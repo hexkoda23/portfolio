@@ -4,3 +4,9 @@ I love building AI applications.
 This portfolio showcases my work in web development and machine learning.
 I am proficient in React, Python, and Node.js.
 You can contact me via the contact form on this website.
+Gender: Male.
+Full Name: Adeleke Kehinde Boluwatife.
+University: Caleb University.
+Degree: B.Sc Computer Science.
+CGPA: 4.4/5.0.
+Secondary School: FSTC Ijebu Imushin (JSS1 to SS3).
