@@ -171,6 +171,15 @@ export default function Chatbot() {
               const code = errBody?.error?.code || res.status;
               const msg = errBody?.error?.message || res.statusText;
               if (code === 401 || code === 403) throw new Error(`Permission error (${code}): ${msg}`);
+              if (code === 429) {
+                const m = String(msg).match(/retry in ([\d\.]+)s/i);
+                const waitSec = m ? m[1] : null;
+                throw new Error(
+                  waitSec
+                    ? `Rate limit reached. Please try again in ${waitSec}s.`
+                    : `Rate limit reached. Please try again later.`
+                );
+              }
               if (code === 404 || String(msg).includes('not found')) {
                 lastErr = new Error(msg);
                 selected = null;
