@@ -11,6 +11,27 @@ export default function Chatbot() {
   const [knowledgeBase, setKnowledgeBase] = useState('');
   const messagesEndRef = useRef(null);
 
+  const kbMap = (kb) => {
+    const map = {};
+    kb.split(/\r?\n/).forEach(line => {
+      const m = line.match(/^\\s*([^:]+):\\s*(.+)\\s*$/i);
+      if (m) map[m[1].trim().toLowerCase()] = m[2].trim();
+    });
+    return map;
+  };
+
+  const answerFromKB = (q, kb) => {
+    const qm = q.toLowerCase();
+    const m = kbMap(kb);
+    if (/\\bfull\\s*name\\b|who\\s*is\\b/.test(qm) && m['full name']) return `His full name is ${m['full name']}.`;
+    if (/\\bgender\\b|male|female/.test(qm) && m['gender']) return `He is ${m['gender'].toLowerCase()}.`;
+    if (/\\buniversity\\b|\\bcollege\\b|\\buni\\b/.test(qm) && m['university']) return `He attended ${m['university']}.`;
+    if (/\\bsecondary\\b|\\bschool\\b|fstc/.test(qm) && m['secondary school']) return `He attended ${m['secondary school']}.`;
+    if (/\\bdegree\\b|\\bcourse\\b|computer\\s*science/.test(qm) && m['degree']) return `He studied ${m['degree']}.`;
+    if (/\\bcgpa\\b|\\bgpa\\b/.test(qm) && m['cgpa']) return `His CGPA is ${m['cgpa']}.`;
+    return null;
+  };
+
   // Load the knowledge base from the text file
   useEffect(() => {
     const fetchKnowledgeBase = async () => {
@@ -44,6 +65,11 @@ export default function Chatbot() {
     setIsLoading(true);
 
     try {
+      const kbAnswer = answerFromKB(userMessage, knowledgeBase);
+      if (kbAnswer) {
+        setMessages(prev => [...prev, { role: 'bot', text: kbAnswer }]);
+        return;
+      }
       const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
       if (!apiKey || apiKey === 'YOUR_API_KEY_HERE') {
         throw new Error('API Key is missing. Please set VITE_GEMINI_API_KEY in .env file.');
