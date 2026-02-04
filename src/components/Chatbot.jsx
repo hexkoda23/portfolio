@@ -49,8 +49,13 @@ export default function Chatbot() {
         throw new Error('API Key is missing. Please set VITE_GEMINI_API_KEY in .env file.');
       }
 
-      const genAI = new GoogleGenerativeAI(apiKey);
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+      const API_VERSIONS = ["v1", "v1beta"];
+      const PREFERRED = [
+        "gemini-1.5-flash-latest",
+        "gemini-1.5-flash-002",
+        "gemini-1.5-flash",
+        "gemini-pro"
+      ];
 
       const prompt = `
         You are an AI assistant for Tife's portfolio website.
@@ -67,14 +72,110 @@ export default function Chatbot() {
         - Keep answers concise.
       `;
 
-      const result = await model.generateContent(prompt);
-      const response = await result.response;
-      const text = response.text();
+      let text = '';
+      let lastErr = null;
+      let selected = null;
+      for (const ver of API_VERSIONS) {
+        try {
+          const listRes = await fetch(`https://generativelanguage.googleapis.com/${ver}/models`, {
+            headers: {
+              'Content-Type': 'application/json',
+              'x-goog-api-key': apiKey
+            }
+          });
+          if (!listRes.ok) {
+            const errBody = await listRes.json().catch(() => ({}));
+            const code = errBody?.error?.code || listRes.status;
+            const msg = errBody?.error?.message || listRes.statusText;
+            if (code === 401 || code === 403) throw new Error(`Permission error (${code}): ${msg}`);
+            continue;
+          }
+          const modelsData = await listRes.json();
+          const models = modelsData?.models || modelsData?.data || [];
+          const byId = {};
+          for (const m of models) {
+            const name = m?.name || m?.id || '';
+            if (name) byId[name] = m;
+          }
+          for (const id of PREFERRED) {
+            const matchedKey = Object.keys(byId).find(k => k.endsWith(id));
+            if (matchedKey) {
+              const supported = byId[matchedKey]?.supportedGenerationMethods || byId[matchedKey]?.capabilities || [];
+              const ok = Array.isArray(supported)
+                ? supported.includes('generateContent') || supported.includes('text') || supported.includes('generate')
+                : true;
+              if (ok) {
+                selected = { ver, id: matchedKey.split('/').pop() };
+                break;
+              }
+            }
+          }
+          if (!selected && models.length) {
+            const any = models.find(m => {
+              const supported = m?.supportedGenerationMethods || m?.capabilities || [];
+              const hasGen = Array.isArray(supported)
+                ? supported.includes('generateContent') || supported.includes('text') || supported.includes('generate')
+                : true;
+              const name = m?.name || '';
+              return hasGen && /gemini/i.test(name);
+            });
+            if (any) {
+              selected = { ver, id: (any?.name || '').split('/').pop() };
+            }
+          }
+          if (selected) {
+            const res = await fetch(`https://generativelanguage.googleapis.com/${ver}/models/${selected.id}:generateContent`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'x-goog-api-key': apiKey
+              },
+              body: JSON.stringify({
+                contents: [
+                  {
+                    role: 'user',
+                    parts: [{ text: prompt }]
+                  }
+                ]
+              })
+            });
+            if (!res.ok) {
+              const errBody = await res.json().catch(() => ({}));
+              const code = errBody?.error?.code || res.status;
+              const msg = errBody?.error?.message || res.statusText;
+              if (code === 401 || code === 403) throw new Error(`Permission error (${code}): ${msg}`);
+              if (code === 404 || String(msg).includes('not found')) {
+                lastErr = new Error(msg);
+                selected = null;
+                continue;
+              }
+              throw new Error(`API error (${code}): ${msg}`);
+            }
+            const data = await res.json();
+            text =
+              data?.candidates?.[0]?.content?.parts?.[0]?.text ||
+              data?.candidates?.[0]?.content?.parts?.[0]?.inline_data?.data ||
+              '';
+            if (!text) throw new Error('Empty response');
+            break;
+          }
+        } catch (err) {
+          lastErr = err;
+        }
+      }
+      if (!text) {
+        const msg = String(lastErr?.message || 'Model selection failed');
+        throw new Error(`All attempts failed. ${msg}`);
+      }
 
       setMessages(prev => [...prev, { role: 'bot', text: text }]);
     } catch (error) {
       console.error('Error generating response:', error);
-      setMessages(prev => [...prev, { role: 'bot', text: 'Sorry, something went wrong. Please check the API key or try again later.' }]);
+      const safeMsg = typeof error?.message === 'string' ? error.message : 'Unexpected error';
+      setMessages(prev => [
+        ...prev,
+        { role: 'bot', text: `Sorry, something went wrong: ${safeMsg}. Please verify your API key and domain restrictions.` }
+      ]);
     } finally {
       setIsLoading(false);
     }
