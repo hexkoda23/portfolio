@@ -36,7 +36,7 @@
 
 
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -44,21 +44,40 @@ import Home from './pages/Home'
 import About from './pages/About'
 import Portfolio from './pages/Portfolio'
 import Contact from './pages/Contact'
+import Chatbot from './components/Chatbot'
+import CV from './pages/CV'
 
 
 export default function App(){
-return (
-<div className="min-h-screen flex flex-col bg-slate-50 text-slate-900">
-<Header />
-<main className="flex-1">
-<Routes>
-<Route path="/" element={<Home />} />
-<Route path="/about" element={<About />} />
-<Route path="/portfolio" element={<Portfolio />} />
-<Route path="/contact" element={<Contact />} />
-</Routes>
-</main>
-<Footer />
-</div>
-)
+  const [darkMode, setDarkMode] = useState(true)
+
+  useEffect(() => {
+    // Force dark mode
+    setDarkMode(true)
+    document.documentElement.classList.add('dark')
+    localStorage.setItem('theme', 'dark')
+  }, [])
+
+  const toggleTheme = () => {
+    // Disabled theme toggling
+    setDarkMode(true)
+    document.documentElement.classList.add('dark')
+  }
+
+  return (
+    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300">
+      <Header darkMode={darkMode} toggleTheme={toggleTheme} />
+      <main className="flex-1">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/cv" element={<CV />} />
+        </Routes>
+      </main>
+      <Footer />
+      <Chatbot />
+    </div>
+  )
 }

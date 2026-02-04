@@ -1,67 +1,73 @@
 import Hero from '../components/Hero'
 import ProjectCard from '../components/ProjectCard'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const highlightCards = [
   {
-    title: 'Styling & Editorial',
-    detail: 'Campaign styling, lookbooks, celebrity fittings and visual rollouts.',
-    meta: 'Vogue-level polish for African fashion houses.'
+    title: 'Natural Language Processing',
+    detail: 'Advanced NLP solutions using embeddings, semantic similarity, and transformer models.',
+    meta: 'Building intelligent text analysis and understanding systems.'
   },
   {
-    title: 'Brand Leadership',
-    detail: 'Launch strategy, collection planning, pricing architecture and pipeline.',
-    meta: 'Trusted by Retrograde, Swag Out and Yellow Mellow.'
+    title: 'Machine Learning Engineering',
+    detail: 'Production-ready ML systems with anomaly detection, predictive analytics, and model optimization.',
+    meta: 'From research to deployment-ready solutions.'
   },
   {
-    title: 'Creative Direction',
-    detail: 'Storytelling, concept decks, set design and production oversight.',
-    meta: 'From sketches to launch-ready experiences.'
+    title: 'AI System Design',
+    detail: 'End-to-end AI applications combining multiple technologies for real-world problem solving.',
+    meta: 'Architecting scalable, intelligent systems.'
   }
 ]
 
 const process = [
   {
-    stage: 'Discover',
-    description: 'Immersive audit of your culture, customers and aspiration.',
+    stage: 'Research & Analysis',
+    description: 'Deep dive into problem space, data exploration, and technology evaluation.',
     duration: 'Week 01'
   },
   {
-    stage: 'Design',
-    description: 'Trend research, mood systems and capsule direction.',
+    stage: 'Architecture Design',
+    description: 'System design, model selection, and technical architecture planning.',
     duration: 'Weeks 02—03'
   },
   {
-    stage: 'Build',
-    description: 'Talent sourcing, fittings, production supervision and QA.',
+    stage: 'Development & Training',
+    description: 'Implementation, model training, testing, and iterative improvement.',
     duration: 'Weeks 04—06'
   },
   {
-    stage: 'Release',
-    description: 'Campaign rollout, retail choreography and press moments.',
+    stage: 'Deployment & Optimization',
+    description: 'Production deployment, monitoring, and continuous performance optimization.',
     duration: 'Launch week'
   }
 ]
 
 const featuredProjects = [
   {
-    title: 'Swag Out',
-    subtitle: 'Contemporary Streetwear',
+    title: 'AI Resume & Job Match Scoring System',
+    subtitle: 'NLP & Semantic Analysis',
     status: 'Published',
     description:
-      'Scaled the Lagos-born label into a multi-city lifestyle brand with premium drops and experiential retail.',
-    tags: ['Retail rollout', 'Collection direction', 'Team leadership']
+      'An intelligent system that analyzes CVs and job descriptions to provide match scores, missing skills identification, and personalized improvement recommendations.',
+    tags: ['NLP', 'Embeddings', 'FastAPI', 'React'],
+    images: ["/ai-resume/ai-resume1.jpg"]
   },
   {
-    title: 'Retrograde',
-    subtitle: 'Bold street codes',
+    title: 'Intelligent AI Study Planner',
+    subtitle: 'Adaptive Learning Agent',
     status: 'Published',
     description:
-      'Curated expressive silhouettes and modular styling playbooks for editorial partners.',
-    tags: ['Editorial', 'Campaign', 'Lookbook']
+      'An AI-powered adaptive learning system that creates personalized study plans and dynamically adjusts them based on user progress and feedback.',
+    tags: ['AI Agent', 'Vector DB', 'LLM', 'Next.js'],
+    images: [ "/ai-study/ai-study1.jpg"]
   }
 ]
 
 export default function Home () {
+  const navigate = useNavigate()
+  
   return (
     <div className='space-y-16 lg:space-y-20'>
       <Hero />
@@ -69,27 +75,28 @@ export default function Home () {
       <section className='max-w-6xl mx-auto px-4 sm:px-6'>
         <div className='flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between'>
           <div>
-            <p className='section-label'>Expertise</p>
-            <h2 className='text-3xl font-bold text-slate-900 mt-2'>
-              End-to-end leadership for ambitious fashion teams.
+            <p className='section-label text-slate-900 dark:text-slate-400'>Expertise</p>
+            <h2 className='text-3xl font-bold text-slate-900 dark:text-white mt-2'>
+              Building AI solutions that solve real-world problems.
             </h2>
           </div>
-          <p className='text-slate-500 max-w-xl'>
-            From capsule ideation to go-to-market, I orchestrate styling, design
-            and brand strategy so founders can focus on scale.
+          <p className='text-slate-900 dark:text-slate-400 max-w-xl'>
+            From concept to deployment, I develop intelligent systems using cutting-edge 
+            AI technologies including NLP, machine learning, and multimodal AI to create 
+            practical, impactful solutions.
           </p>
         </div>
 
         <div className='mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3'>
           {highlightCards.map(card => (
-            <div key={card.title} className='floating-card'>
+            <div key={card.title} className='floating-card dark:bg-slate-900 dark:border-slate-800'>
               <div className='text-xs uppercase tracking-[0.2em] text-orange-400'>
                 {card.title}
               </div>
-              <p className='mt-3 text-lg font-semibold text-slate-900'>
+              <p className='mt-3 text-lg font-semibold text-slate-900 dark:text-white'>
                 {card.detail}
               </p>
-              <p className='mt-2 text-sm text-slate-500'>{card.meta}</p>
+              <p className='mt-2 text-sm text-slate-900 dark:text-slate-400'>{card.meta}</p>
             </div>
           ))}
         </div>
@@ -98,40 +105,40 @@ export default function Home () {
       <section className='px-4 sm:px-6'>
         <div className='glass-panel max-w-6xl mx-auto p-8 md:p-12 grid gap-8 md:grid-cols-[1.1fr,0.9fr] items-center'>
           <div>
-            <p className='section-label text-slate-300'>The brands</p>
-            <h3 className='mt-3 text-3xl font-semibold'>
-              Retrograde · Yellow Mellow · Swag Out · Preppy Nigga
+            <p className='section-label text-slate-900 dark:text-slate-300'>Technologies</p>
+            <h3 className='mt-3 text-3xl font-semibold text-slate-900 dark:text-white'>
+              NLP · Machine Learning · RAG · Multimodal AI
             </h3>
-            <p className='mt-4 text-slate-200 text-base'>
-              Multi-label leadership with cross-functional teams — blending
-              Lagos grit with global appeal. I build systems for consistency,
-              profitability and culture.
+            <p className='mt-4 text-slate-900 dark:text-slate-200 text-base'>
+              Specializing in practical AI applications that deliver measurable value. 
+              I combine cutting-edge research with production-ready engineering to build 
+              systems that solve real business challenges.
             </p>
             <div className='mt-6 flex flex-wrap gap-3'>
-              <span className='badge-soft bg-white/15 text-white border border-white/20'>
-                Production oversight
+              <span className='badge-soft bg-white dark:bg-white/15 text-slate-700 dark:text-white border border-slate-200 dark:border-white/20'>
+                Model Development
               </span>
-              <span className='badge-soft bg-white/15 text-white border border-white/20'>
-                Styling sprints
+              <span className='badge-soft bg-white dark:bg-white/15 text-slate-700 dark:text-white border border-slate-200 dark:border-white/20'>
+                System Architecture
               </span>
-              <span className='badge-soft bg-white/15 text-white border border-white/20'>
-                Growth strategy
+              <span className='badge-soft bg-white dark:bg-white/15 text-slate-700 dark:text-white border border-slate-200 dark:border-white/20'>
+                Production Deployment
               </span>
             </div>
           </div>
           <div className='grid gap-4 md:grid-cols-2'>
-            <div className='rounded-2xl bg-white/10 p-5 border border-white/10'>
-              <p className='text-sm text-slate-200'>Swag Out</p>
-              <p className='text-3xl font-bold text-white mt-2'>33%</p>
-              <p className='text-xs text-slate-300'>
-                YoY revenue lift since 2022
+            <div className='rounded-2xl bg-white/50 dark:bg-white/10 p-5 border border-slate-200 dark:border-white/10'>
+              <p className='text-sm text-slate-900 dark:text-slate-200'>AI Projects</p>
+              <p className='text-3xl font-bold text-slate-900 dark:text-white mt-2'>8</p>
+              <p className='text-xs text-slate-900 dark:text-slate-300'>
+                Production-ready solutions
               </p>
             </div>
-            <div className='rounded-2xl bg-white/10 p-5 border border-white/10'>
-              <p className='text-sm text-slate-200'>Retrograde</p>
-              <p className='text-3xl font-bold text-white mt-2'>11</p>
-              <p className='text-xs text-slate-300'>
-                Editorial features this year
+            <div className='rounded-2xl bg-white/50 dark:bg-white/10 p-5 border border-slate-200 dark:border-white/10'>
+              <p className='text-sm text-slate-900 dark:text-slate-200'>Technologies</p>
+              <p className='text-3xl font-bold text-slate-900 dark:text-white mt-2'>15+</p>
+              <p className='text-xs text-slate-900 dark:text-slate-300'>
+                AI/ML frameworks mastered
               </p>
             </div>
           </div>
@@ -141,9 +148,9 @@ export default function Home () {
       <section className='max-w-6xl mx-auto px-4 sm:px-6'>
         <div className='flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between'>
           <div>
-            <p className='section-label'>Recent cases</p>
-            <h2 className='text-3xl font-bold text-slate-900 mt-2'>
-              Work grounded in cultural precision and global taste.
+            <p className='section-label text-slate-900 dark:text-slate-400'>Featured Projects</p>
+            <h2 className='text-3xl font-bold text-slate-900 dark:text-white mt-2'>
+              AI solutions addressing real-world challenges.
             </h2>
           </div>
           <a href='/portfolio' className='btn-primary self-start'>
@@ -152,21 +159,25 @@ export default function Home () {
         </div>
         <div className='mt-10 grid gap-6 md:grid-cols-2'>
           {featuredProjects.map(project => (
-            <ProjectCard key={project.title} {...project} />
+            <ProjectCard 
+              key={project.title} 
+              {...project} 
+              onClick={() => navigate('/portfolio')}
+            />
           ))}
         </div>
       </section>
 
       <section className='max-w-6xl mx-auto px-4 sm:px-6 pb-16'>
-        <div className='rounded-[32px] bg-white border border-slate-100 p-8 md:p-12'>
+        <div className='rounded-[32px] bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 p-8 md:p-12'>
           <div className='flex flex-col gap-6 md:flex-row md:items-center md:justify-between'>
             <div>
-              <p className='section-label text-slate-400'>Method</p>
-              <h2 className='text-3xl font-bold text-slate-900 mt-2'>
-                A thoughtful, sprint-based process.
+              <p className='section-label text-slate-900 dark:text-slate-500'>Development Process</p>
+              <h2 className='text-3xl font-bold text-slate-900 dark:text-white mt-2'>
+                A systematic, research-driven approach.
               </h2>
             </div>
-            <a href='/contact' className='btn-secondary text-slate-900 border-slate-200'>
+            <a href='/contact' className='btn-secondary text-slate-900 dark:text-white border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800'>
               Start a project
             </a>
           </div>
@@ -174,15 +185,15 @@ export default function Home () {
             {process.map(step => (
               <div
                 key={step.stage}
-                className='border border-slate-100 rounded-2xl p-5 flex flex-col gap-3'
+                className='border border-slate-100 dark:border-slate-800 rounded-2xl p-5 flex flex-col gap-3'
               >
-                <p className='text-xs uppercase tracking-[0.2em] text-slate-400'>
+                <p className='text-xs uppercase tracking-[0.2em] text-slate-900 dark:text-slate-500'>
                   {step.duration}
                 </p>
-                <h4 className='text-xl font-semibold text-slate-900'>
+                <h4 className='text-xl font-semibold text-slate-900 dark:text-white'>
                   {step.stage}
                 </h4>
-                <p className='text-sm text-slate-500'>{step.description}</p>
+                <p className='text-sm text-slate-900 dark:text-slate-400'>{step.description}</p>
               </div>
             ))}
           </div>

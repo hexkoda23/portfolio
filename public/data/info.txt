@@ -1,0 +1,6 @@
+My name is Tife.
+I am a software engineer.
+I love building AI applications.
+This portfolio showcases my work in web development and machine learning.
+I am proficient in React, Python, and Node.js.
+You can contact me via the contact form on this website.

@@ -15,8 +15,9 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background: radial-gradient(circle at top, #f8fbff 0%, #eef2ff 35%, #f8fafc 100%);
-  color: #0f172a;
+  background: radial-gradient(circle at top, #0f172a 0%, #1e293b 35%, #0f172a 100%);
+  color: #f8fafc;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 img {
@@ -25,12 +26,13 @@ img {
 }
 
 .hero-gradient {
-  background: radial-gradient(circle at 20% 20%, rgba(250, 250, 255, 0.25), transparent),
+  background: radial-gradient(circle at 20% 20%, rgba(2, 2, 42, 0.655), transparent),
     radial-gradient(circle at 80% 0%, rgba(59, 130, 246, 0.25), transparent),
     linear-gradient(135deg, #0f172a, #1e293b 55%, #111827);
   color: #f8fafc;
   position: relative;
   overflow: hidden;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 .hero-gradient::after {
@@ -54,15 +56,30 @@ img {
   padding: 1.5rem;
   box-shadow: 0 20px 85px rgba(15, 23, 42, 0.15);
   border: 1px solid rgba(15, 23, 42, 0.08);
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.dark .floating-card {
+  background: #1e293b;
+  border-color: #060e1b;
+  color: #f8fafc;
+  box-shadow: 0 20px 85px rgba(0, 0, 0, 0.4);
 }
 
 .glass-panel {
   backdrop-filter: blur(16px);
-  background: rgba(15, 23, 42, 0.85);
+  background: rgba(255, 255, 255, 0.7);
   border-radius: 1.75rem;
-  border: 1px solid rgba(148, 163, 184, 0.2);
+  border: 1px solid rgba(15, 23, 42, 0.08);
   position: relative;
   overflow: hidden;
+  color: #0f172a;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.dark .glass-panel {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(148, 163, 184, 0.2);
   color: #f8fafc;
 }
 
@@ -71,7 +88,7 @@ img {
   position: absolute;
   inset: auto -20% -60% -20%;
   height: 120%;
-  background: radial-gradient(circle at top, rgba(59, 130, 246, 0.25), transparent 60%);
+  background: radial-gradient(circle at top, rgba(4, 18, 40, 0.841), transparent 60%);
   pointer-events: none;
 }
 
@@ -112,6 +129,11 @@ img {
   font-weight: 500;
 }
 
+.dark .badge-soft {
+  background: rgba(255, 255, 255, 0.1);
+  color: #f8fafc;
+}
+
 .project-card {
   border-radius: 1.25rem;
   padding: 1.75rem;
@@ -121,6 +143,13 @@ img {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dark .project-card {
+  background: #1e293b;
+  border-color: #334155;
+  box-shadow: 0 10px 45px rgba(0, 0, 0, 0.3);
 }
 
 .project-card:hover {
@@ -129,11 +158,20 @@ img {
   box-shadow: 0 30px 65px rgba(15, 23, 42, 0.12);
 }
 
+.dark .project-card:hover {
+  box-shadow: 0 30px 65px rgba(0, 0, 0, 0.5);
+}
+
 .section-label {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   font-size: 0.78rem;
-  color: #94a3b8;
+  color: #000000;
+  font-weight: 700;
+}
+
+.dark .section-label {
+  color: #cbd5e1;
 }
 
 .grid-dots {
@@ -150,12 +188,23 @@ img {
   pointer-events: none;
 }
 
+.dark .grid-dots::after {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+}
+
 .contact-card {
   border-radius: 1.25rem;
   border: 1px solid rgba(15, 23, 42, 0.08);
   padding: 1.5rem;
   background: white;
   box-shadow: 0 30px 60px rgba(15, 23, 42, 0.08);
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.dark .contact-card {
+  background: #1e293b;
+  border-color: #334155;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
 }
 
 .contact-card h4 {
