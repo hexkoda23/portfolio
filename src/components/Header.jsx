@@ -46,7 +46,7 @@ export default function Header ({ darkMode, toggleTheme }) {
               Adeleke Kehinde
             </p>
             <p className='text-xs text-slate-500 leading-none mt-1 dark:text-slate-400'>
-              AI Developer
+              AI & Full-Stack Developer
             </p>
           </div>
         </Link>

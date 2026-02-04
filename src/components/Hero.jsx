@@ -13,7 +13,7 @@ export default function Hero () {
         <div className='grid lg:grid-cols-[1.2fr_0.8fr] gap-10 items-center'>
           <div>
             <div className='flex flex-wrap gap-2 text-xs uppercase tracking-[0.3em] text-slate-200/90 accent-pill px-4 py-2 inline-flex transition-colors'>
-              AI Developer
+              AI & Full-Stack Developer
             </div>
             <h1 className='mt-6 text-4xl sm:text-5xl xl:text-6xl font-extrabold leading-tight text-white transition-colors'>
               Building intelligent AI solutions that solve real-world problems.

@@ -14,7 +14,12 @@ const roles = [
   {
     title: 'AI Developer · Freelance',
     detail: 'Building intelligent applications using LLMs, RAG, and modern web technologies. delivering custom AI solutions that address specific business needs and drive innovation.',
-    year: '2023 — Present'
+    year: 'Nov 2023 — Present'
+  },
+  {
+    title: 'Database Manager (SIWES) · Sonet Technology Limited',
+    detail: 'Industrial training (SIWES): Managed Oracle databases, data integrity, and day-to-day operations. Assisted with data migration, backups, and performance monitoring; collaborated with teams to ensure reliable data access.',
+    year: 'May 2023 — Nov 2023'
   },
   {
     title: 'Software Engineer · Tech Startups',
@@ -42,7 +47,7 @@ export default function About () {
             Building intelligent systems that solve complex problems.
           </h1>
           <p className='mt-4 text-slate-900 dark:text-slate-300'>
-            I’m Adeleke Kehinde — an AI Developer and Software Engineer passionate about 
+            I’m Adeleke Kehinde — an AI & Full-Stack Developer passionate about 
             bridging the gap between cutting-edge AI research and practical applications. 
             My work focuses on creating autonomous agents, intelligent assistants, and 
             data-driven solutions that drive real value.
