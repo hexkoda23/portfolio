@@ -60,7 +60,7 @@ export default function Hero () {
             <div className='relative rounded-[28px] overflow-hidden shadow-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-gradient-to-br dark:from-blue-600 dark:to-purple-600 transition-colors'>
               <div className='w-full h-[420px] relative overflow-hidden'>
                 <img 
-                  src='/Image/meee.jpg' 
+                  src='/Image/mee.jpg' 
                   alt='Adeleke Kehinde - AI Developer' 
                   className='w-full h-full object-cover'
                   onError={(e) => {
