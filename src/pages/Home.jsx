@@ -1,6 +1,5 @@
 import Hero from '../components/Hero'
 import ProjectCard from '../components/ProjectCard'
-import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const highlightCards = [
@@ -129,7 +128,7 @@ export default function Home () {
           <div className='grid gap-4 md:grid-cols-2'>
             <div className='rounded-2xl bg-white/50 dark:bg-white/10 p-5 border border-slate-200 dark:border-white/10'>
               <p className='text-sm text-slate-900 dark:text-slate-200'>AI Projects</p>
-              <p className='text-3xl font-bold text-slate-900 dark:text-white mt-2'>8</p>
+              <p className='text-3xl font-bold text-slate-900 dark:text-white mt-2'>9</p>
               <p className='text-xs text-slate-900 dark:text-slate-300'>
                 Production-ready solutions
               </p>

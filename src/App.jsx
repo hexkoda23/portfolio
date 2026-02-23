@@ -49,24 +49,24 @@ import CV from './pages/CV'
 
 
 export default function App(){
-  const [darkMode, setDarkMode] = useState(true)
+  const initialDark = (() => {
+    if (typeof window === 'undefined') return false
+    const saved = localStorage.getItem('theme')
+    if (saved) return saved === 'dark'
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  })()
+  const [darkMode] = useState(initialDark)
 
   useEffect(() => {
-    // Force dark mode
-    setDarkMode(true)
-    document.documentElement.classList.add('dark')
-    localStorage.setItem('theme', 'dark')
-  }, [])
+    document.documentElement.classList.toggle('dark', darkMode)
+    localStorage.setItem('theme', darkMode ? 'dark' : 'light')
+  }, [darkMode])
 
-  const toggleTheme = () => {
-    // Disabled theme toggling
-    setDarkMode(true)
-    document.documentElement.classList.add('dark')
-  }
+  // Theme toggle intentionally unused in current header
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300">
-      <Header darkMode={darkMode} toggleTheme={toggleTheme} />
+      <Header />
       <main className="flex-1">
         <Routes>
           <Route path="/" element={<Home />} />

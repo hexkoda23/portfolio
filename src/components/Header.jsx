@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 const navItems = [
@@ -26,13 +26,8 @@ const NavLink = ({ to, children, onClick }) => {
   )
 }
 
-export default function Header ({ darkMode, toggleTheme }) {
+export default function Header () {
   const [isOpen, setIsOpen] = useState(false)
-  const location = useLocation()
-
-  useEffect(() => {
-    setIsOpen(false)
-  }, [location.pathname])
 
   return (
     <header className='bg-white/90 backdrop-blur border-b border-slate-100 sticky top-0 z-50 dark:bg-slate-900/90 dark:border-slate-800 transition-colors duration-300'>

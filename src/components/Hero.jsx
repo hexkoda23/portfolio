@@ -12,13 +12,13 @@ export default function Hero () {
       <div className='max-w-6xl mx-auto px-4 sm:px-6 relative z-10'>
         <div className='grid lg:grid-cols-[1.2fr_0.8fr] gap-10 items-center'>
           <div>
-            <div className='flex flex-wrap gap-2 text-xs uppercase tracking-[0.3em] text-slate-200/90 accent-pill px-4 py-2 inline-flex transition-colors'>
+            <div className='flex flex-wrap gap-2 text-xs uppercase tracking-[0.3em] text-slate-600 dark:text-slate-200/90 accent-pill px-4 py-2 inline-flex transition-colors'>
               AI & Full-Stack Developer
             </div>
-            <h1 className='mt-6 text-4xl sm:text-5xl xl:text-6xl font-extrabold leading-tight text-white transition-colors'>
+            <h1 className='mt-6 text-4xl sm:text-5xl xl:text-6xl font-extrabold leading-tight text-slate-900 dark:text-white transition-colors'>
               Building intelligent AI solutions that solve real-world problems.
             </h1>
-            <p className='mt-6 text-lg text-slate-200 max-w-2xl transition-colors'>
+            <p className='mt-6 text-lg text-slate-600 dark:text-slate-200 max-w-2xl transition-colors'>
               Specializing in Natural Language Processing, Machine Learning, and AI system design. 
               I develop production-ready solutions that combine cutting-edge research with practical 
               engineering to deliver measurable business value.
@@ -46,8 +46,8 @@ export default function Hero () {
             <div className='mt-10 grid grid-cols-2 sm:grid-cols-3 gap-6'>
               {stats.map(stat => (
                 <div key={stat.label}>
-                  <p className='text-3xl font-bold text-white transition-colors'>{stat.value}</p>
-                  <p className='text-xs uppercase tracking-widest text-slate-300 transition-colors'>
+                  <p className='text-3xl font-bold text-slate-900 dark:text-white transition-colors'>{stat.value}</p>
+                  <p className='text-xs uppercase tracking-widest text-slate-500 dark:text-slate-300 transition-colors'>
                     {stat.label}
                   </p>
                 </div>
@@ -56,7 +56,7 @@ export default function Hero () {
           </div>
 
           <div className='relative'>
-            <div className='absolute -top-6 -left-6 w-32 h-32 rounded-full bg-orange-400/40 blur-3xl' />
+            <div className='absolute -top-6 -left-6 w-32 h-32 rounded-full bg-orange-400/30 blur-3xl' />
             <div className='relative rounded-[28px] overflow-hidden shadow-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-gradient-to-br dark:from-blue-600 dark:to-purple-600 transition-colors'>
               <div className='w-full h-[420px] relative overflow-hidden'>
                 <img 
