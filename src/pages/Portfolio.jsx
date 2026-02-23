@@ -503,6 +503,70 @@ const portfolioItems = [
     github: 'https://github.com/hexkoda23/AI-Powered-smart-shop-manager',
     demo: 'https://ai-powered-smart-shop-manager-2l9n.vercel.app/'
   }
+  ,
+  {
+    id: 9,
+    title: '23 — Fashion Platform & Brand Experience',
+    subtitle: 'E‑commerce, Lookbook & Outfit Generator',
+    status: 'Published',
+    description:
+      'A polished brand experience for 23 that blends shopping, storytelling and an outfit generator — built as a platform that inspires greatness, not just a storefront.',
+    tags: ['E‑commerce', 'Fashion UX', 'React', 'Tailwind', 'Outfit Generator'],
+    category: 'Digital Product & Frontend',
+    overview:
+      '23 is more than a clothing website — it is an avenue for greatness. The experience is designed to move beyond a catalogue into a living brand platform that showcases craft, culture and community. Visitors explore a cinematic lookbook, shop curated releases, and use an outfit generator to style pieces with confidence. The result is a product that elevates the brand narrative while making conversion paths clear and delightful.',
+    whyImpressive:
+      'This project fuses brand storytelling with product utility. It demonstrates design systems thinking, performance‑first front‑end engineering, and an interaction model (the outfit generator) that turns browsing into creation — deepening engagement and affinity for the 23 brand.',
+    coreConcepts: [
+      'UX for conversion & community',
+      'Component‑driven design system',
+      'Accessible, responsive layouts',
+      'Stateful interactions',
+      'AI‑style outfit suggestions'
+    ],
+    techStack: [
+      'React',
+      'Vite',
+      'Tailwind CSS',
+      'React Router'
+    ],
+    features: [
+      'Hero narrative that frames 23 as a movement',
+      'Lookbook gallery with editorial‑style imagery',
+      'Shop grid for new drops and capsules',
+      'Outfit generator with wardrobe panels and drag‑to‑style flow',
+      'Persistent cart and quick view interactions',
+      'Search, filters and structured product info',
+      'FAQ and contact touchpoints for trust and support',
+      'Performance‑minded image loading and error fallbacks'
+    ],
+    problemStatement:
+      'The brand needed more than a basic store. 23 required a digital home that communicates ethos, showcases design craft and gives people tools to style and belong — a path from admiration to participation.',
+    approach:
+      'I built a modular, component‑driven UI that keeps the aesthetic consistent across Lookbook, Shop and Generator. The outfit generator mirrors a creative studio: a personal wardrobe rail on the left, a styling canvas on the right, and guided suggestions. Information architecture clarifies journeys from discovery to purchase, while micro‑copy and CTAs continually reinforce the brand’s call to greatness.',
+    deliverables: [
+      'Responsive website with lookbook, shop and generator',
+      'Reusable design‑system components and tokens',
+      'Product detail templates and merchandising layouts',
+      'Empty‑state, loading and error experiences',
+      'Deployment and performance budget'
+    ],
+    limitations:
+      'Demo content uses sample inventory and screenshots. Next steps include integrating live inventory, payments and personalization models for the generator.',
+    images: [
+     "/23/23-1.jpg",
+      "/23/23-2.jpg",
+      "/23/23-3.jpg",
+      "/23/23-4.jpg",
+      "/23/23-5.jpg",
+      "/23/23-6.jpg",
+      "/23/23-7.jpg",
+      "/23/23-8.jpg",
+      "/23/23-9.jpg",
+    ],
+    github: 'https://github.com/hexkoda23/23-web',
+    demo: 'https://23-web.vercel.app/'
+  }
 ]
 
 export default function Portfolio () {
