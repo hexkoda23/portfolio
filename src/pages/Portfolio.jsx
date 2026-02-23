@@ -571,6 +571,13 @@ const portfolioItems = [
 
 export default function Portfolio () {
   const [selectedProject, setSelectedProject] = useState(null)
+  const sortedItems = [...portfolioItems].sort((a, b) => {
+    const hasLocalA =
+      Array.isArray(a.images) && a.images.some(img => typeof img === 'string' && img.startsWith('/'))
+    const hasLocalB =
+      Array.isArray(b.images) && b.images.some(img => typeof img === 'string' && img.startsWith('/'))
+    return (hasLocalB ? 1 : 0) - (hasLocalA ? 1 : 0)
+  })
 
   return (
     <>
@@ -588,7 +595,7 @@ export default function Portfolio () {
         </div>
 
         <div className='grid gap-6 md:grid-cols-2'>
-          {portfolioItems.map(item => (
+          {sortedItems.map(item => (
             <ProjectCard
               key={item.id}
               {...item}
