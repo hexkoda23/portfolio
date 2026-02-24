@@ -28,13 +28,13 @@ export default function Hero () {
               <a href='/portfolio' className='btn-primary'>
                 View portfolio
               </a>
-              <a href='/contact' className='btn-secondary text-white border-white/40 hover:bg-white/10 transition-colors'>
+              <a href='/contact' className='btn-secondary text-slate-900 border-slate-300 hover:bg-slate-100 dark:text-white dark:border-white/40 dark:hover:bg-white/10 transition-colors'>
                 Get in touch
               </a>
               <a 
                 href='/cv/tife-cv.pdf' 
                 download='Tife_CV.pdf'
-                className='btn-secondary text-white border-white/40 hover:bg-white/10 transition-colors flex items-center gap-2'
+                className='btn-secondary text-slate-900 border-slate-300 hover:bg-slate-100 dark:text-white dark:border-white/40 dark:hover:bg-white/10 transition-colors flex items-center gap-2'
               >
                 <span>Download CV</span>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
@@ -56,7 +56,7 @@ export default function Hero () {
           </div>
 
           <div className='relative'>
-            <div className='absolute -top-6 -left-6 w-32 h-32 rounded-full bg-orange-400/30 blur-3xl' />
+            <div className='absolute -top-6 -left-6 w-32 h-32 rounded-full bg-orange-400/30 blur-3xl hidden dark:block' />
             <div className='relative rounded-[28px] overflow-hidden shadow-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-gradient-to-br dark:from-blue-600 dark:to-purple-600 transition-colors'>
               <div className='w-full h-[420px] relative overflow-hidden'>
                 <img 

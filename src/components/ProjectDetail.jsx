@@ -9,7 +9,7 @@ export default function ProjectDetail ({ project, onClose }) {
       onClick={onClose}
     >
       <div 
-        className='relative bg-white dark:bg-slate-900 rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto shadow-2xl transition-colors duration-300'
+        className='relative bg-white dark:bg-[#1e2435] border border-slate-200 dark:border-[#2d3748] rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto shadow-2xl transition-colors duration-300'
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
@@ -54,7 +54,7 @@ export default function ProjectDetail ({ project, onClose }) {
 
           {/* Why It's Impressive */}
           {project.whyImpressive && (
-            <div className='mb-8 p-6 bg-orange-50 dark:bg-orange-900/20 rounded-xl border border-orange-100 dark:border-orange-900/30'>
+            <div className='mb-8 p-6 bg-orange-50 dark:bg-[#1e2435] rounded-xl border border-orange-100 dark:border-[#2d3748]'>
               <h3 className='text-xl font-semibold text-slate-900 dark:text-white mb-2'>
                 Why It's Impressive
               </h3>
@@ -119,7 +119,7 @@ export default function ProjectDetail ({ project, onClose }) {
 
           {/* Problem Statement */}
           {project.problemStatement && (
-            <div className='mb-8 p-6 bg-slate-50 dark:bg-slate-800 rounded-xl'>
+            <div className='mb-8 p-6 bg-slate-50 dark:bg-[#1e2435] rounded-xl border border-slate-200 dark:border-[#2d3748]'>
               <h3 className='text-xl font-semibold text-slate-900 dark:text-white mb-2'>
                 Problem Statement
               </h3>
@@ -185,7 +185,7 @@ export default function ProjectDetail ({ project, onClose }) {
 
           {/* Limitations & Future Improvements */}
           {project.limitations && (
-            <div className='mb-8 p-6 bg-amber-50 dark:bg-amber-900/20 rounded-xl border border-amber-100 dark:border-amber-900/30'>
+            <div className='mb-8 p-6 bg-amber-50 dark:bg-[#1e2435] rounded-xl border border-amber-100 dark:border-[#2d3748]'>
               <h3 className='text-xl font-semibold text-slate-900 dark:text-white mb-2'>
                 Limitations & Future Improvements
               </h3>

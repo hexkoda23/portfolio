@@ -54,7 +54,7 @@ export default function About () {
           </p>
           <div className='mt-8 grid gap-4'>
             {roles.map(role => (
-              <div key={role.title} className='border border-slate-100 dark:border-slate-800 rounded-2xl p-5'>
+              <div key={role.title} className='bg-white dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800 rounded-2xl p-5'>
                 <div className='text-xs uppercase tracking-[0.2em] text-slate-900 dark:text-slate-400'>
                   {role.year}
                 </div>

@@ -126,14 +126,14 @@ export default function Home () {
             </div>
           </div>
           <div className='grid gap-4 md:grid-cols-2'>
-            <div className='rounded-2xl bg-white/50 dark:bg-white/10 p-5 border border-slate-200 dark:border-white/10'>
+            <div className='rounded-2xl bg-white dark:bg-[#1e2435] p-5 border border-slate-200 dark:border-[#2d3748]'>
               <p className='text-sm text-slate-900 dark:text-slate-200'>AI Projects</p>
               <p className='text-3xl font-bold text-slate-900 dark:text-white mt-2'>9</p>
               <p className='text-xs text-slate-900 dark:text-slate-300'>
                 Production-ready solutions
               </p>
             </div>
-            <div className='rounded-2xl bg-white/50 dark:bg-white/10 p-5 border border-slate-200 dark:border-white/10'>
+            <div className='rounded-2xl bg-white dark:bg-[#1e2435] p-5 border border-slate-200 dark:border-[#2d3748]'>
               <p className='text-sm text-slate-900 dark:text-slate-200'>Technologies</p>
               <p className='text-3xl font-bold text-slate-900 dark:text-white mt-2'>15+</p>
               <p className='text-xs text-slate-900 dark:text-slate-300'>
@@ -184,7 +184,7 @@ export default function Home () {
             {process.map(step => (
               <div
                 key={step.stage}
-                className='border border-slate-100 dark:border-slate-800 rounded-2xl p-5 flex flex-col gap-3'
+                className='bg-white dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 rounded-2xl p-5 flex flex-col gap-3'
               >
                 <p className='text-xs uppercase tracking-[0.2em] text-slate-900 dark:text-slate-500'>
                   {step.duration}

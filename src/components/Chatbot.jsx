@@ -296,9 +296,10 @@ export default function Chatbot() {
                 className={`bg-white text-slate-900 border border-slate-200 p-2 rounded-md hover:bg-slate-100 transition-colors ${
                   isLoading ? 'opacity-50 cursor-not-allowed' : ''
                 }`}
+                aria-label="Send"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.27 3.61c.18-.47.72-.7 1.19-.52l16.2 6.3a.75.75 0 0 1 0 1.38l-16.2 6.3a.75.75 0 0 1-1-.44.75.75 0 0 1-.02-.27L4.8 12 3.14 4.36a.75.75 0 0 1 .13-.75zM4.8 12l7.2 2.88L12 12l0-2.88L4.8 12z" />
                 </svg>
               </button>
             </div>

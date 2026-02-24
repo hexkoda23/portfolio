@@ -583,7 +583,7 @@ export default function Portfolio () {
     <>
       <section className='max-w-6xl mx-auto px-4 sm:px-6 py-16 space-y-12'>
         <div className='text-center max-w-3xl mx-auto'>
-          <p className='section-label'>AI & Machine Learning Projects</p>
+          <p className='section-label text-slate-500 dark:text-slate-400'>AI & Machine Learning Projects</p>
           <h1 className='mt-3 text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white'>
             Innovative AI Solutions Solving Real-World Problems
           </h1>

@@ -58,14 +58,16 @@ export default function App(){
   const [darkMode] = useState(initialDark)
 
   useEffect(() => {
-    document.documentElement.classList.toggle('dark', darkMode)
+    const root = document.documentElement
+    root.setAttribute('data-theme', darkMode ? 'dark' : 'light')
+    root.classList.toggle('dark', darkMode) // keep Tailwind dark: variants active
     localStorage.setItem('theme', darkMode ? 'dark' : 'light')
   }, [darkMode])
 
   // Theme toggle intentionally unused in current header
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300">
+    <div className="min-h-screen flex flex-col transition-colors duration-300">
       <Header />
       <main className="flex-1">
         <Routes>

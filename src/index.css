@@ -1,20 +1,33 @@
 @import "tailwindcss";
 
 :root {
-  --light-bg: #ffffff;
-  --light-surface: #f8fafc;
-  --light-card: #ffffff;
-  --light-border: #e5e7eb;
-  --light-text-primary: #0f172a;
-  --light-text-secondary: #475569;
-  --light-text-muted: #64748b;
-  --accent-primary: #ff7a18;
-  --accent-secondary: #ff9f43;
+  /* Light (default) */
+  --bg-primary: #ffffff;
+  --bg-card: #ffffff;
+  --text-primary: #0f172a;
+  --text-secondary: #374151;
+  --text-muted: #64748b;
+  --border-color: #e5e7eb;
+  --bg-nav: #ffffff;
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.08);
+  --cta: #f97316;
   font-family: "Inter", "Space Grotesk", system-ui, -apple-system,
     BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: var(--light-text-secondary);
-  background-color: var(--light-bg);
+  color: var(--text-secondary);
+  background-color: var(--bg-primary);
   line-height: 1.6;
+}
+
+[data-theme='dark'] {
+  --bg-primary: #0d1117;         /* deep navy */
+  --bg-card: #1e2435;            /* slightly lighter navy */
+  --text-primary: #ffffff;
+  --text-secondary: #94a3b8;
+  --text-muted: #9aa8bc;
+  --border-color: #2d3748;
+  --bg-nav: #0d1117;
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --cta: #f97316;
 }
 
 * {
@@ -24,8 +37,8 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background: var(--light-bg);
-  color: var(--light-text-secondary);
+  background: var(--bg-primary);
+  color: var(--text-secondary);
   transition: background 0.3s ease, color 0.3s ease, box-shadow 0.2s ease;
 }
 
@@ -35,22 +48,14 @@ img {
 }
 
 .hero-gradient {
-  background: radial-gradient(circle at top, var(--light-surface) 0%, var(--light-bg) 70%);
-  color: var(--light-text-primary);
+  background: var(--bg-primary);
+  color: var(--text-primary);
   position: relative;
   overflow: hidden;
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-.dark .hero-gradient {
-  background: radial-gradient(circle at 20% 20%, rgba(2, 2, 42, 0.655), transparent),
-    radial-gradient(circle at 80% 0%, rgba(59, 130, 246, 0.25), transparent),
-    linear-gradient(135deg, #0f172a, #1e293b 55%, #111827);
-  color: #f8fafc;
-}
-
-.hero-gradient::after,
-.dark .hero-gradient::after {
+.hero-gradient::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -58,48 +63,42 @@ img {
   pointer-events: none;
 }
 
+/* Navbar using variables (light: white with border, dark: deep navy) */
+.app-navbar {
+  background: var(--bg-nav);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
 .accent-pill {
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--light-border);
-  background: #ffffff;
-  color: var(--light-text-muted);
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-muted);
 }
 
 .floating-card {
-  background: var(--light-card);
+  background: var(--bg-card);
   border-radius: 1.5rem;
   padding: 1.5rem;
-  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.06);
-  border: 1px solid var(--light-border);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-color);
   transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-}
-
-.dark .floating-card {
-  background: #1e293b;
-  border-color: #060e1b;
-  color: #f8fafc;
-  box-shadow: 0 20px 85px rgba(0, 0, 0, 0.4);
 }
 
 .glass-panel {
-  backdrop-filter: blur(16px);
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--bg-card);
   border-radius: 1.75rem;
-  border: 1px solid var(--light-border);
+  border: 1px solid var(--border-color);
   position: relative;
   overflow: hidden;
-  color: var(--light-text-primary);
+  color: var(--text-primary);
   transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
-.dark .glass-panel {
-  background: rgba(15, 23, 42, 0.85);
-  border: 1px solid rgba(148, 163, 184, 0.2);
-  color: #f8fafc;
-}
-
-.glass-panel::before,
-.dark .glass-panel::before {
+.glass-panel::before {
   content: "";
   position: absolute;
   inset: auto -20% -60% -20%;
@@ -114,16 +113,16 @@ img {
   gap: 0.35rem;
   border-radius: 999px;
   padding: 0.85rem 1.75rem;
-  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  background: var(--cta);
   color: white;
   font-weight: 600;
-  box-shadow: 0 8px 24px rgba(255, 122, 24, 0.35);
+  box-shadow: 0 8px 24px rgba(249, 115, 22, 0.35);
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
 .btn-primary:hover {
   transform: translateY(-1px);
-  box-shadow: 0 12px 28px rgba(255, 122, 24, 0.45);
+  box-shadow: 0 12px 28px rgba(249, 115, 22, 0.45);
 }
 
 .btn-secondary {
@@ -132,9 +131,9 @@ img {
   gap: 0.35rem;
   border-radius: 999px;
   padding: 0.85rem 1.5rem;
-  background: #ffffff;
-  border: 1px solid var(--light-border);
-  color: var(--light-text-primary);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
   font-weight: 600;
 }
 
@@ -143,7 +142,7 @@ img {
   padding: 0.25rem 0.85rem;
   font-size: 0.82rem;
   background: #f1f5f9;
-  color: var(--light-text-primary);
+  color: var(--text-primary);
   font-weight: 500;
 }
 
@@ -155,9 +154,9 @@ img {
 .project-card {
   border-radius: 1.25rem;
   padding: 1.75rem;
-  background: var(--light-card);
-  border: 1px solid var(--light-border);
-  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.06);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -184,7 +183,7 @@ img {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   font-size: 0.78rem;
-  color: var(--light-text-muted);
+  color: var(--text-muted);
   font-weight: 700;
 }
 
@@ -212,17 +211,15 @@ img {
 
 .contact-card {
   border-radius: 1.25rem;
-  border: 1px solid var(--light-border);
+  border: 1px solid var(--border-color);
   padding: 1.5rem;
-  background: var(--light-card);
-  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.06);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-card);
   transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 .dark .contact-card {
-  background: #1e293b;
-  border-color: #334155;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-card);
 }
 
 .contact-card h4 {
