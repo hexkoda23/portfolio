@@ -1,135 +1,142 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { Menu, X } from 'lucide-react'
 
 const navItems = [
   { label: 'Home', to: '/' },
   { label: 'About', to: '/about' },
   { label: 'Portfolio', to: '/portfolio' },
-  { label: 'Contact', to: '/contact' }
+  { label: 'Contact', to: '/contact' },
 ]
 
-const NavLink = ({ to, children, onClick }) => {
+export default function Header() {
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
   const loc = useLocation()
-  const active = loc.pathname === to
+
+  // SabiLens LandingHeader scroll logic — exact copy
+  useEffect(() => {
+    const fn = () => setIsScrolled(window.scrollY > 20)
+    window.addEventListener('scroll', fn, { passive: true })
+    fn()
+    return () => window.removeEventListener('scroll', fn)
+  }, [])
+
+  // SabiLens theme toggle logic
+  const toggleTheme = () => {
+    const root = document.documentElement
+    const dark = root.getAttribute('data-theme') === 'dark'
+    root.setAttribute('data-theme', dark ? 'light' : 'dark')
+    root.classList.toggle('dark', !dark)
+    localStorage.setItem('theme', dark ? 'light' : 'dark')
+  }
+
+  // SabiLens headerBg pattern — transparent over hero, solid on scroll
+  const headerBg = isScrolled
+    ? 'bg-white/95 dark:bg-[#0f172a]/95 backdrop-blur-xl border-b border-border shadow-soft'
+    : 'bg-transparent'
+
+  // SabiLens nav link color logic
+  const linkColor = isScrolled
+    ? 'text-muted hover:text-accent dark:text-slate-400 dark:hover:text-white'
+    : 'text-white/80 hover:text-white'
+
   return (
-    <Link
-      to={to}
-      onClick={onClick}
-      className={`px-4 py-2 text-sm font-semibold rounded-full transition-colors ${
-        active
-          ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900'
-          : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-800'
-      }`}
-    >
-      {children}
-    </Link>
-  )
-}
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${headerBg}`}>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
 
-export default function Header () {
-  const [isOpen, setIsOpen] = useState(false)
-
-  return (
-    <header className='app-navbar'>
-      <div className='max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-4'>
-        <Link to='/' className='flex items-center gap-3'>
-          <div className='h-11 w-11 rounded-2xl bg-slate-900 text-white flex items-center justify-center font-semibold dark:bg-white dark:text-slate-900'>
-            AK
-          </div>
-          <div>
-            <p className='text-lg font-semibold text-slate-900 leading-none dark:text-white'>
-              Adeleke Kehinde
-            </p>
-            <p className='text-xs text-slate-500 leading-none mt-1 dark:text-slate-400'>
-              AI & Full-Stack Developer
-            </p>
-          </div>
-        </Link>
-
-        <nav className='hidden lg:flex items-center gap-2'>
-          {navItems.map(item => (
-            <NavLink key={item.to} to={item.to}>
-              {item.label}
-            </NavLink>
-          ))}
-        </nav>
-
-        <div className='flex items-center gap-3'>
-          <button
-            type='button'
-            aria-label='Toggle theme'
-            title='Toggle theme'
-            className='inline-flex items-center justify-center w-11 h-11 rounded-full border border-slate-200 text-slate-900 bg-white hover:bg-slate-50 dark:border-slate-700 dark:text-white dark:bg-slate-900/60'
-            onClick={() => {
-              const root = document.documentElement
-              const willBeDark = root.getAttribute('data-theme') !== 'dark'
-              root.setAttribute('data-theme', willBeDark ? 'dark' : 'light')
-              root.classList.toggle('dark', willBeDark) // keep Tailwind dark: variants working
-              localStorage.setItem('theme', willBeDark ? 'dark' : 'light')
-            }}
-          >
-            <span className='block dark:hidden' aria-hidden='true'>
-              <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor' className='w-5 h-5'>
-                <path d='M12 3.75a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0V4.5A.75.75 0 0 1 12 3.75ZM6.72 5.28a.75.75 0 0 1 1.06 0l1.06 1.06a.75.75 0 1 1-1.06 1.06L6.72 6.34a.75.75 0 0 1 0-1.06ZM3.75 12a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 0 1.5H4.5A.75.75 0 0 1 3.75 12Zm3.97 6.72a.75.75 0 0 1 0-1.06l1.06-1.06a.75.75 0 1 1 1.06 1.06l-1.06 1.06a.75.75 0 0 1-1.06 0ZM12 18a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 12 18Zm6.28-1.28a.75.75 0 0 1-1.06 0l-1.06-1.06a.75.75 0 1 1 1.06-1.06l1.06 1.06a.75.75 0 0 1 0 1.06ZM18 12a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 0 1.5h-1.5A.75.75 0 0 1 18 12ZM8.47 12a3.53 3.53 0 1 1 7.06 0 3.53 3.53 0 0 1-7.06 0Z' />
-              </svg>
-            </span>
-            <span className='hidden dark:block' aria-hidden='true'>
-              <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor' className='w-5 h-5'>
-                <path d='M21.752 15.002A9 9 0 0 1 9 2.248a.75.75 0 0 0-1.212-.59 10.5 10.5 0 1 0 15.05 15.05.75.75 0 0 0-.586-1.206h0Z' />
-              </svg>
-            </span>
-          </button>
-          <Link
-            to='/contact'
-            className='hidden sm:inline-flex px-4 py-2 text-sm font-semibold rounded-full bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-900'
-          >
-            Let’s talk
-          </Link>
-          <button
-            type='button'
-            className='lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-full border border-slate-200 text-slate-900 dark:border-slate-700 dark:text-white'
-            aria-label='Toggle navigation menu'
-            aria-expanded={isOpen}
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            <span className='sr-only'>Menu</span>
-            <div className='space-y-1.5'>
-              <span
-                className={`block h-0.5 w-6 rounded-full bg-current transition-transform ${
-                  isOpen ? 'translate-y-[6px] rotate-45' : ''
-                }`}
-              />
-              <span
-                className={`block h-0.5 w-6 rounded-full bg-current transition-opacity ${
-                  isOpen ? 'opacity-0' : 'opacity-100'
-                }`}
-              />
-              <span
-                className={`block h-0.5 w-6 rounded-full bg-current transition-transform ${
-                  isOpen ? '-translate-y-[6px] -rotate-45' : ''
-                }`}
-              />
+          {/* Logo — SabiLens brand square + name pattern */}
+          <Link to="/" className="flex items-center gap-2.5 group">
+            <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center font-syne font-bold text-white text-sm shadow-glow group-hover:scale-105 transition-transform">
+              AK
             </div>
-          </button>
+            <div>
+              <p className={`font-syne font-bold text-base leading-none transition-colors ${isScrolled ? 'text-accent dark:text-white' : 'text-white'}`}>
+                Adeleke Kehinde
+              </p>
+              <p className={`font-mono text-[0.58rem] leading-none mt-0.5 uppercase tracking-widest transition-colors ${isScrolled ? 'text-muted' : 'text-white/50'}`}>
+                AI & Full-Stack Developer
+              </p>
+            </div>
+          </Link>
+
+          {/* Desktop nav — SabiLens after:w-0 hover:after:w-full underline animation */}
+          <nav className="hidden lg:flex items-center gap-1">
+            {navItems.map(item => {
+              const active = loc.pathname === item.to
+              return (
+                <Link key={item.to} to={item.to}
+                  className={`relative px-4 py-2 font-syne font-semibold text-sm transition-all rounded-lg
+                    after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px] after:bg-primary
+                    after:rounded-full after:transition-all after:duration-300
+                    ${active ? 'text-primary after:w-auto' : `${linkColor} after:w-0 hover:after:w-auto`}
+                    ${isScrolled && active ? 'bg-primary/8' : ''}
+                  `}>
+                  {item.label}
+                </Link>
+              )
+            })}
+          </nav>
+
+          {/* Actions */}
+          <div className="flex items-center gap-2">
+            {/* Theme toggle */}
+            <button onClick={toggleTheme} aria-label="Toggle theme"
+              className={`w-9 h-9 rounded-xl border flex items-center justify-center transition-all hover:scale-105
+                ${isScrolled
+                  ? 'border-border bg-white dark:bg-accent-2 dark:border-white/10 text-muted dark:text-slate-400'
+                  : 'border-white/20 bg-white/10 text-white'
+                }`}>
+              <span className="block dark:hidden text-sm">☀️</span>
+              <span className="hidden dark:block text-sm">🌙</span>
+            </button>
+
+            {/* CTA — SabiLens primary button with glow */}
+            <Link to="/contact"
+              className="hidden sm:inline-flex items-center px-5 py-2 font-syne font-semibold text-sm rounded-xl bg-primary text-white shadow-glow hover:bg-primary-dark hover:shadow-[0_0_40px_rgba(249,115,22,0.5)] hover:scale-[1.02] active:scale-[0.98] transition-all">
+              Let's Talk
+            </Link>
+
+            {/* Mobile hamburger */}
+            <button onClick={() => setMobileOpen(!mobileOpen)}
+              className={`lg:hidden w-9 h-9 rounded-xl border flex items-center justify-center transition-colors
+                ${isScrolled ? 'border-border text-accent dark:border-white/10 dark:text-white' : 'border-white/20 text-white'}`}>
+              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
         </div>
       </div>
 
+      {/* Mobile drawer — SabiLens slide-from-right pattern */}
       <div
-        className={`lg:hidden overflow-hidden border-t border-slate-100 dark:border-slate-800 transition-all duration-300 origin-top ${
-          isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-        }`}
-      >
-        <nav className='px-4 sm:px-6 py-4 flex flex-col gap-2 bg-white dark:bg-[#1e2435]'>
+        className={`fixed inset-0 z-40 bg-accent/40 backdrop-blur-sm transition-opacity lg:hidden ${mobileOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}
+        onClick={() => setMobileOpen(false)}
+      />
+      <div className={`fixed top-0 right-0 z-50 w-full max-w-xs h-screen bg-white dark:bg-[#0f172a] shadow-dark transition-transform duration-300 lg:hidden flex flex-col ${mobileOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+        <div className="flex items-center justify-between px-6 py-5 border-b border-border dark:border-white/8">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-xl bg-primary flex items-center justify-center font-syne font-bold text-white text-xs">AK</div>
+            <span className="font-syne font-bold text-accent dark:text-white">Adeleke Kehinde</span>
+          </div>
+          <button onClick={() => setMobileOpen(false)} className="text-muted hover:text-accent dark:text-slate-400 dark:hover:text-white p-1 rounded-lg hover:bg-surface transition-colors">
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+        <nav className="flex-1 p-6 flex flex-col gap-1">
           {navItems.map(item => (
-            <NavLink key={item.to} to={item.to} onClick={() => setIsOpen(false)}>
+            <Link key={item.to} to={item.to} onClick={() => setMobileOpen(false)}
+              className={`px-4 py-3 font-syne font-semibold text-base rounded-xl transition-colors
+                ${loc.pathname === item.to
+                  ? 'bg-primary/10 text-primary'
+                  : 'text-accent dark:text-white/80 hover:bg-surface dark:hover:bg-white/5'
+                }`}>
               {item.label}
-            </NavLink>
+            </Link>
           ))}
-          <Link
-            to='/contact'
-            className='mt-2 inline-flex justify-center px-4 py-2 text-sm font-semibold rounded-full bg-slate-900 text-white dark:bg-white dark:text-slate-900'
-          >
-            Book a project
+          <Link to="/contact" onClick={() => setMobileOpen(false)}
+            className="mt-4 w-full py-3 text-center font-syne font-semibold text-sm rounded-xl bg-primary text-white shadow-glow">
+            Let's Talk
           </Link>
         </nav>
       </div>

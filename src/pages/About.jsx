@@ -37,63 +37,84 @@ const capabilities = [
   'API Design & Integration'
 ]
 
-export default function About () {
+export default function About() {
   return (
-    <section className='max-w-6xl mx-auto px-4 sm:px-6 py-16 space-y-12'>
-      <div className='grid gap-10 lg:grid-cols-[1.1fr,0.9fr] items-start'>
-        <div className='rounded-[28px] bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 p-8 md:p-10 shadow-xl'>
-          <p className='section-label text-slate-900 dark:text-slate-400'>About</p>
-          <h1 className='mt-4 text-3xl font-bold text-slate-900 dark:text-white'>
-            Building intelligent systems that solve complex problems.
-          </h1>
-          <p className='mt-4 text-slate-900 dark:text-slate-300'>
-            I’m Adeleke Kehinde — an AI & Full-Stack Developer passionate about 
-            bridging the gap between cutting-edge AI research and practical applications. 
-            My work focuses on creating autonomous agents, intelligent assistants, and 
-            data-driven solutions that drive real value.
+    <div>
+      {/* Dark header — SabiLens dark section */}
+      <section className="bg-[#0f172a] py-24 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9IiNmZmZmZmYiLz48L3N2Zz4=')] [mask-image:radial-gradient(ellipse_at_center,white,transparent)]" />
+        <div className="absolute -top-[20%] -right-[10%] w-[50%] h-[50%] rounded-full bg-orange-500/5 blur-[100px]" />
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
+          <p className="inline-flex items-center gap-2 font-mono font-semibold text-[0.7rem] uppercase tracking-[0.16em] text-orange-500 mb-4 before:block before:w-5 before:h-0.5 before:bg-orange-500 before:rounded-full">
+            About
           </p>
-          <div className='mt-8 grid gap-4'>
-            {roles.map(role => (
-              <div key={role.title} className='bg-white dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800 rounded-2xl p-5'>
-                <div className='text-xs uppercase tracking-[0.2em] text-slate-900 dark:text-slate-400'>
-                  {role.year}
+          <h1 className="font-syne font-bold text-white leading-tight mb-5"
+            style={{ fontSize: 'clamp(2rem, 4vw, 3.25rem)' }}>
+            Building intelligent systems<br />that solve complex problems.
+          </h1>
+          <p className="font-sans text-lg text-white/60 max-w-xl leading-relaxed">
+            I'm Adeleke Kehinde — an AI & Full-Stack Developer bridging the gap between cutting-edge AI research and real-world applications. Based in Lagos, working globally.
+          </p>
+        </div>
+      </section>
+
+      <section className="py-16 bg-white dark:bg-[#0d1117]">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="grid gap-10 lg:grid-cols-[1.1fr,0.9fr] items-start">
+
+            {/* Timeline */}
+            <div className="space-y-4">
+              <p className="inline-flex items-center gap-2 font-mono font-semibold text-[0.7rem] uppercase tracking-[0.16em] text-orange-500 mb-6 before:block before:w-5 before:h-0.5 before:bg-orange-500 before:rounded-full">
+                Experience
+              </p>
+              {roles.map((role, i) => (
+                <div key={role.title}
+                  className={`bg-white dark:bg-[#1e2435] border border-slate-100 dark:border-white/[0.08] rounded-2xl p-6 shadow-soft hover:border-orange-200 hover:shadow-[0_4px_24px_rgba(0,0,0,0.10)] dark:hover:border-orange-500/30 dark:hover:shadow-[0_8px_32px_rgba(249,115,22,0.10)] hover:-translate-y-1 transition-all duration-300 animate-fade-up stagger-${Math.min(i + 1, 5)}`}>
+                  <p className="font-mono font-bold text-[0.65rem] text-orange-500 uppercase tracking-widest mb-2">{role.year}</p>
+                  <h3 className="font-syne font-semibold text-lg text-slate-900 dark:text-white mb-2">{role.title}</h3>
+                  <p className="font-sans text-sm text-slate-500 dark:text-slate-400 leading-relaxed">{role.detail}</p>
                 </div>
-                <h3 className='text-lg font-semibold text-slate-900 dark:text-white mt-2'>{role.title}</h3>
-                <p className='text-sm text-slate-900 dark:text-slate-300 mt-1'>{role.detail}</p>
+              ))}
+            </div>
+
+            {/* Sidebar */}
+            <aside className="space-y-5 lg:sticky lg:top-24">
+              {/* Capabilities */}
+              <div className="bg-white dark:bg-[#1e2435] border border-slate-100 dark:border-white/[0.08] rounded-2xl p-6 shadow-soft">
+                <p className="inline-flex items-center gap-2 font-mono font-semibold text-[0.7rem] uppercase tracking-[0.16em] text-orange-500 mb-5 before:block before:w-5 before:h-0.5 before:bg-orange-500 before:rounded-full">
+                  Capabilities
+                </p>
+                <ul className="space-y-3">
+                  {capabilities.map(item => (
+                    <li key={item} className="flex items-center gap-3 font-sans text-sm text-slate-500 dark:text-slate-400">
+                      <span className="w-2 h-2 rounded-full bg-orange-500 flex-shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
-            ))}
+
+              {/* Contact card — SabiLens dark card with glow */}
+              <div className="bg-[#0f172a] border border-white/10 rounded-2xl p-6 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-40 h-40 bg-orange-500/10 rounded-full blur-[60px] pointer-events-none" />
+                <div className="relative z-10">
+                  <div className="flex items-center gap-2 mb-4">
+                    <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                    <span className="font-mono text-xs text-green-400 uppercase tracking-widest font-semibold">Available for Work</span>
+                  </div>
+                  <p className="font-syne font-bold text-white text-base mb-1">Lagos, Nigeria</p>
+                  <p className="font-sans text-white/40 text-sm mb-2">Available worldwide · Remote</p>
+                  <p className="font-sans text-white/50 text-sm mb-6">kehindeadeleke92@gmail.com</p>
+                  <a href="/contact"
+                    className="block w-full py-3 text-center font-syne font-semibold text-sm rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-glow hover:scale-[0.98] transition-all">
+                    Request Availability →
+                  </a>
+                </div>
+              </div>
+            </aside>
           </div>
         </div>
-
-        <aside className='space-y-6'>
-          <div className='contact-card dark:bg-slate-900 dark:border-slate-800'>
-            <h4 className='text-base font-semibold text-slate-900 dark:text-white'>Capabilities</h4>
-            <ul className='mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-slate-900 dark:text-slate-300'>
-              {capabilities.map(item => (
-                <li key={item} className='flex items-center gap-2'>
-                  <span className='h-2 w-2 rounded-full bg-slate-900 dark:bg-white' />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className='contact-card dark:bg-slate-900 dark:border-slate-800'>
-            <h4 className='text-base font-semibold text-slate-900 dark:text-white'>Location</h4>
-            <p className='text-sm text-slate-900 dark:text-slate-400'>Lagos, Nigeria — available worldwide</p>
-            <div className='mt-4'>
-              <h4 className='text-base font-semibold text-slate-900 dark:text-white'>Contact</h4>
-              <p className='text-sm text-slate-900 dark:text-slate-400'>kehindeadeleke92@gmail.com</p>
-            </div>
-            <a
-              href='/contact'
-              className='mt-6 inline-flex justify-center w-full px-4 py-3 text-sm font-semibold rounded-full bg-slate-900 text-white dark:bg-white dark:text-slate-900'
-            >
-              Request availability
-            </a>
-          </div>
-        </aside>
-      </div>
-    </section>
+      </section>
+    </div>
   )
 }

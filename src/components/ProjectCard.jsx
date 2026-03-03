@@ -1,77 +1,29 @@
-import React from 'react'
-
-export default function ProjectCard ({
-  title,
-  subtitle,
-  description,
-  status,
-  tags = [],
-  images = [],
-  onClick
-}) {
-  const isInProgress = status === 'In Progress'
-  const previewImage = images && images.length > 0 ? images[0] : null
-
+export default function ProjectCard({ title, subtitle, status, description, tags, images, onClick }) {
   return (
-    <article 
-      className='project-card cursor-pointer'
-      onClick={onClick}
-    >
-      {/* Project Image Preview */}
-      {previewImage && (
-        <div className='relative h-48 rounded-xl overflow-hidden mb-4 bg-slate-100 dark:bg-gradient-to-br dark:from-blue-500 dark:to-purple-600'>
-          <img
-            src={previewImage}
-            alt={title}
-            className='w-full h-full object-cover'
-            onError={(e) => {
-              e.target.src = `https://via.placeholder.com/600x300/3b82f6/ffffff?text=${encodeURIComponent(title)}`
-            }}
-          />
-          <div className='absolute inset-0 bg-gradient-to-t from-black/40 to-transparent hidden dark:block' />
+    <div onClick={onClick}
+      className="bg-white dark:bg-[#1e2435] border border-slate-100 dark:border-white/[0.08] rounded-2xl p-6 shadow-soft hover:border-orange-200 hover:shadow-[0_4px_24px_rgba(0,0,0,0.10)] dark:hover:border-orange-500/30 dark:hover:shadow-[0_8px_32px_rgba(249,115,22,0.10)] hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col gap-4">
+      {images?.[0] && (
+        <div className="rounded-xl overflow-hidden aspect-video bg-slate-50 dark:bg-[#0d1117]">
+          <img src={images[0]} alt={title} className="w-full h-full object-cover" />
         </div>
       )}
-
-      <div className='flex items-start justify-between gap-4'>
-        <div className='flex-1'>
-          <p className='text-xs uppercase tracking-[0.2em] text-slate-600 dark:text-slate-500'>
-            {subtitle}
-          </p>
-          <h3 className='text-2xl font-semibold text-slate-900 dark:text-white mt-2'>{title}</h3>
-        </div>
-        <div
-          className={`text-xs px-3 py-1 rounded-full font-semibold whitespace-nowrap ${
-            isInProgress
-              ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400'
-              : 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400'
-          }`}
-        >
-          {status}
-        </div>
+      <div className="flex items-center justify-between">
+        <span className="font-mono font-bold text-[0.65rem] uppercase tracking-widest text-orange-500">{subtitle}</span>
+        {status && (
+          <span className="font-mono text-[0.6rem] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-500">{status}</span>
+        )}
       </div>
-
-      <p className='text-slate-600 dark:text-slate-300 text-sm mt-3'>{description}</p>
-
-      {tags.length > 0 && (
-        <div className='flex flex-wrap gap-2 mt-4'>
-          {tags.map((tag, idx) => (
-            <span key={idx} className='badge-soft bg-slate-50 dark:bg-slate-800 dark:text-slate-300'>
+      <h3 className="font-syne font-bold text-xl text-slate-900 dark:text-white leading-snug">{title}</h3>
+      <p className="font-sans text-slate-500 dark:text-slate-400 text-sm leading-relaxed">{description}</p>
+      {tags?.length > 0 && (
+        <div className="flex flex-wrap gap-2 mt-auto pt-3 border-t border-slate-100 dark:border-white/8">
+          {tags.map(tag => (
+            <span key={tag} className="font-mono text-[0.62rem] font-medium px-2.5 py-1 rounded-full bg-slate-50 dark:bg-white/5 text-slate-500 dark:text-slate-400 border border-slate-100 dark:border-white/8">
               {tag}
             </span>
           ))}
         </div>
       )}
-
-      <button 
-        className='text-sm font-semibold text-slate-900 dark:text-white flex items-center gap-2 mt-4 hover:text-orange-500 dark:hover:text-orange-400 transition-colors'
-        onClick={(e) => {
-          e.stopPropagation()
-          onClick?.()
-        }}
-      >
-        View project details
-        <span aria-hidden='true'>↗</span>
-      </button>
-    </article>
+    </div>
   )
 }

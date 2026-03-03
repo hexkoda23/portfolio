@@ -3,87 +3,118 @@ import React from 'react'
 const stats = [
   { label: 'AI Projects', value: '9' },
   { label: 'Technologies', value: '15+' },
-  { label: 'Production Ready', value: '100%' }
+  { label: 'Production Ready', value: '100%' },
 ]
 
-export default function Hero () {
+export default function Hero() {
   return (
-    <section className='hero-gradient py-16 md:py-20'>
-      <div className='max-w-6xl mx-auto px-4 sm:px-6 relative z-10'>
-        <div className='grid lg:grid-cols-[1.2fr_0.8fr] gap-10 items-center'>
-          <div>
-            <div className='flex flex-wrap gap-2 text-xs uppercase tracking-[0.3em] text-slate-600 dark:text-slate-200/90 accent-pill px-4 py-2 inline-flex transition-colors'>
+    <section className="relative min-h-screen flex items-center bg-[#0f172a] overflow-hidden">
+
+      {/* Background blobs + dot grid */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute -top-[20%] -right-[10%] w-[70%] h-[70%] rounded-full bg-orange-500/5 blur-[120px]" />
+        <div className="absolute bottom-[10%] -left-[10%] w-[50%] h-[50%] rounded-full bg-orange-500/5 blur-[100px]" />
+        <div className="absolute inset-0 opacity-[0.06]"
+          style={{ backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
+      </div>
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10 pt-24 pb-16 w-full">
+
+        {/* MOBILE ONLY: circular photo above text */}
+        <div className="flex justify-center mb-10 lg:hidden">
+          <div className="relative">
+            <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden border-4 border-orange-500/30 shadow-[0_0_40px_rgba(249,115,22,0.2)]">
+              <img src="/Image/mee.jpg" alt="Adeleke Kehinde"
+                className="w-full h-full object-cover"
+                onError={e => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex' }} />
+              <div className="w-full h-full bg-[#1e293b] items-center justify-center text-4xl" style={{ display: 'none' }}>👨💻</div>
+            </div>
+            <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-green-400 border-2 border-[#0f172a] animate-pulse" />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 items-center">
+
+          {/* LEFT: Text */}
+          <div className="max-w-2xl mx-auto lg:mx-0 text-center lg:text-left">
+
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 font-semibold text-sm mb-8 animate-fade-up">
+              <span className="w-2 h-2 rounded-full bg-orange-400 animate-pulse" />
               AI & Full-Stack Developer
             </div>
-            <h1 className='mt-6 text-4xl sm:text-5xl xl:text-6xl font-extrabold leading-tight text-slate-900 dark:text-white transition-colors'>
-              Building intelligent AI solutions that solve real-world problems.
+
+            <h1 className="font-syne font-extrabold text-white leading-[1.1] mb-6 animate-fade-up tracking-tight"
+              style={{ fontSize: 'clamp(2.2rem, 5.5vw, 3.75rem)', animationDelay: '0.1s' }}>
+              Building intelligent AI<br />solutions that solve{' '}
+              <span className="relative inline-block" style={{
+                background: 'linear-gradient(135deg, #f97316 0%, #fb923c 60%, #fed7aa 100%)',
+                WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'
+              }}>
+                real-world problems.
+                <svg className="absolute w-full h-3 -bottom-1 left-0" viewBox="0 0 100 10" preserveAspectRatio="none" style={{ color: 'rgba(249,115,22,0.3)' }}>
+                  <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="4" fill="none" />
+                </svg>
+              </span>
             </h1>
-            <p className='mt-6 text-lg text-slate-600 dark:text-slate-200 max-w-2xl transition-colors'>
-              Specializing in Natural Language Processing, Machine Learning, and AI system design. 
-              I develop production-ready solutions that combine cutting-edge research with practical 
-              engineering to deliver measurable business value.
+
+            <p className="font-sans text-lg text-white/60 mb-10 leading-relaxed animate-fade-up max-w-lg mx-auto lg:mx-0" style={{ animationDelay: '0.2s' }}>
+              Specializing in NLP, Machine Learning, and AI system design. I build production-ready solutions that combine cutting-edge research with practical engineering to deliver measurable business value.
             </p>
 
-            <div className='mt-8 flex flex-wrap gap-4'>
-              <a href='/portfolio' className='btn-primary'>
-                View portfolio
+            <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start mb-12 animate-fade-up" style={{ animationDelay: '0.3s' }}>
+              <a href="/portfolio" className="w-full sm:w-auto px-8 py-4 font-syne font-semibold text-lg rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-[0_8px_24px_rgba(249,115,22,0.35)] hover:shadow-[0_12px_32px_rgba(249,115,22,0.5)] hover:scale-[0.98] active:scale-95 transition-all text-center">
+                View Portfolio
               </a>
-              <a href='/contact' className='btn-secondary text-slate-900 border-slate-300 hover:bg-slate-100 dark:text-white dark:border-white/40 dark:hover:bg-white/10 transition-colors'>
-                Get in touch
+              <a href="/contact" className="w-full sm:w-auto flex items-center justify-center gap-2 font-syne font-semibold text-lg text-white/80 hover:text-white py-4 px-6 rounded-xl hover:bg-white/10 border border-white/20 hover:border-white/40 transition-all">
+                Get in Touch
               </a>
-              <a 
-                href='/cv/tife-cv.pdf' 
-                download='Tife_CV.pdf'
-                className='btn-secondary text-slate-900 border-slate-300 hover:bg-slate-100 dark:text-white dark:border-white/40 dark:hover:bg-white/10 transition-colors flex items-center gap-2'
-              >
-                <span>Download CV</span>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
-                </svg>
+              <a href="/cv/Adeleke_Kehinde_CV.pdf" download className="w-full sm:w-auto flex items-center justify-center gap-2 font-syne font-semibold text-lg text-white/80 hover:text-white py-4 px-6 rounded-xl hover:bg-white/10 border border-white/20 hover:border-white/40 transition-all">
+                Download CV
               </a>
             </div>
 
-            <div className='mt-10 grid grid-cols-2 sm:grid-cols-3 gap-6'>
-              {stats.map(stat => (
-                <div key={stat.label}>
-                  <p className='text-3xl font-bold text-slate-900 dark:text-white transition-colors'>{stat.value}</p>
-                  <p className='text-xs uppercase tracking-widest text-slate-500 dark:text-slate-300 transition-colors'>
-                    {stat.label}
-                  </p>
-                </div>
+            <div className="flex flex-wrap items-center gap-x-8 gap-y-4 animate-fade-up justify-center lg:justify-start" style={{ animationDelay: '0.4s' }}>
+              {stats.map((s, i) => (
+                <React.Fragment key={s.label}>
+                  {i > 0 && <div className="w-1 h-1 rounded-full bg-white/20" />}
+                  <div className="flex items-center gap-2">
+                    <span className="font-syne font-bold text-white text-xl">{s.value}</span>
+                    <span className="font-sans text-white/40 text-sm">{s.label}</span>
+                  </div>
+                </React.Fragment>
               ))}
             </div>
           </div>
 
-          <div className='relative'>
-            <div className='absolute -top-6 -left-6 w-32 h-32 rounded-full bg-orange-400/30 blur-3xl hidden dark:block' />
-            <div className='relative rounded-[28px] overflow-hidden shadow-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-gradient-to-br dark:from-blue-600 dark:to-purple-600 transition-colors'>
-              <div className='w-full h-[420px] relative overflow-hidden'>
-                <img 
-                  src='/Image/mee.jpg' 
-                  alt='Adeleke Kehinde - AI Developer' 
-                  className='w-full h-full object-cover'
-                  onError={(e) => {
-                    e.target.style.display = 'none'
-                    e.target.nextElementSibling.style.display = 'flex'
-                  }}
-                />
-                <div className='absolute inset-0 flex items-center justify-center text-center text-slate-900 dark:text-white hidden bg-gradient-to-br from-blue-50 to-purple-50 dark:bg-none'>
-                  <div>
-                    <div className='text-6xl mb-4'>🤖</div>
-                    <p className='text-xl font-semibold'>AI Portfolio</p>
-                    <p className='text-sm text-slate-900 dark:text-white/80 mt-2'>Innovative Solutions</p>
-                  </div>
-                </div>
+          {/* RIGHT: Desktop tall card + floating cards — hidden on mobile */}
+          <div className="relative hidden lg:block lg:ml-auto w-full max-sm mx-auto animate-fade-up" style={{ animationDelay: '0.3s' }}>
+            <div className="absolute w-72 h-72 bg-orange-500/15 rounded-full blur-[80px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+            <div className="relative mx-auto w-[300px] rounded-[32px] border-[6px] border-white/10 shadow-[0_40px_80px_rgba(0,0,0,0.6)] overflow-hidden z-10">
+              <img src="/Image/mee.jpg" alt="Adeleke Kehinde — AI Developer"
+                className="w-full h-[420px] object-cover"
+                onError={e => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex' }} />
+              <div className="hidden w-full h-[420px] bg-[#1e293b] items-center justify-center flex-col gap-4">
+                <span className="text-6xl">👨💻</span>
+                <p className="font-syne font-bold text-white text-xl">AI Developer</p>
               </div>
             </div>
-            <div className='absolute -bottom-6 left-1/2 -translate-x-1/2 min-w-[240px] rounded-2xl accent-pill px-4 py-4 text-center text-xs transition-colors'>
-              <p className='text-[0.95rem] font-semibold text-slate-900 dark:text-white'>
-                Current focus — Production AI Systems
-              </p>
-              <p className='text-slate-900 dark:text-slate-200/80 mt-1'>
-                Building scalable, intelligent solutions
-              </p>
+            {/* Floating card 1 */}
+            <div className="absolute -right-12 top-24 z-20 animate-float bg-white p-4 rounded-xl shadow-[0_4px_24px_rgba(0,0,0,0.12)] border border-slate-100 w-48">
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                <span className="font-mono text-[0.6rem] font-bold text-green-700 tracking-wide uppercase">Available</span>
+              </div>
+              <p className="font-syne font-semibold text-slate-800 text-sm leading-tight">Open to new projects</p>
+              <p className="font-sans text-xs text-slate-400 mt-1">Lagos, Nigeria · Remote</p>
+            </div>
+            {/* Floating card 2 */}
+            <div className="absolute -left-16 bottom-32 z-20 animate-float bg-white p-4 rounded-xl shadow-[0_4px_24px_rgba(0,0,0,0.12)] border border-slate-100 w-52" style={{ animationDelay: '1.5s' }}>
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-orange-500">⚡</span>
+                <span className="font-mono text-[0.6rem] font-bold text-slate-700 tracking-wide uppercase">Current Focus</span>
+              </div>
+              <p className="font-syne font-semibold text-slate-800 text-sm leading-tight">Production AI Systems</p>
+              <p className="font-sans text-xs text-slate-400 mt-1">RAG · LLMs · NLP</p>
             </div>
           </div>
         </div>

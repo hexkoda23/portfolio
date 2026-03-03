@@ -48,7 +48,7 @@ import Chatbot from './components/Chatbot'
 import CV from './pages/CV'
 
 
-export default function App(){
+export default function App() {
   const initialDark = (() => {
     if (typeof window === 'undefined') return false
     const saved = localStorage.getItem('theme')
@@ -67,9 +67,9 @@ export default function App(){
   // Theme toggle intentionally unused in current header
 
   return (
-    <div className="min-h-screen flex flex-col transition-colors duration-300">
+    <div className="transition-colors duration-300">
       <Header />
-      <main className="flex-1">
+      <main>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />

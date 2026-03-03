@@ -4,64 +4,191 @@ import ProjectDetail from '../components/ProjectDetail'
 
 const portfolioItems = [
   {
-    id: 1,
-    title: 'AI Resume & Job Match Scoring System',
-    subtitle: 'NLP & Semantic Analysis',
-    status: 'Published',
+    id: 10,
+    title: 'NYSC AI Chatbot',
+    subtitle: 'Multilingual Intelligent Assistant',
+    status: 'In Progress',
     description:
-      'An intelligent system that analyzes CVs and job descriptions to provide match scores, missing skills identification, and personalized improvement recommendations.',
-    tags: ['NLP', 'Embeddings', 'FastAPI', 'React'],
-    category: 'Natural Language Processing',
+      'A pioneering AI solution designed to assist National Youth Service Corps (NYSC) members. Recognizing the struggle many corps members face in accessing timely and accurate information, this chatbot serves as a 24/7 knowledge hub. It uniquely supports English, Yoruba, and Hausa, ensuring inclusivity across diverse cultural backgrounds. This is the first stage of a larger vision to digitalize information access for Nigerian youth.',
+    tags: ['NLP', 'Multi-Language', 'LLM', 'Python'],
+    category: 'Conversational AI',
     overview:
-      'The AI Resume & Job Match Scoring System is a comprehensive solution that addresses a critical challenge in modern hiring: efficiently matching candidates with job opportunities. By leveraging advanced natural language processing and semantic similarity techniques, the system provides actionable insights to both job seekers and recruiters.',
+      'The NYSC AI Chatbot is a specialized multilingual assistant designed to bridge the information gap for corps members in Nigeria. It provides real-time answers to orientation, placement, and service-year queries in major local languages.',
     whyImpressive:
-      'This project directly solves a real-world hiring problem that affects millions of job seekers and employers daily. It demonstrates practical application of NLP, embeddings, and hybrid reasoning systems that combine rule-based logic with machine learning to deliver accurate, interpretable results.',
+      'This project addresses a large-scale accessibility challenge by implementing a multilingual RAG system that understands Nigerian linguistic nuances. It is the first stage of digitalizing the corps member experience at scale.',
     coreConcepts: [
-      'Text Embeddings',
-      'Semantic Similarity',
-      'NLP Preprocessing',
-      'Cosine Similarity',
-      'Hybrid ML Logic'
+      'Multilingual NLP',
+      'RAG Architecture',
+      'Linguistic Nuance',
+      'Information Accessibility'
     ],
     techStack: [
       'Python',
-      'FastAPI',
+      'LangChain',
       'OpenAI API',
-      'Sentence Transformers',
       'React',
-      'TypeScript'
+      'FastAPI'
     ],
     features: [
-      'Automated CV and job description analysis',
-      'Match percentage calculation using semantic similarity',
-      'Missing skills identification and gap analysis',
-      'Personalized improvement recommendations',
-      'RESTful API for easy integration',
-      'Interactive web interface for real-time analysis'
+      '24/7 Information Access',
+      'Support for English, Yoruba, and Hausa',
+      'Context-aware NYSC knowledge base',
+      'Multilingual query processing',
+      'Source-grounded responses to prevent hallucinations'
     ],
     problemStatement:
-      'Job seekers struggle to understand why their applications are rejected, while recruiters spend excessive time manually screening resumes. There\'s a critical need for an automated system that can objectively assess candidate-job fit and provide actionable feedback.',
+      'Corps members often struggle to find accurate, timely information during their service year, leading to confusion and missed opportunities. Language barriers can further complicate access to official guidelines.',
     approach:
-      'The system uses transformer-based embeddings to convert CVs and job descriptions into high-dimensional vectors. By calculating cosine similarity between these vectors, we determine semantic match scores. Additional rule-based logic analyzes specific skills, experience levels, and qualifications to provide comprehensive matching and gap analysis.',
+      'The system uses an advanced RAG (Retrieval-Augmented Generation) pipeline with multilingual embeddings to retrieve and synthesize information from NYSC handbooks and official sources in the user\'s preferred language.',
     deliverables: [
-      'Web application with intuitive user interface',
-      'REST API with comprehensive documentation',
-      'GitHub repository with detailed README explaining scoring logic',
-      'Model evaluation metrics and performance benchmarks',
-      'Deployment guide for production environments'
+      'Interactive Multilingual Chatbot Interface',
+      'Specialized NYSC Knowledge Base',
+      'Information Access Analytics Dashboard',
+      'Phase 1 Deployment Documentation'
     ],
     limitations:
-      'Current limitations include handling non-standard CV formats and understanding context-specific industry requirements. Future improvements will incorporate domain-specific embeddings, multi-language support, and integration with popular job boards and ATS systems.',
+      'Currently in Phase 1 (Information Access). Future updates will include deployment on mobile platforms, integration with official NYSC portals, and support for additional local dialects.',
     images: [
-      "/ai-resume/ai-resume1.jpg",
-      "/ai-resume/ai-resume2.jpg",
-      "/ai-resume/ai-resume3.jpg",
-      "/ai-resume/ai-resume4.jpg",
-      "/ai-resume/ai-resume5.jpg",
-      "/ai-resume/ai-resume6.jpg",
+      "/nysc-ai-chatbot/nysc1.jpg",
+      "/nysc-ai-chatbot/nysc2.jpg",
+      "/nysc-ai-chatbot/nysc3.jpg",
+      "/nysc-ai-chatbot/nysc4.jpg",
+      "/nysc-ai-chatbot/nysc5.jpg",
+      "/nysc-ai-chatbot/nysc6.jpg",
+      "/nysc-ai-chatbot/nysc7.jpg",
+      "/nysc-ai-chatbot/nysc8.jpg",
+      "/nysc-ai-chatbot/nysc9.jpg",
+      "/nysc-ai-chatbot/nysc10.jpg"
     ],
-    github: '#',
-    demo: '#'
+    github: 'https://github.com/hexkoda23/nysc_chatbot_ai',
+    demo: 'https://nysc-ai-chatbot.vercel.app/'
+  },
+  {
+    id: 9,
+    title: '23 — Fashion Platform & Brand Experience',
+    subtitle: 'E‑commerce, Lookbook & Outfit Generator',
+    status: 'Published',
+    description:
+      'A polished brand experience for 23 that blends shopping, storytelling and an outfit generator — built as a platform that inspires greatness, not just a storefront.',
+    tags: ['E‑commerce', 'Fashion UX', 'React', 'Tailwind', 'Outfit Generator'],
+    category: 'Digital Product & Frontend',
+    overview:
+      '23 is more than a clothing website — it is an avenue for greatness. The experience is designed to move beyond a catalogue into a living brand platform that showcases craft, culture and community. Visitors explore a cinematic lookbook, shop curated releases, and use an outfit generator to style pieces with confidence. The result is a product that elevates the brand narrative while making conversion paths clear and delightful.',
+    whyImpressive:
+      'This project fuses brand storytelling with product utility. It demonstrates design systems thinking, performance‑first front‑end engineering, and an interaction model (the outfit generator) that turns browsing into creation — deepening engagement and affinity for the 23 brand.',
+    coreConcepts: [
+      'UX for conversion & community',
+      'Component‑driven design system',
+      'Accessible, responsive layouts',
+      'Stateful interactions',
+      'AI‑style outfit suggestions'
+    ],
+    techStack: [
+      'React',
+      'Vite',
+      'Tailwind CSS',
+      'React Router'
+    ],
+    features: [
+      'Hero narrative that frames 23 as a movement',
+      'Lookbook gallery with editorial‑style imagery',
+      'Shop grid for new drops and capsules',
+      'Outfit generator with wardrobe panels and drag‑to‑style flow',
+      'Persistent cart and quick view interactions',
+      'Search, filters and structured product info',
+      'FAQ and contact touchpoints for trust and support',
+      'Performance‑minded image loading and error fallbacks'
+    ],
+    problemStatement:
+      'The brand needed more than a basic store. 23 required a digital home that communicates ethos, showcases design craft and gives people tools to style and belong — a path from admiration to participation.',
+    approach:
+      'I built a modular, component‑driven UI that keeps the aesthetic consistent across Lookbook, Shop and Generator. The outfit generator mirrors a creative studio: a personal wardrobe rail on the left, a styling canvas on the right, and guided suggestions. Information architecture clarifies journeys from discovery to purchase, while micro‑copy and CTAs continually reinforce the brand’s call to greatness.',
+    deliverables: [
+      'Responsive website with lookbook, shop and generator',
+      'Reusable design‑system components and tokens',
+      'Product detail templates and merchandising layouts',
+      'Empty‑state, loading and error experiences',
+      'Deployment and performance budget'
+    ],
+    limitations:
+      'Demo content uses sample inventory and screenshots. Next steps include integrating live inventory, payments and personalization models for the generator.',
+    images: [
+      "/23/23-1.jpg",
+      "/23/23-2.jpg",
+      "/23/23-3.jpg",
+      "/23/23-4.jpg",
+      "/23/23-5.jpg",
+      "/23/23-6.jpg",
+      "/23/23-7.jpg",
+      "/23/23-8.jpg",
+      "/23/23-9.jpg",
+    ],
+    github: 'https://github.com/hexkoda23/23-web',
+    demo: 'https://23-web.vercel.app/'
+  },
+  {
+    id: 8,
+    title: 'Smart Provision Shop Management System',
+    subtitle: 'AI-Powered Retail Assistant',
+    status: 'Published',
+    description:
+      'A comprehensive web-based shop management system with AI-powered insights that helps small retailers track sales, manage inventory, and make data-driven restocking decisions.',
+    tags: ['AI Assistant', 'Inventory Management', 'Sales Analytics', 'React'],
+    category: 'Retail Technology',
+    overview:
+      'The Smart Provision Shop Management System is designed to digitize and optimize small retail operations. It combines traditional inventory management with AI-powered insights to help shop owners understand their business better and make informed decisions.',
+    whyImpressive:
+      'This project addresses real-world needs of small business owners who lack access to sophisticated business intelligence tools. It demonstrates how AI can be democratized to help everyday entrepreneurs, making advanced analytics accessible through simple interfaces.',
+    coreConcepts: [
+      'Sales Trend Analysis',
+      'Predictive Analytics',
+      'Inventory Optimization',
+      'Natural Language Processing',
+      'Business Intelligence',
+      'Chat Interface'
+    ],
+    techStack: [
+      'React / Next.js',
+      'Python',
+      'FastAPI',
+      'PostgreSQL / SQLite',
+      'OpenAI API',
+      'Pandas'
+    ],
+    features: [
+      'Simple sales recording interface',
+      'Real-time stock level tracking',
+      'Low-stock alerts and notifications',
+      'Profit and sales summary dashboard',
+      'AI-powered shop assistant chat interface',
+      'Smart restock recommendations',
+      'Business insight generation',
+      'Mobile-friendly responsive design'
+    ],
+    problemStatement:
+      'Small shop owners typically manage their businesses using paper records or basic spreadsheets, making it difficult to track inventory, understand sales patterns, and make informed restocking decisions. They need affordable, easy-to-use tools that provide actionable insights.',
+    approach:
+      'The system records sales transactions and automatically updates inventory levels. An AI component analyzes sales patterns, stock levels, and historical data to generate insights and recommendations. A chat interface allows natural language queries about business performance.',
+    deliverables: [
+      'Web application with mobile-responsive design',
+      'Sales recording and inventory management system',
+      'AI chat assistant for business queries',
+      'Dashboard with visual analytics',
+      'Restock recommendation engine',
+      'Profit and loss reporting',
+      'Deployment guide for cloud hosting'
+    ],
+    limitations:
+      'Current version focuses on single-shop operations. Future improvements will include multi-user support, WhatsApp integration for daily summaries, receipt generation, voice input for sales recording, and integration with supplier systems for automated ordering.',
+    images: [
+      "/ai-shop/ai-shop1.jpg",
+      "/ai-shop/ai-shop1.jpg",
+      "/ai-shop/ai-shop2.jpg",
+      "/ai-shop/ai-shop3.jpg",
+      "/ai-shop/ai-shop4.jpg",
+    ],
+    github: 'https://github.com/hexkoda23/AI-Powered-smart-shop-manager',
+    demo: 'https://ai-powered-smart-shop-manager-2l9n.vercel.app/'
   },
   {
     id: 2,
@@ -119,6 +246,66 @@ const portfolioItems = [
       "/ai-study/ai-study2.jpg",
       "/ai-study/ai-study3.jpg",
       "/ai-study/ai-study4.jpg",
+    ],
+    github: '#',
+    demo: '#'
+  },
+  {
+    id: 1,
+    title: 'AI Resume & Job Match Scoring System',
+    subtitle: 'NLP & Semantic Analysis',
+    status: 'Published',
+    description:
+      'An intelligent system that analyzes CVs and job descriptions to provide match scores, missing skills identification, and personalized improvement recommendations.',
+    tags: ['NLP', 'Embeddings', 'FastAPI', 'React'],
+    category: 'Natural Language Processing',
+    overview:
+      'The AI Resume & Job Match Scoring System is a comprehensive solution that addresses a critical challenge in modern hiring: efficiently matching candidates with job opportunities. By leveraging advanced natural language processing and semantic similarity techniques, the system provides actionable insights to both job seekers and recruiters.',
+    whyImpressive:
+      'This project directly solves a real-world hiring problem that affects millions of job seekers and employers daily. It demonstrates practical application of NLP, embeddings, and hybrid reasoning systems that combine rule-based logic with machine learning to deliver accurate, interpretable results.',
+    coreConcepts: [
+      'Text Embeddings',
+      'Semantic Similarity',
+      'NLP Preprocessing',
+      'Cosine Similarity',
+      'Hybrid ML Logic'
+    ],
+    techStack: [
+      'Python',
+      'FastAPI',
+      'OpenAI API',
+      'Sentence Transformers',
+      'React',
+      'TypeScript'
+    ],
+    features: [
+      'Automated CV and job description analysis',
+      'Match percentage calculation using semantic similarity',
+      'Missing skills identification and gap analysis',
+      'Personalized improvement recommendations',
+      'RESTful API for easy integration',
+      'Interactive web interface for real-time analysis'
+    ],
+    problemStatement:
+      'Job seekers struggle to understand why their applications are rejected, while recruiters spend excessive time manually screening resumes. There\'s a critical need for an automated system that can objectively assess candidate-job fit and provide actionable feedback.',
+    approach:
+      'The system uses transformer-based embeddings to convert CVs and job descriptions into high-dimensional vectors. By calculating cosine similarity between these vectors, we determine semantic match scores. Additional rule-based logic analyzes specific skills, experience levels, and qualifications to provide comprehensive matching and gap analysis.',
+    deliverables: [
+      'Web application with intuitive user interface',
+      'REST API with comprehensive documentation',
+      'GitHub repository with detailed README explaining scoring logic',
+      'Model evaluation metrics and performance benchmarks',
+      'Deployment guide for production environments'
+    ],
+    limitations:
+      'Current limitations include handling non-standard CV formats and understanding context-specific industry requirements. Future improvements will incorporate domain-specific embeddings, multi-language support, and integration with popular job boards and ATS systems.',
+    images: [
+      "/ai-resume/ai-resume1.jpg",
+      "/ai-resume/ai-resume2.jpg",
+      "/ai-resume/ai-resume3.jpg",
+      "/ai-resume/ai-resume4.jpg",
+      "/ai-resume/ai-resume5.jpg",
+      "/ai-resume/ai-resume6.jpg",
     ],
     github: '#',
     demo: '#'
@@ -422,7 +609,7 @@ const portfolioItems = [
     limitations:
       'Current system works best with structured, clean data. Future enhancements will include support for unstructured data sources, predictive analytics, automated report scheduling, integration with popular business tools (Salesforce, Google Analytics), and custom insight templates for different industries.',
     images: [
-            "/ai-business/ai-business1.jpg",
+      "/ai-business/ai-business1.jpg",
       "/ai-business/ai-business2.jpg",
       "/ai-business/ai-business3.jpg",
       "/ai-business/ai-business4.jpg",
@@ -438,146 +625,12 @@ const portfolioItems = [
     ],
     github: '#',
     demo: '#'
-  },
-  {
-    id: 8,
-    title: 'Smart Provision Shop Management System',
-    subtitle: 'AI-Powered Retail Assistant',
-    status: 'Published',
-    description:
-      'A comprehensive web-based shop management system with AI-powered insights that helps small retailers track sales, manage inventory, and make data-driven restocking decisions.',
-    tags: ['AI Assistant', 'Inventory Management', 'Sales Analytics', 'React'],
-    category: 'Retail Technology',
-    overview:
-      'The Smart Provision Shop Management System is designed to digitize and optimize small retail operations. It combines traditional inventory management with AI-powered insights to help shop owners understand their business better and make informed decisions.',
-    whyImpressive:
-      'This project addresses real-world needs of small business owners who lack access to sophisticated business intelligence tools. It demonstrates how AI can be democratized to help everyday entrepreneurs, making advanced analytics accessible through simple interfaces.',
-    coreConcepts: [
-      'Sales Trend Analysis',
-      'Predictive Analytics',
-      'Inventory Optimization',
-      'Natural Language Processing',
-      'Business Intelligence',
-      'Chat Interface'
-    ],
-    techStack: [
-      'React / Next.js',
-      'Python',
-      'FastAPI',
-      'PostgreSQL / SQLite',
-      'OpenAI API',
-      'Pandas'
-    ],
-    features: [
-      'Simple sales recording interface',
-      'Real-time stock level tracking',
-      'Low-stock alerts and notifications',
-      'Profit and sales summary dashboard',
-      'AI-powered shop assistant chat interface',
-      'Smart restock recommendations',
-      'Business insight generation',
-      'Mobile-friendly responsive design'
-    ],
-    problemStatement:
-      'Small shop owners typically manage their businesses using paper records or basic spreadsheets, making it difficult to track inventory, understand sales patterns, and make informed restocking decisions. They need affordable, easy-to-use tools that provide actionable insights.',
-    approach:
-      'The system records sales transactions and automatically updates inventory levels. An AI component analyzes sales patterns, stock levels, and historical data to generate insights and recommendations. A chat interface allows natural language queries about business performance.',
-    deliverables: [
-      'Web application with mobile-responsive design',
-      'Sales recording and inventory management system',
-      'AI chat assistant for business queries',
-      'Dashboard with visual analytics',
-      'Restock recommendation engine',
-      'Profit and loss reporting',
-      'Deployment guide for cloud hosting'
-    ],
-    limitations:
-      'Current version focuses on single-shop operations. Future improvements will include multi-user support, WhatsApp integration for daily summaries, receipt generation, voice input for sales recording, and integration with supplier systems for automated ordering.',
-    images: [
-      "/ai-shop/ai-shop1.jpg",
-      "/ai-shop/ai-shop1.jpg",
-      "/ai-shop/ai-shop2.jpg",
-      "/ai-shop/ai-shop3.jpg",
-      "/ai-shop/ai-shop4.jpg",
-    ],
-    github: 'https://github.com/hexkoda23/AI-Powered-smart-shop-manager',
-    demo: 'https://ai-powered-smart-shop-manager-2l9n.vercel.app/'
-  }
-  ,
-  {
-    id: 9,
-    title: '23 — Fashion Platform & Brand Experience',
-    subtitle: 'E‑commerce, Lookbook & Outfit Generator',
-    status: 'Published',
-    description:
-      'A polished brand experience for 23 that blends shopping, storytelling and an outfit generator — built as a platform that inspires greatness, not just a storefront.',
-    tags: ['E‑commerce', 'Fashion UX', 'React', 'Tailwind', 'Outfit Generator'],
-    category: 'Digital Product & Frontend',
-    overview:
-      '23 is more than a clothing website — it is an avenue for greatness. The experience is designed to move beyond a catalogue into a living brand platform that showcases craft, culture and community. Visitors explore a cinematic lookbook, shop curated releases, and use an outfit generator to style pieces with confidence. The result is a product that elevates the brand narrative while making conversion paths clear and delightful.',
-    whyImpressive:
-      'This project fuses brand storytelling with product utility. It demonstrates design systems thinking, performance‑first front‑end engineering, and an interaction model (the outfit generator) that turns browsing into creation — deepening engagement and affinity for the 23 brand.',
-    coreConcepts: [
-      'UX for conversion & community',
-      'Component‑driven design system',
-      'Accessible, responsive layouts',
-      'Stateful interactions',
-      'AI‑style outfit suggestions'
-    ],
-    techStack: [
-      'React',
-      'Vite',
-      'Tailwind CSS',
-      'React Router'
-    ],
-    features: [
-      'Hero narrative that frames 23 as a movement',
-      'Lookbook gallery with editorial‑style imagery',
-      'Shop grid for new drops and capsules',
-      'Outfit generator with wardrobe panels and drag‑to‑style flow',
-      'Persistent cart and quick view interactions',
-      'Search, filters and structured product info',
-      'FAQ and contact touchpoints for trust and support',
-      'Performance‑minded image loading and error fallbacks'
-    ],
-    problemStatement:
-      'The brand needed more than a basic store. 23 required a digital home that communicates ethos, showcases design craft and gives people tools to style and belong — a path from admiration to participation.',
-    approach:
-      'I built a modular, component‑driven UI that keeps the aesthetic consistent across Lookbook, Shop and Generator. The outfit generator mirrors a creative studio: a personal wardrobe rail on the left, a styling canvas on the right, and guided suggestions. Information architecture clarifies journeys from discovery to purchase, while micro‑copy and CTAs continually reinforce the brand’s call to greatness.',
-    deliverables: [
-      'Responsive website with lookbook, shop and generator',
-      'Reusable design‑system components and tokens',
-      'Product detail templates and merchandising layouts',
-      'Empty‑state, loading and error experiences',
-      'Deployment and performance budget'
-    ],
-    limitations:
-      'Demo content uses sample inventory and screenshots. Next steps include integrating live inventory, payments and personalization models for the generator.',
-    images: [
-     "/23/23-1.jpg",
-      "/23/23-2.jpg",
-      "/23/23-3.jpg",
-      "/23/23-4.jpg",
-      "/23/23-5.jpg",
-      "/23/23-6.jpg",
-      "/23/23-7.jpg",
-      "/23/23-8.jpg",
-      "/23/23-9.jpg",
-    ],
-    github: 'https://github.com/hexkoda23/23-web',
-    demo: 'https://23-web.vercel.app/'
   }
 ]
 
-export default function Portfolio () {
+export default function Portfolio() {
   const [selectedProject, setSelectedProject] = useState(null)
-  const sortedItems = [...portfolioItems].sort((a, b) => {
-    const hasLocalA =
-      Array.isArray(a.images) && a.images.some(img => typeof img === 'string' && img.startsWith('/'))
-    const hasLocalB =
-      Array.isArray(b.images) && b.images.some(img => typeof img === 'string' && img.startsWith('/'))
-    return (hasLocalB ? 1 : 0) - (hasLocalA ? 1 : 0)
-  })
+  const sortedItems = [...portfolioItems]
 
   return (
     <>
@@ -588,8 +641,8 @@ export default function Portfolio () {
             Innovative AI Solutions Solving Real-World Problems
           </h1>
           <p className='mt-3 text-slate-500 dark:text-slate-400'>
-            A collection of AI-powered projects demonstrating expertise in natural language processing, 
-            machine learning, and intelligent system design. Each project addresses real challenges 
+            A collection of AI-powered projects demonstrating expertise in natural language processing,
+            machine learning, and intelligent system design. Each project addresses real challenges
             with practical, deployable solutions.
           </p>
         </div>
