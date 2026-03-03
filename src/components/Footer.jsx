@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Github, Linkedin, Mail } from 'lucide-react'
 
 export default function Footer() {
   return (
@@ -7,23 +8,37 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
 
-          {/* Brand — SabiLens col-span-4 brand column */}
+          {/* Brand — matching Header style */}
           <div className="lg:col-span-5 flex flex-col">
             <div className="flex items-center gap-2.5 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-primary shadow-glow flex items-center justify-center font-syne font-bold text-white">AK</div>
-              <span className="font-syne font-bold text-xl text-white">Adeleke Kehinde</span>
+              <div className="w-10 h-10 rounded-xl bg-primary shadow-glow flex items-center justify-center font-syne font-bold text-white text-sm">AK</div>
+              <div>
+                <span className="font-syne font-bold text-xl text-white block">Adeleke Kehinde</span>
+                <span className="font-mono text-[0.6rem] uppercase tracking-widest text-white/40">AI & Full-Stack Developer</span>
+              </div>
             </div>
-            <p className="font-sans text-muted text-base leading-relaxed mb-6 max-w-xs">
+            <p className="font-sans text-muted text-base leading-relaxed mb-8 max-w-xs">
               AI Developer building intelligent solutions for real-world problems. Based in Lagos, working globally.
             </p>
-            <a href="mailto:kehindeadeleke92@gmail.com"
-              className="font-sans text-primary text-sm font-medium hover:text-primary-dark transition-colors self-start">
-              kehindeadeleke92@gmail.com
-            </a>
-            <p className="mt-4 text-sm text-white/30 font-mono">Made with ❤️ in Lagos</p>
+
+            <div className="flex items-center gap-4">
+              <a href="https://github.com/hexkoda23" target="_blank" rel="noopener noreferrer"
+                className="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-white/60 hover:text-primary hover:border-primary transition-all">
+                <Github size={20} />
+              </a>
+              <a href="#" target="_blank" rel="noopener noreferrer"
+                className="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-white/60 hover:text-primary hover:border-primary transition-all">
+                <Linkedin size={20} />
+              </a>
+              <a href="mailto:kehindeadeleke92@gmail.com"
+                className="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-white/60 hover:text-primary hover:border-primary transition-all">
+                <Mail size={20} />
+              </a>
+            </div>
+            <p className="mt-8 text-sm text-white/30 font-mono">Made with ❤️ in Lagos</p>
           </div>
 
-          {/* Nav */}
+          {/* Navigation */}
           <div className="lg:col-span-3">
             <h4 className="font-mono text-primary uppercase text-sm font-semibold tracking-wider mb-6">Navigation</h4>
             <ul className="space-y-4">
@@ -33,22 +48,28 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Work */}
+          {/* Featured Work — Functional Links */}
           <div className="lg:col-span-4">
-            <h4 className="font-mono text-primary uppercase text-sm font-semibold tracking-wider mb-6">Work</h4>
+            <h4 className="font-mono text-primary uppercase text-sm font-semibold tracking-wider mb-6">Featured Work</h4>
             <ul className="space-y-4">
               {[
-                ['AI Resume System', '#'],
-                ['AI Study Planner', '#'],
-                ['Download CV', '/cv/tife-cv.pdf'],
+                ['NYSC AI Chatbot', 'https://nysc-ai-chatbot.vercel.app/'],
+                ['23 Fashion Platform', 'https://23-web.vercel.app/'],
+                ['Smart Shop Manager', 'https://ai-powered-smart-shop-manager-2l9n.vercel.app/'],
+                ['Download CV', '/cv/Adeleke_Kehinde_CV.pdf'],
               ].map(([label, href]) => (
-                <li key={label}><a href={href} className="font-sans text-white/60 hover:text-primary transition-colors text-sm">{label}</a></li>
+                <li key={label}>
+                  <a href={href} target={href.startsWith('http') ? "_blank" : "_self"} rel="noopener noreferrer"
+                    className="font-sans text-white/60 hover:text-primary transition-colors text-sm">
+                    {label}
+                  </a>
+                </li>
               ))}
             </ul>
           </div>
         </div>
 
-        {/* Bottom bar — exact SabiLens bottom bar */}
+        {/* Bottom bar */}
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="font-sans text-sm text-white/40">
             © {new Date().getFullYear()} Adeleke Kehinde. All rights reserved.
