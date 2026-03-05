@@ -35,7 +35,6 @@ export default function Footer() {
                 <Mail size={20} />
               </a>
             </div>
-            <p className="mt-8 text-sm text-white/30 font-mono">Made with ❤️ in Lagos</p>
           </div>
 
           {/* Navigation */}
