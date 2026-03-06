@@ -181,11 +181,17 @@ const portfolioItems = [
     limitations:
       'Current version focuses on single-shop operations. Future improvements will include multi-user support, WhatsApp integration for daily summaries, receipt generation, voice input for sales recording, and integration with supplier systems for automated ordering.',
     images: [
-      "/ai-shop/ai-shop1.jpg",
-      "/ai-shop/ai-shop1.jpg",
-      "/ai-shop/ai-shop2.jpg",
-      "/ai-shop/ai-shop3.jpg",
-      "/ai-shop/ai-shop4.jpg",
+      "/ai-shop/Notable1.jpg",
+      "/ai-shop/Notable2.jpg",
+      "/ai-shop/Notable3.jpg",
+      "/ai-shop/Notable4.jpg",
+      "/ai-shop/Notable5.jpg",
+      "/ai-shop/Notable6.jpg",
+      "/ai-shop/Notable7.jpg",
+      "/ai-shop/Notable8.jpg",
+      "/ai-shop/Notable9.jpg",
+      "/ai-shop/Notable10.jpg",
+      "/ai-shop/Notable11.jpg",
     ],
     github: 'https://github.com/hexkoda23/AI-Powered-smart-shop-manager',
     demo: 'https://ai-powered-smart-shop-manager-2l9n.vercel.app/'
