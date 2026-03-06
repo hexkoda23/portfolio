@@ -122,6 +122,9 @@ const portfolioItems = [
       "/23/23-7.jpg",
       "/23/23-8.jpg",
       "/23/23-9.jpg",
+      "/23/23-10.jpg",
+      "/23/23-11.jpg",
+      "/23/23-12.jpg",
     ],
     github: 'https://github.com/hexkoda23/23-web',
     demo: 'https://23-web.vercel.app/'
