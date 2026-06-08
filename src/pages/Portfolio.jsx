@@ -4,6 +4,74 @@ import ProjectDetail from '../components/ProjectDetail'
 
 const portfolioItems = [
   {
+    id: 11,
+    title: 'RubberSearch — Lightweight Search Engine API',
+    subtitle: 'Full-Text Search & Indexing Engine',
+    status: 'Published',
+    description:
+      'A lightweight search engine and data store built with .NET 9, designed for fast full-text search, document indexing, tenant-based API access, and relevance-ranked results on development-scale workloads.',
+    tags: ['.NET 9', 'C#', 'Search Engine', 'REST API', 'Inverted Index'],
+    category: 'Backend Engineering & Search Infrastructure',
+    overview:
+      'RubberSearch is a compact full-text search engine that lets applications index documents and retrieve relevant results through a REST API. It combines document storage, tokenization, inverted indexing, API-key-based tenancy, and relevance scoring into a developer-friendly search service.',
+    whyImpressive:
+      'This project demonstrates strong backend engineering fundamentals by implementing the core building blocks of a search engine from scratch: tokenization, n-gram indexing, posting lists, TF-IDF-style scoring, title boosting, proximity ranking, tenant isolation, API authentication, Swagger documentation, and testable service architecture.',
+    coreConcepts: [
+      'Full-Text Search',
+      'Inverted Indexing',
+      'N-Gram Tokenization',
+      'TF-IDF-Style Ranking',
+      'Proximity Boosting',
+      'Tenant-Based API Keys',
+      'REST API Design'
+    ],
+    techStack: [
+      '.NET 9',
+      'C#',
+      'ASP.NET Core Web API',
+      'Swagger / OpenAPI',
+      'JSON File Storage',
+      'xUnit',
+      'HTML',
+      'CSS',
+      'JavaScript'
+    ],
+    features: [
+      'Document indexing through POST /api/index',
+      'Search through GET and POST /api/search',
+      'API key generation through /api/requestkey',
+      'Tenant-based indexes so each API key maps to a separate search space',
+      'Inverted index storage with token-to-document postings',
+      'N-gram tokenization for flexible partial matching',
+      'TF-IDF-style relevance scoring',
+      'Title boosting to prioritize matches in document titles',
+      'Proximity boosting for multi-word queries',
+      'Swagger UI for API testing and documentation',
+      'Simple built-in web interface for indexing and searching documents',
+      'Unit tests for tokenizer and indexing behavior'
+    ],
+    problemStatement:
+      'Many small applications need fast, simple search without the overhead of running a production-scale search platform. Developers often need a lightweight service that can index documents, search them quickly, and expose clear APIs for testing, prototypes, internal tools, and early-stage products.',
+    approach:
+      'RubberSearch uses ASP.NET Core to expose REST endpoints for indexing, searching, and API-key creation. Documents are tokenized into words and n-grams, then stored in an inverted index where each token maps to document postings. Search queries are tokenized the same way, matched against the index, scored with TF-IDF-style relevance, boosted when matches appear in titles, and further adjusted using proximity scoring for multi-token queries. API keys map users to tenants, giving each tenant its own logical index.',
+    deliverables: [
+      'ASP.NET Core REST API for indexing and search',
+      'Tenant-aware API key authentication',
+      'Core search and indexing services',
+      'JSON-backed document and index repositories',
+      'Swagger/OpenAPI documentation',
+      'Static web UI for API key generation, document indexing, and search testing',
+      'Unit tests covering tokenizer and indexing logic'
+    ],
+    limitations:
+      'RubberSearch is currently optimized for smaller and development-scale workloads. Future improvements could include persistent database-backed storage, distributed indexing, autocomplete completion, improved ranking algorithms, observability dashboards, production hardening, and horizontal scaling.',
+    images: [
+      '/rubbersearch/rubbersearch-cover.svg'
+    ],
+    github: 'https://github.com/Ugbe/Rubbersearch',
+    demo: 'https://rubbersearch-bdgcheg2d4gagqau.canadacentral-01.azurewebsites.net/swagger/index.html'
+  },
+  {
     id: 10,
     title: 'NYSC AI Chatbot',
     subtitle: 'Multilingual Intelligent Assistant',

@@ -46,6 +46,17 @@ const process = [
 
 const featuredProjects = [
   {
+    title: 'RubberSearch — Lightweight Search Engine API',
+    subtitle: 'Full-Text Search & Indexing Engine',
+    status: 'Published',
+    description:
+      'A lightweight search engine and data store built with .NET 9, designed for fast full-text search, document indexing, tenant-based API access, and relevance-ranked results on development-scale workloads.',
+    tags: ['.NET 9', 'C#', 'Search Engine', 'REST API', 'Inverted Index'],
+    images: ['/rubbersearch/rubbersearch-cover.svg'],
+    github: 'https://github.com/Ugbe/Rubbersearch',
+    demo: 'https://rubbersearch-bdgcheg2d4gagqau.canadacentral-01.azurewebsites.net/swagger/index.html'
+  },
+  {
     title: 'NYSC AI Chatbot',
     subtitle: 'Multilingual Intelligent Assistant',
     status: 'In Progress',
@@ -123,7 +134,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { value: '9', label: 'AI Projects', sub: 'Production-ready' },
+              { value: '10', label: 'AI & Software Projects', sub: 'Production-ready' },
               { value: '15+', label: 'Technologies', sub: 'AI/ML frameworks' },
               { value: '3+', label: 'Years Experience', sub: 'Building AI systems' },
               { value: '100%', label: 'Delivery Rate', sub: 'Client satisfaction' },

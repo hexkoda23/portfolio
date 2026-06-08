@@ -1,7 +1,7 @@
 import React from 'react'
 
 const stats = [
-  { label: 'AI Projects', value: '9' },
+  { label: 'AI & Software Projects', value: '10' },
   { label: 'Technologies', value: '15+' },
   { label: 'Production Ready', value: '100%' },
 ]
