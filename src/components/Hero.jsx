@@ -1,123 +1,139 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import { ArrowRight, ArrowDown } from 'lucide-react'
+import Tilt from './anim/Tilt'
+import Reveal from './anim/Reveal'
 
-const stats = [
-  { label: 'AI & Software Projects', value: '10' },
-  { label: 'Technologies', value: '15+' },
-  { label: 'Production Ready', value: '100%' },
+const marqueeItems = [
+  'React', 'TypeScript', 'Next.js', 'FastAPI', 'NestJS', '.NET', 'PostgreSQL', 'MongoDB',
+  'Claude AI', 'RAG Systems', 'Tailwind', 'Docker', 'Azure DevOps', 'Prisma', 'Redis', 'Python',
 ]
+
+/** Headline words rise one-by-one through overflow masks. */
+function Cascade({ text, startDelay = 0, className = '' }) {
+  return (
+    <span className={className}>
+      {text.split(' ').map((w, i) => (
+        <span key={i} className="word-mask mr-[0.28em]">
+          <span style={{ '--wd': `${startDelay + i * 0.08}s` }}>{w}</span>
+        </span>
+      ))}
+    </span>
+  )
+}
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center bg-[#0f172a] overflow-hidden">
+    <section className="relative min-h-screen flex flex-col overflow-hidden grain" style={{ background: 'var(--bg)' }}>
+      {/* ambient orbs */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'var(--hero-grad)' }} />
+      <div className="absolute -top-32 -right-32 w-[480px] h-[480px] rounded-full blur-[140px] anim-orb pointer-events-none" style={{ background: 'var(--glow)', opacity: 0.5 }} />
+      <div className="absolute bottom-0 -left-40 w-[420px] h-[420px] rounded-full blur-[130px] anim-orb pointer-events-none" style={{ background: 'var(--pine-soft)', animationDelay: '-7s' }} />
+      {/* rotating deco ring */}
+      <div className="absolute top-24 right-[12%] w-64 h-64 rounded-full border border-dashed pointer-events-none anim-spin-slow hidden lg:block" style={{ borderColor: 'var(--line-strong)' }} />
 
-      {/* Background blobs + dot grid */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute -top-[20%] -right-[10%] w-[70%] h-[70%] rounded-full bg-orange-500/5 blur-[120px]" />
-        <div className="absolute bottom-[10%] -left-[10%] w-[50%] h-[50%] rounded-full bg-orange-500/5 blur-[100px]" />
-        <div className="absolute inset-0 opacity-[0.06]"
-          style={{ backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
-      </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 pt-32 pb-10 w-full flex-1 flex items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-14 lg:gap-8 items-center w-full">
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10 pt-24 pb-16 w-full">
+          {/* Copy */}
+          <div className="text-center lg:text-left">
+            <Reveal variant="down" duration={0.7}>
+              <span className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-line bg-card/70 backdrop-blur font-mono text-[0.66rem] uppercase tracking-[0.2em] text-ink-soft mb-8">
+                <span className="w-2 h-2 rounded-full bg-green-500 dot-live" />
+                Software Engineer · Available for hire
+              </span>
+            </Reveal>
 
-        {/* MOBILE ONLY: circular photo above text */}
-        <div className="flex justify-center mb-10 lg:hidden">
-          <div className="relative">
-            <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden border-4 border-orange-500/30 shadow-[0_0_40px_rgba(249,115,22,0.2)]">
-              <img src="/Image/mee.jpg" alt="Adeleke Kehinde"
-                className="w-full h-full object-cover"
-                onError={e => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex' }} />
-              <div className="w-full h-full bg-[#1e293b] items-center justify-center text-4xl" style={{ display: 'none' }}>👨💻</div>
-            </div>
-            <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-green-400 border-2 border-[#0f172a] animate-pulse" />
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 items-center">
-
-          {/* LEFT: Text */}
-          <div className="max-w-2xl mx-auto lg:mx-0 text-center lg:text-left">
-
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 font-semibold text-sm mb-8 animate-fade-up">
-              <span className="w-2 h-2 rounded-full bg-orange-400 animate-pulse" />
-              AI & Full-Stack Developer
-            </div>
-
-            <h1 className="font-syne font-extrabold text-white leading-[1.1] mb-6 animate-fade-up tracking-tight"
-              style={{ fontSize: 'clamp(2.2rem, 5.5vw, 3.75rem)', animationDelay: '0.1s' }}>
-              Building intelligent AI<br />solutions that solve{' '}
-              <span className="relative inline-block" style={{
-                background: 'linear-gradient(135deg, #f97316 0%, #fb923c 60%, #fed7aa 100%)',
-                WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'
-              }}>
-                real-world problems.
-                <svg className="absolute w-full h-3 -bottom-1 left-0" viewBox="0 0 100 10" preserveAspectRatio="none" style={{ color: 'rgba(249,115,22,0.3)' }}>
-                  <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="4" fill="none" />
-                </svg>
+            <h1 className="font-display font-semibold text-ink leading-[1.02] tracking-tight mb-7"
+              style={{ fontSize: 'clamp(2.6rem, 6vw, 4.6rem)' }}>
+              <Cascade text="I design and ship" startDelay={0.1} />
+              <br />
+              <Cascade text="production software —" startDelay={0.4} />
+              <br />
+              <span className="word-mask">
+                <span style={{ '--wd': '0.75s' }} className="text-ember-grad italic">from AI to enterprise.</span>
               </span>
             </h1>
 
-            <p className="font-sans text-lg text-white/60 mb-10 leading-relaxed animate-fade-up max-w-lg mx-auto lg:mx-0" style={{ animationDelay: '0.2s' }}>
-              Specializing in NLP, Machine Learning, and AI system design. I build production-ready solutions that combine cutting-edge research with practical engineering to deliver measurable business value.
-            </p>
+            <Reveal variant="blur" delay={0.5}>
+              <p className="text-lg text-muted leading-relaxed max-w-xl mx-auto lg:mx-0 mb-10 font-light">
+                Full-stack &amp; AI engineer with shipped client platforms across assessment tech,
+                enterprise procurement, creative-economy CRM, and edtech — React, Python, .NET, and
+                LLM systems, taken all the way to production.
+              </p>
+            </Reveal>
 
-            <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start mb-12 animate-fade-up" style={{ animationDelay: '0.3s' }}>
-              <a href="/portfolio" className="w-full sm:w-auto px-8 py-4 font-syne font-semibold text-lg rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-[0_8px_24px_rgba(249,115,22,0.35)] hover:shadow-[0_12px_32px_rgba(249,115,22,0.5)] hover:scale-[0.98] active:scale-95 transition-all text-center">
-                View Portfolio
-              </a>
-              <a href="/contact" className="w-full sm:w-auto flex items-center justify-center gap-2 font-syne font-semibold text-lg text-white/80 hover:text-white py-4 px-6 rounded-xl hover:bg-white/10 border border-white/20 hover:border-white/40 transition-all">
-                Get in Touch
-              </a>
-              <a href="/cv/Adeleke_Kehinde_CV.pdf" download className="w-full sm:w-auto flex items-center justify-center gap-2 font-syne font-semibold text-lg text-white/80 hover:text-white py-4 px-6 rounded-xl hover:bg-white/10 border border-white/20 hover:border-white/40 transition-all">
+            <Reveal variant="up" delay={0.65} className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start mb-12">
+              <Link to="/portfolio" className="btn-ember w-full sm:w-auto px-9 py-4 text-base group">
+                Explore the Work
+                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5" />
+              </Link>
+              <a href="/cv/Adeleke_Kehinde_CV.pdf" download className="btn-ghost w-full sm:w-auto px-8 py-4 text-base">
                 Download CV
               </a>
-            </div>
+            </Reveal>
 
-            <div className="flex flex-wrap items-center gap-x-8 gap-y-4 animate-fade-up justify-center lg:justify-start" style={{ animationDelay: '0.4s' }}>
-              {stats.map((s, i) => (
-                <React.Fragment key={s.label}>
-                  {i > 0 && <div className="w-1 h-1 rounded-full bg-white/20" />}
-                  <div className="flex items-center gap-2">
-                    <span className="font-syne font-bold text-white text-xl">{s.value}</span>
-                    <span className="font-sans text-white/40 text-sm">{s.label}</span>
-                  </div>
-                </React.Fragment>
+            <Reveal variant="up" delay={0.8} className="flex flex-wrap items-center gap-x-10 gap-y-4 justify-center lg:justify-start">
+              {[
+                ['5+', 'Client platforms shipped'],
+                ['14', 'Projects in portfolio'],
+                ['3+', 'Years building'],
+              ].map(([v, l]) => (
+                <div key={l} className="text-center lg:text-left">
+                  <p className="font-display font-semibold text-2xl text-ink">{v}</p>
+                  <p className="font-mono text-[0.6rem] uppercase tracking-[0.16em] text-muted mt-1">{l}</p>
+                </div>
               ))}
-            </div>
+            </Reveal>
           </div>
 
-          {/* RIGHT: Desktop tall card + floating cards — hidden on mobile */}
-          <div className="relative hidden lg:block lg:ml-auto w-full max-sm mx-auto animate-fade-up" style={{ animationDelay: '0.3s' }}>
-            <div className="absolute w-72 h-72 bg-orange-500/15 rounded-full blur-[80px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
-            <div className="relative mx-auto w-[300px] rounded-[32px] border-[6px] border-white/10 shadow-[0_40px_80px_rgba(0,0,0,0.6)] overflow-hidden z-10">
-              <img src="/Image/mee.jpg" alt="Adeleke Kehinde — AI Developer"
-                className="w-full h-[420px] object-cover"
-                onError={e => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex' }} />
-              <div className="hidden w-full h-[420px] bg-[#1e293b] items-center justify-center flex-col gap-4">
-                <span className="text-6xl">👨💻</span>
-                <p className="font-syne font-bold text-white text-xl">AI Developer</p>
+          {/* Portrait */}
+          <Reveal variant="zoom" delay={0.35} className="hidden lg:block">
+            <Tilt className="relative mx-auto w-[340px]">
+              <div className="portrait-halo" />
+              <div className="absolute -inset-6 rounded-[3rem] rotate-3 border border-line-strong" />
+              <div className="absolute -inset-6 rounded-[3rem] -rotate-2 border border-line" />
+              <div className="portrait-lit relative rounded-[2.6rem] overflow-hidden border border-line" style={{ boxShadow: 'var(--shadow-lift), 0 0 60px var(--glow)' }}>
+                <img src="/Image/Tife%20(1).jpeg" alt="Adeleke Kehinde — Software Engineer"
+                  className="w-full h-[440px] object-cover object-[50%_30%]"
+                  onError={e => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex' }} />
+                <div className="hidden w-full h-[440px] bg-surface items-center justify-center flex-col gap-4">
+                  <span className="text-6xl">👨🏾‍💻</span>
+                  <p className="font-display font-semibold text-ink text-xl">Software Engineer</p>
+                </div>
+                <div className="absolute inset-x-0 bottom-0 p-5 bg-gradient-to-t from-black/70 to-transparent">
+                  <p className="text-white font-display font-semibold">Adeleke Kehinde</p>
+                  <p className="text-white/60 font-mono text-[0.6rem] uppercase tracking-[0.2em] mt-0.5">Lagos → Worldwide</p>
+                </div>
               </div>
-            </div>
-            {/* Floating card 1 */}
-            <div className="absolute -right-12 top-24 z-20 animate-float bg-white p-4 rounded-xl shadow-[0_4px_24px_rgba(0,0,0,0.12)] border border-slate-100 w-48">
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                <span className="font-mono text-[0.6rem] font-bold text-green-700 tracking-wide uppercase">Available</span>
+
+              {/* floating chips */}
+              <div className="absolute -right-16 top-14 anim-float card-lux rounded-2xl px-4 py-3 w-44" style={{ '--fl-rot': '2deg' }}>
+                <p className="font-mono text-[0.58rem] uppercase tracking-[0.16em] text-ember mb-1">Currently</p>
+                <p className="font-sans font-medium text-ink text-sm leading-tight">Shipping client platforms end-to-end</p>
               </div>
-              <p className="font-syne font-semibold text-slate-800 text-sm leading-tight">Open to new projects</p>
-              <p className="font-sans text-xs text-slate-400 mt-1">Lagos, Nigeria · Remote</p>
-            </div>
-            {/* Floating card 2 */}
-            <div className="absolute -left-16 bottom-32 z-20 animate-float bg-white p-4 rounded-xl shadow-[0_4px_24px_rgba(0,0,0,0.12)] border border-slate-100 w-52" style={{ animationDelay: '1.5s' }}>
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-orange-500">⚡</span>
-                <span className="font-mono text-[0.6rem] font-bold text-slate-700 tracking-wide uppercase">Current Focus</span>
+              <div className="absolute -left-20 bottom-20 anim-float card-lux rounded-2xl px-4 py-3 w-48" style={{ animationDelay: '1.6s', '--fl-rot': '-2deg' }}>
+                <p className="font-mono text-[0.58rem] uppercase tracking-[0.16em] text-ember mb-1">Stack of choice</p>
+                <p className="font-sans font-medium text-ink text-sm leading-tight">React · Python · .NET · LLMs</p>
               </div>
-              <p className="font-syne font-semibold text-slate-800 text-sm leading-tight">Production AI Systems</p>
-              <p className="font-sans text-xs text-slate-400 mt-1">RAG · LLMs · NLP</p>
-            </div>
-          </div>
+            </Tilt>
+          </Reveal>
         </div>
+      </div>
+
+      {/* marquee */}
+      <div className="relative z-10 border-t border-line py-5 overflow-hidden" style={{ background: 'color-mix(in srgb, var(--surface) 70%, transparent)' }}>
+        <div className="flex whitespace-nowrap anim-marquee w-max">
+          {[...marqueeItems, ...marqueeItems].map((item, i) => (
+            <span key={i} className="inline-flex items-center gap-6 px-6 font-mono text-xs uppercase tracking-[0.22em] text-muted">
+              {item} <span className="text-ember text-sm">✦</span>
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div className="absolute bottom-24 left-1/2 -translate-x-1/2 z-10 hidden lg:flex flex-col items-center gap-2 text-muted">
+        <ArrowDown className="w-4 h-4 animate-bounce" />
       </div>
     </section>
   )

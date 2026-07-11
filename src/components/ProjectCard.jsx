@@ -1,29 +1,50 @@
-export default function ProjectCard({ title, subtitle, status, description, tags, images, onClick }) {
+import Reveal from './anim/Reveal'
+
+const variants = ['up', 'zoom', 'left', 'right', 'blur', 'rot', 'flip']
+
+/** Image-led project card with zoom hover + varied entrance. */
+export default function ProjectCard({ project, index = 0, onClick }) {
+  const { title, subtitle, status, description, tags, images } = project
+  const variant = variants[index % variants.length]
+
   return (
-    <div onClick={onClick}
-      className="bg-white dark:bg-[#1e2435] border border-slate-100 dark:border-white/[0.08] rounded-2xl p-6 shadow-soft hover:border-orange-200 hover:shadow-[0_4px_24px_rgba(0,0,0,0.10)] dark:hover:border-orange-500/30 dark:hover:shadow-[0_8px_32px_rgba(249,115,22,0.10)] hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col gap-4">
-      {images?.[0] && (
-        <div className="rounded-xl overflow-hidden aspect-video bg-slate-50 dark:bg-[#0d1117]">
-          <img src={images[0]} alt={title} className="w-full h-full object-cover" />
-        </div>
-      )}
-      <div className="flex items-center justify-between">
-        <span className="font-mono font-bold text-[0.65rem] uppercase tracking-widest text-orange-500">{subtitle}</span>
-        {status && (
-          <span className="font-mono text-[0.6rem] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-500">{status}</span>
-        )}
-      </div>
-      <h3 className="font-syne font-bold text-xl text-slate-900 dark:text-white leading-snug">{title}</h3>
-      <p className="font-sans text-slate-500 dark:text-slate-400 text-sm leading-relaxed">{description}</p>
-      {tags?.length > 0 && (
-        <div className="flex flex-wrap gap-2 mt-auto pt-3 border-t border-slate-100 dark:border-white/8">
-          {tags.map(tag => (
-            <span key={tag} className="font-mono text-[0.62rem] font-medium px-2.5 py-1 rounded-full bg-slate-50 dark:bg-white/5 text-slate-500 dark:text-slate-400 border border-slate-100 dark:border-white/8">
-              {tag}
+    <Reveal variant={variant} delay={(index % 3) * 0.08}>
+      <article
+        onClick={onClick}
+        className="card-lux rounded-3xl overflow-hidden cursor-pointer group h-full flex flex-col"
+      >
+        {images?.[0] && (
+          <div className="img-zoom aspect-[16/10] bg-surface relative">
+            <img src={images[0]} alt={title} loading="lazy" className="w-full h-full object-cover object-top" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <span className="absolute bottom-4 left-4 text-white font-sans font-medium text-sm opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
+              View case study →
             </span>
-          ))}
+            {status && (
+              <span className={`absolute top-4 right-4 font-mono text-[0.6rem] font-medium uppercase tracking-[0.14em] px-3 py-1.5 rounded-full backdrop-blur-md border
+                ${status === 'Client Work'
+                  ? 'bg-black/40 border-white/25 text-white'
+                  : 'bg-white/70 dark:bg-black/40 border-line text-ink dark:text-white'}`}>
+                {status}
+              </span>
+            )}
+          </div>
+        )}
+        <div className="p-6 flex flex-col gap-3 flex-1">
+          <span className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-ember">{subtitle}</span>
+          <h3 className="font-display font-semibold text-xl text-ink leading-snug group-hover:text-ember transition-colors duration-300">{title}</h3>
+          <p className="text-muted text-sm leading-relaxed line-clamp-3">{description}</p>
+          {tags?.length > 0 && (
+            <div className="flex flex-wrap gap-2 mt-auto pt-4">
+              {tags.slice(0, 5).map(tag => (
+                <span key={tag} className="font-mono text-[0.6rem] px-2.5 py-1 rounded-full bg-surface text-muted border border-line group-hover:border-line-strong transition-colors">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
-      )}
-    </div>
+      </article>
+    </Reveal>
   )
 }

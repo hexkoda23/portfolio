@@ -1,227 +1,197 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { X, ArrowUpRight, Check } from 'lucide-react'
 
-export default function ProjectDetail ({ project, onClose }) {
+/** Full-screen editorial case-study overlay with image lightbox. */
+export default function ProjectDetail({ project, onClose }) {
+  const [entered, setEntered] = useState(false)
+  const [lightbox, setLightbox] = useState(null)
+
+  useEffect(() => {
+    if (!project) return
+    document.body.style.overflow = 'hidden'
+    const t = requestAnimationFrame(() => setEntered(true))
+    const onKey = e => {
+      if (e.key === 'Escape') (lightbox ? setLightbox(null) : onClose())
+    }
+    window.addEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = ''
+      cancelAnimationFrame(t)
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [project, onClose, lightbox])
+
   if (!project) return null
 
+  const Sect = ({ label, children, className = '' }) => (
+    <div className={`mb-12 ${className}`}>
+      <p className="eyebrow mb-5">{label}</p>
+      {children}
+    </div>
+  )
+
   return (
-    <div 
-      className='fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm flex items-center justify-center p-4'
+    <div
+      className={`fixed inset-0 z-[70] overflow-y-auto bg-black/70 backdrop-blur-md transition-opacity duration-500 ${entered ? 'opacity-100' : 'opacity-0'}`}
       onClick={onClose}
     >
-      <div 
-        className='relative bg-white dark:bg-[#1e2435] border border-slate-200 dark:border-[#2d3748] rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto shadow-2xl transition-colors duration-300'
-        onClick={(e) => e.stopPropagation()}
+      <div
+        className={`relative bg-bg min-h-full w-full max-w-6xl mx-auto my-0 sm:my-8 sm:rounded-[2rem] overflow-hidden border border-line transition-all duration-700 ${entered ? 'translate-y-0 scale-100' : 'translate-y-16 scale-[0.97]'}`}
+        style={{ transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)' }}
+        onClick={e => e.stopPropagation()}
       >
-        {/* Close Button */}
+        {/* Close */}
         <button
           onClick={onClose}
-          className='absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center justify-center transition-colors text-slate-900 dark:text-white'
-          aria-label='Close'
+          className="fixed sm:absolute top-5 right-5 z-20 w-12 h-12 rounded-full bg-black/40 backdrop-blur-md border border-white/20 hover:bg-ember flex items-center justify-center transition-all duration-300 text-white hover:rotate-90"
+          aria-label="Close"
         >
-          <span className='text-2xl'>×</span>
+          <X className="w-5 h-5" />
         </button>
 
-        {/* Hero Image */}
-        <div className='relative h-64 md:h-80 bg-gradient-to-br from-blue-500 to-purple-600 rounded-t-2xl overflow-hidden'>
+        {/* Hero */}
+        <div className="relative h-[46vh] min-h-[320px] overflow-hidden">
           <img
             src={project.images[0]}
             alt={project.title}
-            className='w-full h-full object-cover'
-            onError={(e) => {
-              e.target.src = `https://via.placeholder.com/800x400/3b82f6/ffffff?text=${encodeURIComponent(project.title)}`
-            }}
+            className={`w-full h-full object-cover object-top transition-transform duration-[1.6s] ${entered ? 'scale-100' : 'scale-110'}`}
           />
-          <div className='absolute inset-0 bg-gradient-to-t from-black/60 to-transparent' />
-          <div className='absolute bottom-6 left-6 right-6'>
-            <p className='text-sm uppercase tracking-wider text-white/90 mb-2'>
-              {project.category}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
+          <div className="absolute bottom-8 left-6 right-6 sm:left-10 sm:right-10">
+            <p className={`font-mono text-[0.65rem] uppercase tracking-[0.24em] text-white/80 mb-3 transition-all duration-700 delay-200 ${entered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+              {project.category} {project.status === 'Client Work' && '· Client Engagement'}
             </p>
-            <h1 className='text-3xl md:text-4xl font-bold text-white'>
+            <h1 className={`font-display font-semibold text-white leading-[1.05] tracking-tight transition-all duration-700 delay-300 ${entered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+              style={{ fontSize: 'clamp(1.8rem, 4.5vw, 3.2rem)' }}>
               {project.title}
             </h1>
           </div>
         </div>
 
-        {/* Content */}
-        <div className='p-6 md:p-10'>
-          {/* Overview */}
-          <div className='mb-8'>
-            <h2 className='text-2xl font-bold text-slate-900 dark:text-white mb-4'>Overview</h2>
-            <p className='text-lg text-slate-700 dark:text-slate-300 leading-relaxed'>
-              {project.overview}
-            </p>
+        {/* Body */}
+        <div className="grid lg:grid-cols-[1fr_320px] gap-10 p-6 sm:p-10">
+          <div>
+            <Sect label="Overview">
+              <p className="text-lg text-ink-soft leading-relaxed font-light">{project.overview}</p>
+            </Sect>
+
+            {project.whyImpressive && (
+              <div className="mb-12 p-7 rounded-3xl border border-line relative overflow-hidden" style={{ background: 'var(--ember-soft)' }}>
+                <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full blur-3xl" style={{ background: 'var(--glow)' }} />
+                <p className="eyebrow mb-4">Why it matters</p>
+                <p className="text-ink-soft leading-relaxed relative z-10">{project.whyImpressive}</p>
+              </div>
+            )}
+
+            {project.problemStatement && (
+              <Sect label="The Problem">
+                <p className="text-muted leading-relaxed">{project.problemStatement}</p>
+              </Sect>
+            )}
+
+            {project.approach && (
+              <Sect label="Approach & Architecture">
+                <p className="text-muted leading-relaxed">{project.approach}</p>
+              </Sect>
+            )}
+
+            {project.features?.length > 0 && (
+              <Sect label="Key Features">
+                <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-3.5">
+                  {project.features.map((f, i) => (
+                    <li key={i} className="flex items-start gap-3 text-sm text-ink-soft leading-relaxed">
+                      <span className="mt-0.5 w-5 h-5 rounded-full flex items-center justify-center shrink-0" style={{ background: 'var(--ember-soft)' }}>
+                        <Check className="w-3 h-3 text-ember" />
+                      </span>
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+              </Sect>
+            )}
+
+            {project.images?.length > 1 && (
+              <Sect label="Gallery">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {project.images.slice(1).map((img, i) => (
+                    <button key={i}
+                      className={`img-zoom rounded-2xl border border-line overflow-hidden cursor-zoom-in ${i % 5 === 0 ? 'sm:col-span-2' : ''}`}
+                      onClick={() => setLightbox(img)}>
+                      <img src={img} alt={`${project.title} — screen ${i + 2}`} loading="lazy"
+                        className="w-full object-cover object-top"
+                        style={{ maxHeight: i % 5 === 0 ? 420 : 260, minHeight: 180, width: '100%' }} />
+                    </button>
+                  ))}
+                </div>
+              </Sect>
+            )}
+
+            {project.deliverables?.length > 0 && (
+              <Sect label="Deliverables">
+                <ul className="space-y-2.5">
+                  {project.deliverables.map((d, i) => (
+                    <li key={i} className="flex items-center gap-3 text-sm text-muted">
+                      <span className="w-1.5 h-1.5 rounded-full bg-ember shrink-0" />
+                      {d}
+                    </li>
+                  ))}
+                </ul>
+              </Sect>
+            )}
+
+            {project.limitations && (
+              <div className="p-6 rounded-2xl bg-surface border border-line">
+                <p className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-gold mb-3">Roadmap & Notes</p>
+                <p className="text-sm text-muted leading-relaxed">{project.limitations}</p>
+              </div>
+            )}
           </div>
 
-          {/* Why It's Impressive */}
-          {project.whyImpressive && (
-            <div className='mb-8 p-6 bg-orange-50 dark:bg-[#1e2435] rounded-xl border border-orange-100 dark:border-[#2d3748]'>
-              <h3 className='text-xl font-semibold text-slate-900 dark:text-white mb-2'>
-                Why It's Impressive
-              </h3>
-              <p className='text-slate-700 dark:text-slate-300'>{project.whyImpressive}</p>
-            </div>
-          )}
-
-          {/* Core AI Concepts */}
-          {project.coreConcepts && project.coreConcepts.length > 0 && (
-            <div className='mb-8'>
-              <h2 className='text-2xl font-bold text-slate-900 dark:text-white mb-4'>
-                Core AI Concepts
-              </h2>
-              <div className='flex flex-wrap gap-2'>
-                {project.coreConcepts.map((concept, idx) => (
-                  <span
-                    key={idx}
-                    className='px-4 py-2 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium'
-                  >
-                    {concept}
-                  </span>
+          {/* Sticky meta rail */}
+          <aside className="lg:sticky lg:top-8 self-start space-y-6">
+            <div className="card-lux rounded-3xl p-6">
+              <p className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-ember mb-4">Tech Stack</p>
+              <div className="flex flex-wrap gap-2">
+                {project.techStack?.map(t => (
+                  <span key={t} className="font-mono text-[0.65rem] px-3 py-1.5 rounded-full bg-surface border border-line text-ink-soft">{t}</span>
                 ))}
               </div>
             </div>
-          )}
-
-          {/* Tech Stack */}
-          {project.techStack && project.techStack.length > 0 && (
-            <div className='mb-8'>
-              <h2 className='text-2xl font-bold text-slate-900 dark:text-white mb-4'>
-                Tech Stack
-              </h2>
-              <div className='flex flex-wrap gap-2'>
-                {project.techStack.map((tech, idx) => (
-                  <span
-                    key={idx}
-                    className='px-4 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-full text-sm font-medium'
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Features */}
-          {project.features && project.features.length > 0 && (
-            <div className='mb-8'>
-              <h2 className='text-2xl font-bold text-slate-900 dark:text-white mb-4'>
-                Key Features
-              </h2>
-              <ul className='space-y-3'>
-                {project.features.map((feature, idx) => (
-                  <li key={idx} className='flex items-start gap-3'>
-                    <span className='text-orange-500 mt-1'>✓</span>
-                    <span className='text-slate-700 dark:text-slate-300'>{feature}</span>
+            <div className="card-lux rounded-3xl p-6">
+              <p className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-ember mb-4">Core Concepts</p>
+              <ul className="space-y-2.5">
+                {project.coreConcepts?.map(c => (
+                  <li key={c} className="text-sm text-muted flex items-center gap-2.5">
+                    <span className="w-1 h-1 rounded-full bg-gold" />{c}
                   </li>
                 ))}
               </ul>
             </div>
-          )}
-
-          {/* Problem Statement */}
-          {project.problemStatement && (
-            <div className='mb-8 p-6 bg-slate-50 dark:bg-[#1e2435] rounded-xl border border-slate-200 dark:border-[#2d3748]'>
-              <h3 className='text-xl font-semibold text-slate-900 dark:text-white mb-2'>
-                Problem Statement
-              </h3>
-              <p className='text-slate-700 dark:text-slate-300'>{project.problemStatement}</p>
-            </div>
-          )}
-
-          {/* Architecture/Approach */}
-          {project.approach && (
-            <div className='mb-8'>
-              <h2 className='text-2xl font-bold text-slate-900 dark:text-white mb-4'>
-                Architecture & Approach
-              </h2>
-              <p className='text-slate-700 dark:text-slate-300 leading-relaxed'>{project.approach}</p>
-            </div>
-          )}
-
-          {/* Project Images Gallery */}
-          {project.images && project.images.length > 1 && (
-            <div className='mb-8'>
-              <h2 className='text-2xl font-bold text-slate-900 dark:text-white mb-4'>
-                Project Gallery
-              </h2>
-              <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-                {project.images.slice(1).map((image, idx) => (
-                  <div
-                    key={idx}
-                    className='rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700'
-                  >
-                    <img
-                      src={image}
-                      alt={`${project.title} - Image ${idx + 2}`}
-                      className='w-full h-64 object-cover hover:scale-105 transition-transform duration-300'
-                      onError={(e) => {
-                        e.target.src = `https://via.placeholder.com/600x400/6366f1/ffffff?text=${encodeURIComponent(project.title)}`
-                      }}
-                    />
-                  </div>
-                ))}
+            {(project.github || project.demo) && (
+              <div className="flex flex-col gap-3">
+                {project.demo && (
+                  <a href={project.demo} target="_blank" rel="noopener noreferrer" className="btn-ember py-3.5 text-sm">
+                    Live Demo <ArrowUpRight className="w-4 h-4" />
+                  </a>
+                )}
+                {project.github && (
+                  <a href={project.github} target="_blank" rel="noopener noreferrer" className="btn-ghost py-3.5 text-sm">
+                    View on GitHub <ArrowUpRight className="w-4 h-4" />
+                  </a>
+                )}
               </div>
-            </div>
-          )}
-
-          {/* Deliverables */}
-          {project.deliverables && project.deliverables.length > 0 && (
-            <div className='mb-8'>
-              <h2 className='text-2xl font-bold text-slate-900 dark:text-white mb-4'>
-                Deliverables
-              </h2>
-              <ul className='space-y-2'>
-                {project.deliverables.map((deliverable, idx) => (
-                  <li
-                    key={idx}
-                    className='flex items-center gap-3 text-slate-700 dark:text-slate-300'
-                  >
-                    <span className='w-2 h-2 bg-orange-500 rounded-full' />
-                    {deliverable}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          {/* Limitations & Future Improvements */}
-          {project.limitations && (
-            <div className='mb-8 p-6 bg-amber-50 dark:bg-[#1e2435] rounded-xl border border-amber-100 dark:border-[#2d3748]'>
-              <h3 className='text-xl font-semibold text-slate-900 dark:text-white mb-2'>
-                Limitations & Future Improvements
-              </h3>
-              <p className='text-slate-700 dark:text-slate-300'>{project.limitations}</p>
-          </div>
-          )}
-
-          {/* Links */}
-          {(project.github || project.demo) && (
-            <div className='flex flex-wrap gap-4 pt-6 border-t border-slate-200 dark:border-slate-800'>
-              {project.github && (
-                <a
-                  href={project.github}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className='btn-primary'
-                >
-                  View on GitHub
-                  <span aria-hidden='true'>↗</span>
-                </a>
-              )}
-              {project.demo && (
-                <a
-                  href={project.demo}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className='btn-secondary dark:text-white dark:border-slate-700 dark:hover:bg-slate-800'
-                >
-                  Live Demo
-                  <span aria-hidden='true'>↗</span>
-                </a>
-              )}
-            </div>
-          )}
+            )}
+          </aside>
         </div>
       </div>
+
+      {/* Lightbox */}
+      {lightbox && (
+        <div className="fixed inset-0 z-[80] bg-black/90 flex items-center justify-center p-4 cursor-zoom-out"
+          onClick={e => { e.stopPropagation(); setLightbox(null) }}>
+          <img src={lightbox} alt="Full view" className="max-w-full max-h-full rounded-xl shadow-2xl" style={{ animation: 'wordRise 0.5s cubic-bezier(0.22,1,0.36,1) both' }} />
+        </div>
+      )}
     </div>
   )
 }

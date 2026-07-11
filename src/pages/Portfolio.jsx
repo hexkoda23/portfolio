@@ -1,746 +1,91 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import ProjectCard from '../components/ProjectCard'
 import ProjectDetail from '../components/ProjectDetail'
+import ScatterGallery from '../components/ScatterGallery'
+import Reveal from '../components/anim/Reveal'
+import projects, { featuredProjects } from '../data/projects'
 
-const portfolioItems = [
-  {
-    id: 11,
-    title: 'RubberSearch — Lightweight Search Engine API',
-    subtitle: 'Full-Text Search & Indexing Engine',
-    status: 'Published',
-    description:
-      'A lightweight search engine and data store built with .NET 9, designed for fast full-text search, document indexing, tenant-based API access, and relevance-ranked results on development-scale workloads.',
-    tags: ['.NET 9', 'C#', 'Search Engine', 'REST API', 'Inverted Index'],
-    category: 'Backend Engineering & Search Infrastructure',
-    overview:
-      'RubberSearch is a compact full-text search engine that lets applications index documents and retrieve relevant results through a REST API. It combines document storage, tokenization, inverted indexing, API-key-based tenancy, and relevance scoring into a developer-friendly search service.',
-    whyImpressive:
-      'This project demonstrates strong backend engineering fundamentals by implementing the core building blocks of a search engine from scratch: tokenization, n-gram indexing, posting lists, TF-IDF-style scoring, title boosting, proximity ranking, tenant isolation, API authentication, Swagger documentation, and testable service architecture.',
-    coreConcepts: [
-      'Full-Text Search',
-      'Inverted Indexing',
-      'N-Gram Tokenization',
-      'TF-IDF-Style Ranking',
-      'Proximity Boosting',
-      'Tenant-Based API Keys',
-      'REST API Design'
-    ],
-    techStack: [
-      '.NET 9',
-      'C#',
-      'ASP.NET Core Web API',
-      'Swagger / OpenAPI',
-      'JSON File Storage',
-      'xUnit',
-      'HTML',
-      'CSS',
-      'JavaScript'
-    ],
-    features: [
-      'Document indexing through POST /api/index',
-      'Search through GET and POST /api/search',
-      'API key generation through /api/requestkey',
-      'Tenant-based indexes so each API key maps to a separate search space',
-      'Inverted index storage with token-to-document postings',
-      'N-gram tokenization for flexible partial matching',
-      'TF-IDF-style relevance scoring',
-      'Title boosting to prioritize matches in document titles',
-      'Proximity boosting for multi-word queries',
-      'Swagger UI for API testing and documentation',
-      'Simple built-in web interface for indexing and searching documents',
-      'Unit tests for tokenizer and indexing behavior'
-    ],
-    problemStatement:
-      'Many small applications need fast, simple search without the overhead of running a production-scale search platform. Developers often need a lightweight service that can index documents, search them quickly, and expose clear APIs for testing, prototypes, internal tools, and early-stage products.',
-    approach:
-      'RubberSearch uses ASP.NET Core to expose REST endpoints for indexing, searching, and API-key creation. Documents are tokenized into words and n-grams, then stored in an inverted index where each token maps to document postings. Search queries are tokenized the same way, matched against the index, scored with TF-IDF-style relevance, boosted when matches appear in titles, and further adjusted using proximity scoring for multi-token queries. API keys map users to tenants, giving each tenant its own logical index.',
-    deliverables: [
-      'ASP.NET Core REST API for indexing and search',
-      'Tenant-aware API key authentication',
-      'Core search and indexing services',
-      'JSON-backed document and index repositories',
-      'Swagger/OpenAPI documentation',
-      'Static web UI for API key generation, document indexing, and search testing',
-      'Unit tests covering tokenizer and indexing logic'
-    ],
-    limitations:
-      'RubberSearch is currently optimized for smaller and development-scale workloads. Future improvements could include persistent database-backed storage, distributed indexing, autocomplete completion, improved ranking algorithms, observability dashboards, production hardening, and horizontal scaling.',
-    images: [
-      '/rubbersearch/rubbersearch-cover.svg'
-    ],
-    github: 'https://github.com/Ugbe/Rubbersearch',
-    demo: 'https://rubbersearch-bdgcheg2d4gagqau.canadacentral-01.azurewebsites.net/swagger/index.html'
-  },
-  {
-    id: 10,
-    title: 'NYSC AI Chatbot',
-    subtitle: 'Multilingual Intelligent Assistant',
-    status: 'In Progress',
-    description:
-      'A pioneering AI solution designed to assist National Youth Service Corps (NYSC) members. Recognizing the struggle many corps members face in accessing timely and accurate information, this chatbot serves as a 24/7 knowledge hub. It uniquely supports English, Yoruba, and Hausa, ensuring inclusivity across diverse cultural backgrounds. This is the first stage of a larger vision to digitalize information access for Nigerian youth.',
-    tags: ['NLP', 'Multi-Language', 'LLM', 'Python'],
-    category: 'Conversational AI',
-    overview:
-      'The NYSC AI Chatbot is a specialized multilingual assistant designed to bridge the information gap for corps members in Nigeria. It provides real-time answers to orientation, placement, and service-year queries in major local languages.',
-    whyImpressive:
-      'This project addresses a large-scale accessibility challenge by implementing a multilingual RAG system that understands Nigerian linguistic nuances. It is the first stage of digitalizing the corps member experience at scale.',
-    coreConcepts: [
-      'Multilingual NLP',
-      'RAG Architecture',
-      'Linguistic Nuance',
-      'Information Accessibility'
-    ],
-    techStack: [
-      'Python',
-      'LangChain',
-      'OpenAI API',
-      'React',
-      'FastAPI'
-    ],
-    features: [
-      '24/7 Information Access',
-      'Support for English, Yoruba, and Hausa',
-      'Context-aware NYSC knowledge base',
-      'Multilingual query processing',
-      'Source-grounded responses to prevent hallucinations'
-    ],
-    problemStatement:
-      'Corps members often struggle to find accurate, timely information during their service year, leading to confusion and missed opportunities. Language barriers can further complicate access to official guidelines.',
-    approach:
-      'The system uses an advanced RAG (Retrieval-Augmented Generation) pipeline with multilingual embeddings to retrieve and synthesize information from NYSC handbooks and official sources in the user\'s preferred language.',
-    deliverables: [
-      'Interactive Multilingual Chatbot Interface',
-      'Specialized NYSC Knowledge Base',
-      'Information Access Analytics Dashboard',
-      'Phase 1 Deployment Documentation'
-    ],
-    limitations:
-      'Currently in Phase 1 (Information Access). Future updates will include deployment on mobile platforms, integration with official NYSC portals, and support for additional local dialects.',
-    images: [
-      "/nysc-ai-chatbot/nysc1.jpg",
-      "/nysc-ai-chatbot/nysc2.jpg",
-      "/nysc-ai-chatbot/nysc3.jpg",
-      "/nysc-ai-chatbot/nysc4.jpg",
-      "/nysc-ai-chatbot/nysc5.jpg",
-      "/nysc-ai-chatbot/nysc6.jpg",
-      "/nysc-ai-chatbot/nysc7.jpg",
-      "/nysc-ai-chatbot/nysc8.jpg",
-      "/nysc-ai-chatbot/nysc9.jpg",
-      "/nysc-ai-chatbot/nysc10.jpg"
-    ],
-    github: 'https://github.com/hexkoda23/nysc_chatbot_ai',
-    demo: 'https://nysc-ai-chatbot.vercel.app/'
-  },
-  {
-    id: 9,
-    title: '23 — Fashion Platform & Brand Experience',
-    subtitle: 'E‑commerce, Lookbook & Outfit Generator',
-    status: 'Published',
-    description:
-      'A polished brand experience for 23 that blends shopping, storytelling and an outfit generator — built as a platform that inspires greatness, not just a storefront.',
-    tags: ['E‑commerce', 'Fashion UX', 'React', 'Tailwind', 'Outfit Generator'],
-    category: 'Digital Product & Frontend',
-    overview:
-      '23 is more than a clothing website — it is an avenue for greatness. The experience is designed to move beyond a catalogue into a living brand platform that showcases craft, culture and community. Visitors explore a cinematic lookbook, shop curated releases, and use an outfit generator to style pieces with confidence. The result is a product that elevates the brand narrative while making conversion paths clear and delightful.',
-    whyImpressive:
-      'This project fuses brand storytelling with product utility. It demonstrates design systems thinking, performance‑first front‑end engineering, and an interaction model (the outfit generator) that turns browsing into creation — deepening engagement and affinity for the 23 brand.',
-    coreConcepts: [
-      'UX for conversion & community',
-      'Component‑driven design system',
-      'Accessible, responsive layouts',
-      'Stateful interactions',
-      'AI‑style outfit suggestions'
-    ],
-    techStack: [
-      'React',
-      'Vite',
-      'Tailwind CSS',
-      'React Router'
-    ],
-    features: [
-      'Hero narrative that frames 23 as a movement',
-      'Lookbook gallery with editorial‑style imagery',
-      'Shop grid for new drops and capsules',
-      'Outfit generator with wardrobe panels and drag‑to‑style flow',
-      'Persistent cart and quick view interactions',
-      'Search, filters and structured product info',
-      'FAQ and contact touchpoints for trust and support',
-      'Performance‑minded image loading and error fallbacks'
-    ],
-    problemStatement:
-      'The brand needed more than a basic store. 23 required a digital home that communicates ethos, showcases design craft and gives people tools to style and belong — a path from admiration to participation.',
-    approach:
-      'I built a modular, component‑driven UI that keeps the aesthetic consistent across Lookbook, Shop and Generator. The outfit generator mirrors a creative studio: a personal wardrobe rail on the left, a styling canvas on the right, and guided suggestions. Information architecture clarifies journeys from discovery to purchase, while micro‑copy and CTAs continually reinforce the brand’s call to greatness.',
-    deliverables: [
-      'Responsive website with lookbook, shop and generator',
-      'Reusable design‑system components and tokens',
-      'Product detail templates and merchandising layouts',
-      'Empty‑state, loading and error experiences',
-      'Deployment and performance budget'
-    ],
-    limitations:
-      'Demo content uses sample inventory and screenshots. Next steps include integrating live inventory, payments and personalization models for the generator.',
-    images: [
-      "/23/23-1.jpg",
-      "/23/23-2.jpg",
-      "/23/23-3.jpg",
-      "/23/23-4.jpg",
-      "/23/23-5.jpg",
-      "/23/23-6.jpg",
-      "/23/23-7.jpg",
-      "/23/23-8.jpg",
-      "/23/23-9.jpg",
-      "/23/23-10.jpg",
-      "/23/23-11.jpg",
-      "/23/23-12.jpg",
-    ],
-    github: 'https://github.com/hexkoda23/23-web',
-    demo: 'https://23-web.vercel.app/'
-  },
-  {
-    id: 8,
-    title: 'Smart Provision Shop Management System',
-    subtitle: 'AI-Powered Retail Assistant',
-    status: 'Published',
-    description:
-      'A comprehensive web-based shop management system with AI-powered insights that helps small retailers track sales, manage inventory, and make data-driven restocking decisions.',
-    tags: ['AI Assistant', 'Inventory Management', 'Sales Analytics', 'React'],
-    category: 'Retail Technology',
-    overview:
-      'The Smart Provision Shop Management System is designed to digitize and optimize small retail operations. It combines traditional inventory management with AI-powered insights to help shop owners understand their business better and make informed decisions.',
-    whyImpressive:
-      'This project addresses real-world needs of small business owners who lack access to sophisticated business intelligence tools. It demonstrates how AI can be democratized to help everyday entrepreneurs, making advanced analytics accessible through simple interfaces.',
-    coreConcepts: [
-      'Sales Trend Analysis',
-      'Predictive Analytics',
-      'Inventory Optimization',
-      'Natural Language Processing',
-      'Business Intelligence',
-      'Chat Interface'
-    ],
-    techStack: [
-      'React / Next.js',
-      'Python',
-      'FastAPI',
-      'PostgreSQL / SQLite',
-      'OpenAI API',
-      'Pandas'
-    ],
-    features: [
-      'Simple sales recording interface',
-      'Real-time stock level tracking',
-      'Low-stock alerts and notifications',
-      'Profit and sales summary dashboard',
-      'AI-powered shop assistant chat interface',
-      'Smart restock recommendations',
-      'Business insight generation',
-      'Mobile-friendly responsive design'
-    ],
-    problemStatement:
-      'Small shop owners typically manage their businesses using paper records or basic spreadsheets, making it difficult to track inventory, understand sales patterns, and make informed restocking decisions. They need affordable, easy-to-use tools that provide actionable insights.',
-    approach:
-      'The system records sales transactions and automatically updates inventory levels. An AI component analyzes sales patterns, stock levels, and historical data to generate insights and recommendations. A chat interface allows natural language queries about business performance.',
-    deliverables: [
-      'Web application with mobile-responsive design',
-      'Sales recording and inventory management system',
-      'AI chat assistant for business queries',
-      'Dashboard with visual analytics',
-      'Restock recommendation engine',
-      'Profit and loss reporting',
-      'Deployment guide for cloud hosting'
-    ],
-    limitations:
-      'Current version focuses on single-shop operations. Future improvements will include multi-user support, WhatsApp integration for daily summaries, receipt generation, voice input for sales recording, and integration with supplier systems for automated ordering.',
-    images: [
-      "/ai-shop/Notable1.jpg",
-      "/ai-shop/Notable2.jpg",
-      "/ai-shop/Notable3.jpg",
-      "/ai-shop/Notable4.jpg",
-      "/ai-shop/Notable5.jpg",
-      "/ai-shop/Notable6.jpg",
-      "/ai-shop/Notable7.jpg",
-      "/ai-shop/Notable8.jpg",
-      "/ai-shop/Notable9.jpg",
-      "/ai-shop/Notable10.jpg",
-      "/ai-shop/Notable11.jpg",
-    ],
-    github: 'https://github.com/hexkoda23/AI-Powered-smart-shop-manager',
-    demo: 'https://ai-powered-smart-shop-manager-2l9n.vercel.app/'
-  },
-  {
-    id: 2,
-    title: 'Intelligent AI Study Planner',
-    subtitle: 'Adaptive Learning Agent',
-    status: 'Published',
-    description:
-      'An AI-powered adaptive learning system that creates personalized study plans and dynamically adjusts them based on user progress and feedback.',
-    tags: ['AI Agent', 'Vector DB', 'LLM', 'Next.js'],
-    category: 'Adaptive Learning Systems',
-    overview:
-      'The Intelligent AI Study Planner represents a breakthrough in personalized education technology. It combines advanced AI reasoning with long-term memory systems to create and adapt study plans that evolve with the learner\'s progress, preferences, and goals.',
-    whyImpressive:
-      'This project showcases true agent-like behavior with memory and personalization capabilities. Unlike static study guides, this system demonstrates how AI can maintain context over time, make intelligent decisions, and adapt strategies based on user feedback—key capabilities for next-generation educational tools.',
-    coreConcepts: [
-      'Prompt Engineering',
-      'Long-term Memory',
-      'Vector Databases',
-      'Decision Trees',
-      'LLM Reasoning',
-      'User Profiling'
-    ],
-    techStack: [
-      'Python',
-      'Pinecone / FAISS',
-      'FastAPI',
-      'OpenAI API',
-      'React / Next.js',
-      'PostgreSQL'
-    ],
-    features: [
-      'Personalized study plan generation based on goals and constraints',
-      'Adaptive plan updates based on weekly progress feedback',
-      'Long-term memory of user preferences and learning patterns',
-      'Dynamic difficulty adjustment',
-      'Progress visualization and analytics',
-      'Multi-goal support with priority management'
-    ],
-    problemStatement:
-      'Traditional study planning tools are static and don\'t adapt to individual learning styles, pace, or changing circumstances. Learners need intelligent systems that can understand their unique needs and continuously optimize their learning journey.',
-    approach:
-      'The system uses a combination of vector databases for storing user profiles and learning history, LLM reasoning for generating personalized plans, and decision trees for adaptive logic. User feedback is processed weekly to update the vector embeddings and refine future recommendations.',
-    deliverables: [
-      'Interactive user onboarding flow',
-      'Dynamic plan generation and update system',
-      'Before vs After progress visualization dashboard',
-      'API for plan management and progress tracking',
-      'Comprehensive documentation and user guides'
-    ],
-    limitations:
-      'Current system focuses on structured learning goals. Future enhancements will include support for unstructured learning, integration with learning management systems, collaborative study groups, and advanced analytics for learning pattern recognition.',
-    images: [
-      "/ai-study/ai-study1.jpg",
-      "/ai-study/ai-study1.jpg",
-      "/ai-study/ai-study2.jpg",
-      "/ai-study/ai-study3.jpg",
-      "/ai-study/ai-study4.jpg",
-    ],
-    github: '#',
-    demo: '#'
-  },
-  {
-    id: 1,
-    title: 'AI Resume & Job Match Scoring System',
-    subtitle: 'NLP & Semantic Analysis',
-    status: 'Published',
-    description:
-      'An intelligent system that analyzes CVs and job descriptions to provide match scores, missing skills identification, and personalized improvement recommendations.',
-    tags: ['NLP', 'Embeddings', 'FastAPI', 'React'],
-    category: 'Natural Language Processing',
-    overview:
-      'The AI Resume & Job Match Scoring System is a comprehensive solution that addresses a critical challenge in modern hiring: efficiently matching candidates with job opportunities. By leveraging advanced natural language processing and semantic similarity techniques, the system provides actionable insights to both job seekers and recruiters.',
-    whyImpressive:
-      'This project directly solves a real-world hiring problem that affects millions of job seekers and employers daily. It demonstrates practical application of NLP, embeddings, and hybrid reasoning systems that combine rule-based logic with machine learning to deliver accurate, interpretable results.',
-    coreConcepts: [
-      'Text Embeddings',
-      'Semantic Similarity',
-      'NLP Preprocessing',
-      'Cosine Similarity',
-      'Hybrid ML Logic'
-    ],
-    techStack: [
-      'Python',
-      'FastAPI',
-      'OpenAI API',
-      'Sentence Transformers',
-      'React',
-      'TypeScript'
-    ],
-    features: [
-      'Automated CV and job description analysis',
-      'Match percentage calculation using semantic similarity',
-      'Missing skills identification and gap analysis',
-      'Personalized improvement recommendations',
-      'RESTful API for easy integration',
-      'Interactive web interface for real-time analysis'
-    ],
-    problemStatement:
-      'Job seekers struggle to understand why their applications are rejected, while recruiters spend excessive time manually screening resumes. There\'s a critical need for an automated system that can objectively assess candidate-job fit and provide actionable feedback.',
-    approach:
-      'The system uses transformer-based embeddings to convert CVs and job descriptions into high-dimensional vectors. By calculating cosine similarity between these vectors, we determine semantic match scores. Additional rule-based logic analyzes specific skills, experience levels, and qualifications to provide comprehensive matching and gap analysis.',
-    deliverables: [
-      'Web application with intuitive user interface',
-      'REST API with comprehensive documentation',
-      'GitHub repository with detailed README explaining scoring logic',
-      'Model evaluation metrics and performance benchmarks',
-      'Deployment guide for production environments'
-    ],
-    limitations:
-      'Current limitations include handling non-standard CV formats and understanding context-specific industry requirements. Future improvements will incorporate domain-specific embeddings, multi-language support, and integration with popular job boards and ATS systems.',
-    images: [
-      "/ai-resume/ai-resume1.jpg",
-      "/ai-resume/ai-resume2.jpg",
-      "/ai-resume/ai-resume3.jpg",
-      "/ai-resume/ai-resume4.jpg",
-      "/ai-resume/ai-resume5.jpg",
-      "/ai-resume/ai-resume6.jpg",
-    ],
-    github: '#',
-    demo: '#'
-  },
-  {
-    id: 3,
-    title: 'AI Customer Support Chatbot with RAG',
-    subtitle: 'Retrieval Augmented Generation',
-    status: 'Published',
-    description:
-      'An intelligent chatbot powered by RAG technology that answers customer queries using only company-specific knowledge from FAQs, PDFs, and website content.',
-    tags: ['RAG', 'LangChain', 'Vector Search', 'Chat UI'],
-    category: 'Conversational AI',
-    overview:
-      'This AI Customer Support Chatbot leverages Retrieval Augmented Generation (RAG) to provide accurate, context-aware responses by grounding its answers in company-specific documentation. It eliminates hallucinations by strictly adhering to provided knowledge sources.',
-    whyImpressive:
-      'RAG-based chatbots represent one of the most demanded real-world AI applications today. This project demonstrates mastery of document processing, vector search, and controlled generation—critical skills for enterprise AI solutions. The ability to cite sources and prevent hallucinations makes it production-ready.',
-    coreConcepts: [
-      'Retrieval Augmented Generation (RAG)',
-      'Document Chunking',
-      'Vector Embeddings',
-      'Semantic Search',
-      'Hallucination Control',
-      'Source Citation'
-    ],
-    techStack: [
-      'Python',
-      'LangChain / LlamaIndex',
-      'FAISS / Chroma',
-      'OpenAI API',
-      'React',
-      'FastAPI'
-    ],
-    features: [
-      'Document upload and processing system',
-      'Intelligent document chunking and embedding',
-      'Semantic search across knowledge base',
-      'Source citation in every response',
-      'Hallucination prevention mechanisms',
-      'Multi-format document support (PDF, DOCX, TXT)',
-      'Real-time chat interface with conversation history'
-    ],
-    problemStatement:
-      'Traditional chatbots often provide generic or incorrect information because they lack access to company-specific knowledge. Customer support teams need AI assistants that can accurately answer questions using only verified company documentation.',
-    approach:
-      'The system processes uploaded documents by chunking them into semantically meaningful segments, generating embeddings, and storing them in a vector database. When a user asks a question, the system retrieves relevant chunks, provides them as context to an LLM, and generates responses with source citations.',
-    deliverables: [
-      'Web-based document upload interface',
-      'RAG-powered chat interface with source citations',
-      'Knowledge base management system',
-      'Live demo with sample documentation',
-      'API documentation for integration',
-      'Performance benchmarks and accuracy metrics'
-    ],
-    limitations:
-      'Current implementation handles primarily text-based documents. Future improvements will include support for images, tables, and structured data, multi-language support, fine-tuning capabilities, and integration with popular CRM and helpdesk platforms.',
-    images: [
-      'https://via.placeholder.com/800x400/ef4444/ffffff?text=RAG+Chatbot',
-      'https://via.placeholder.com/600x400/dc2626/ffffff?text=Document+Upload',
-      'https://via.placeholder.com/600x400/b91c1c/ffffff?text=Chat+Interface',
-      'https://via.placeholder.com/600x400/991b1b/ffffff?text=Source+Citations'
-    ],
-    github: '#',
-    demo: '#'
-  },
-  {
-    id: 4,
-    title: 'AI Social Media Content Generator & Analyzer',
-    subtitle: 'Content Intelligence Platform',
-    status: 'Published',
-    description:
-      'An AI-powered platform that generates social media content, predicts engagement scores, and provides optimization suggestions for captions and hashtags.',
-    tags: ['Content Generation', 'Sentiment Analysis', 'NLP', 'Analytics'],
-    category: 'Content Intelligence',
-    overview:
-      'The AI Social Media Content Generator & Analyzer combines content creation with predictive analytics to help brands optimize their social media strategy. It generates brand-aligned content and provides data-driven insights on potential performance.',
-    whyImpressive:
-      'This project uniquely combines generation and analytics—two capabilities rarely found together in portfolios. It demonstrates understanding of both creative AI applications and data-driven decision making, showing how AI can be used end-to-end in content marketing workflows.',
-    coreConcepts: [
-      'Prompt Engineering',
-      'Sentiment Analysis',
-      'Heuristic Scoring',
-      'NLP Classification',
-      'Content Optimization',
-      'Engagement Prediction'
-    ],
-    techStack: [
-      'Python',
-      'Hugging Face Models',
-      'OpenAI API',
-      'React',
-      'FastAPI',
-      'Pandas / NumPy'
-    ],
-    features: [
-      'Brand tone-aware content generation',
-      'Engagement score prediction using ML models',
-      'Hashtag suggestion and optimization',
-      'Caption improvement recommendations',
-      'Multi-platform content adaptation',
-      'Content performance analytics dashboard',
-      'A/B testing suggestions for content variations'
-    ],
-    problemStatement:
-      'Social media managers struggle to create engaging content consistently while understanding what drives performance. They need tools that can both generate quality content and predict its potential success before publishing.',
-    approach:
-      'The system uses fine-tuned language models for content generation based on brand guidelines. A separate ML model analyzes historical engagement data to predict performance scores. Sentiment analysis and NLP techniques are used to optimize captions and suggest relevant hashtags.',
-    deliverables: [
-      'Content generation interface with brand customization',
-      'Engagement prediction dashboard with score explanations',
-      'Side-by-side comparison of multiple content variations',
-      'Hashtag and caption optimization tools',
-      'Analytics dashboard with performance insights',
-      'API for programmatic content generation'
-    ],
-    limitations:
-      'Current predictions are based on general engagement patterns. Future enhancements will include platform-specific models, real-time trend integration, competitor analysis, and advanced A/B testing frameworks with statistical significance testing.',
-    images: [
-      'https://via.placeholder.com/800x400/f59e0b/ffffff?text=Content+Generator',
-      'https://via.placeholder.com/600x400/d97706/ffffff?text=Engagement+Prediction',
-      'https://via.placeholder.com/600x400/b45309/ffffff?text=Content+Analytics',
-      'https://via.placeholder.com/600x400/92400e/ffffff?text=Optimization+Tools'
-    ],
-    github: '#',
-    demo: '#'
-  },
-  {
-    id: 5,
-    title: 'AI Fraud & Anomaly Detection System',
-    subtitle: 'Unsupervised Learning',
-    status: 'Published',
-    description:
-      'An advanced ML system that detects unusual transactions and user behavior patterns in datasets, identifying potential fraud and anomalies in real-time.',
-    tags: ['ML', 'Anomaly Detection', 'Unsupervised Learning', 'Streamlit'],
-    category: 'Machine Learning Engineering',
-    overview:
-      'The AI Fraud & Anomaly Detection System demonstrates serious machine learning engineering capabilities by identifying suspicious patterns in transaction data. It uses unsupervised learning techniques to detect anomalies without requiring labeled fraud examples.',
-    whyImpressive:
-      'This project showcases deep understanding of real-world ML challenges and production-ready engineering. Anomaly detection is a critical capability in finance, security, and e-commerce, making this highly relevant for enterprise applications.',
-    coreConcepts: [
-      'Unsupervised Learning',
-      'Isolation Forest',
-      'Autoencoders',
-      'Feature Engineering',
-      'Data Normalization',
-      'Anomaly Scoring'
-    ],
-    techStack: [
-      'Python',
-      'Scikit-learn',
-      'Pandas / NumPy',
-      'Streamlit',
-      'Matplotlib / Plotly',
-      'FastAPI'
-    ],
-    features: [
-      'Real-time anomaly detection in transaction streams',
-      'Visual anomaly plots and heatmaps',
-      'Configurable sensitivity thresholds',
-      'Model evaluation with precision/recall metrics',
-      'Support for both synthetic and real datasets',
-      'Feature importance analysis',
-      'Batch and streaming processing modes'
-    ],
-    problemStatement:
-      'Financial institutions and e-commerce platforms face constant threats from fraudulent activities. Traditional rule-based systems are easily circumvented, while supervised learning requires extensive labeled data that may not exist for emerging fraud patterns.',
-    approach:
-      'The system employs Isolation Forest algorithms to identify outliers in high-dimensional feature spaces. Autoencoders are used for complex pattern detection. Features are engineered from transaction metadata, user behavior patterns, and temporal sequences. The system outputs anomaly scores that can be thresholded for alerts.',
-    deliverables: [
-      'Interactive Streamlit dashboard with visual anomaly plots',
-      'Model evaluation reports with detailed metrics',
-      'Documentation explaining detection methodology',
-      'Support for synthetic dataset generation',
-      'Real-time detection API',
-      'Performance benchmarks on standard datasets'
-    ],
-    limitations:
-      'Current system requires careful feature engineering and threshold tuning. Future improvements will include adaptive thresholding, ensemble methods combining multiple algorithms, real-time model retraining, and integration with fraud investigation workflows.',
-    images: [
-      "/ai-fruad/ai-fruad1.jpg",
-      "/ai-fruad/ai-fruad1.jpg",
-      "/ai-fruad/ai-fruad2.jpg",
-      "/ai-fruad/ai-fruad3.jpg",
-      "/ai-fruad/ai-fruad4.jpg",
-      "/ai-fruad/ai-fruad5.jpg",
-    ],
-    github: '#',
-    demo: '#'
-  },
-  {
-    id: 6,
-    title: 'AI Voice Assistant for Task Management',
-    subtitle: 'Multimodal AI System',
-    status: 'Published',
-    description:
-      'A voice-enabled AI assistant that accepts spoken commands, creates and manages tasks, and provides audio reminders—demonstrating multimodal AI capabilities.',
-    tags: ['Speech-to-Text', 'Voice AI', 'NLP', 'Task Management'],
-    category: 'Multimodal AI',
-    overview:
-      'The AI Voice Assistant for Task Management showcases the integration of speech recognition, natural language understanding, and text-to-speech technologies to create a hands-free productivity solution.',
-    whyImpressive:
-      'This project demonstrates multimodal AI capabilities—combining speech, text, and audio output. Voice interfaces are becoming increasingly important, and this project shows practical application of cutting-edge speech AI technologies.',
-    coreConcepts: [
-      'Speech-to-Text (STT)',
-      'Intent Detection',
-      'Text-to-Speech (TTS)',
-      'Context Handling',
-      'Natural Language Understanding',
-      'Task Parsing'
-    ],
-    techStack: [
-      'Python',
-      'Whisper / SpeechRecognition',
-      'OpenAI API',
-      'Web Speech API',
-      'React',
-      'FastAPI'
-    ],
-    features: [
-      'Voice input for task creation and management',
-      'Natural language task parsing',
-      'Audio reminders and notifications',
-      'Conversation context maintenance',
-      'Multi-task operations support',
-      'Cross-platform compatibility',
-      'Offline voice recognition capability'
-    ],
-    problemStatement:
-      'Users often need to quickly capture tasks while on the go or in situations where typing is inconvenient. Traditional task management apps require manual input, which can interrupt workflow and reduce productivity.',
-    approach:
-      'The system uses Whisper for accurate speech-to-text conversion, processes the transcribed text through an intent classification model to understand user commands, and manages tasks through a structured database. Text-to-speech provides audio feedback and reminders.',
-    deliverables: [
-      'Voice input interface with real-time transcription',
-      'Intent classification system with high accuracy',
-      'Task persistence and management system',
-      'Audio reminder and notification system',
-      'Web and mobile-compatible interface',
-      'API documentation for voice command integration'
-    ],
-    limitations:
-      'Current system works best in quiet environments and requires internet connectivity for optimal performance. Future improvements will include offline operation, multi-language support, voice biometric authentication, and integration with popular calendar and productivity apps.',
-    images: [
-      'https://via.placeholder.com/800x400/06b6d4/ffffff?text=Voice+Assistant',
-      'https://via.placeholder.com/600x400/0891b2/ffffff?text=Voice+Input',
-      'https://via.placeholder.com/600x400/0e7490/ffffff?text=Task+Management',
-      'https://via.placeholder.com/600x400/155e75/ffffff?text=Audio+Reminders'
-    ],
-    github: '#',
-    demo: '#'
-  },
-  {
-    id: 7,
-    title: 'AI Business Insight Generator',
-    subtitle: 'Data-Driven Decision Making',
-    status: 'Published',
-    description:
-      'An intelligent system that analyzes uploaded CSV data to generate executive-level business insights, detect trends, and provide actionable recommendations.',
-    tags: ['Data Analysis', 'LLM Reasoning', 'Business Intelligence', 'Visualization'],
-    category: 'Business Intelligence',
-    overview:
-      'The AI Business Insight Generator transforms raw data into strategic business intelligence. By combining data analysis with LLM reasoning, it produces executive-level insights that help decision-makers understand trends and opportunities.',
-    whyImpressive:
-      'This project demonstrates how AI can bridge the gap between raw data and strategic decision-making. The ability to turn complex datasets into plain-language insights is highly valued in business contexts, making this a practical and impressive application.',
-    coreConcepts: [
-      'Data Analysis',
-      'LLM-Based Reasoning',
-      'Automated Insight Generation',
-      'Trend Detection',
-      'Statistical Analysis',
-      'Natural Language Summarization'
-    ],
-    techStack: [
-      'Python',
-      'Pandas',
-      'OpenAI API',
-      'Plotly',
-      'Streamlit',
-      'NumPy'
-    ],
-    features: [
-      'CSV upload and automatic data type detection',
-      'Automated insight generation from data patterns',
-      'Trend detection and visualization',
-      'Business recommendation engine',
-      'Executive summary generation',
-      'Interactive charts and graphs',
-      'Downloadable insight reports'
-    ],
-    problemStatement:
-      'Business leaders often receive raw data reports that require significant time and expertise to interpret. They need tools that can automatically identify key insights, trends, and actionable recommendations from business data.',
-    approach:
-      'The system performs statistical analysis on uploaded data to identify patterns, trends, and anomalies. These findings are then processed through an LLM that generates natural language insights and recommendations. Visualizations are created to support the insights.',
-    deliverables: [
-      'Intuitive data upload interface',
-      'Automated insight report generation',
-      'Interactive visualization dashboard',
-      'Downloadable PDF/HTML reports',
-      'API for programmatic insight generation',
-      'Support for multiple data formats and structures'
-    ],
-    limitations:
-      'Current system works best with structured, clean data. Future enhancements will include support for unstructured data sources, predictive analytics, automated report scheduling, integration with popular business tools (Salesforce, Google Analytics), and custom insight templates for different industries.',
-    images: [
-      "/ai-business/ai-business1.jpg",
-      "/ai-business/ai-business2.jpg",
-      "/ai-business/ai-business3.jpg",
-      "/ai-business/ai-business4.jpg",
-      "/ai-business/ai-business5.jpg",
-      "/ai-business/ai-business6.jpg",
-      "/ai-business/ai-business7.jpg",
-      "/ai-business/ai-business8.jpg",
-      "/ai-business/ai-business9.jpg",
-      "/ai-business/ai-business11.jpg",
-      "/ai-business/ai-business12.jpg",
-      "/ai-business/ai-business13.jpg",
-      "/ai-business/ai-business14.jpg",
-    ],
-    github: '#',
-    demo: '#'
-  }
+const FILTERS = [
+  { key: 'all', label: 'All Work' },
+  { key: 'client', label: 'Client Platforms' },
+  { key: 'ai', label: 'AI & ML' },
+  { key: 'engineering', label: 'Engineering' },
+  { key: 'product', label: 'Product & Frontend' },
 ]
 
 export default function Portfolio() {
-  const [selectedProject, setSelectedProject] = useState(null)
-  const sortedItems = [...portfolioItems]
+  const [selected, setSelected] = useState(null)
+  const [filter, setFilter] = useState('all')
+
+  const visible = useMemo(
+    () => (filter === 'all' ? projects : projects.filter(p => p.kind === filter)),
+    [filter]
+  )
 
   return (
     <>
-      <section className='max-w-6xl mx-auto px-4 sm:px-6 py-16 space-y-12'>
-        <div className='text-center max-w-3xl mx-auto'>
-          <p className='section-label text-slate-500 dark:text-slate-400'>AI & Machine Learning Projects</p>
-          <h1 className='mt-3 text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white'>
-            Innovative AI Solutions Solving Real-World Problems
-          </h1>
-          <p className='mt-3 text-slate-500 dark:text-slate-400'>
-            A collection of AI-powered projects demonstrating expertise in natural language processing,
-            machine learning, and intelligent system design. Each project addresses real challenges
-            with practical, deployable solutions.
-          </p>
-        </div>
-
-        <div className='grid gap-6 md:grid-cols-2'>
-          {sortedItems.map(item => (
-            <ProjectCard
-              key={item.id}
-              {...item}
-              onClick={() => setSelectedProject(item)}
-            />
-          ))}
+      {/* intro */}
+      <section className="pt-40 pb-10 relative overflow-hidden grain">
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'var(--hero-grad)' }} />
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10">
+          <Reveal variant="down" as="p" className="eyebrow justify-center mb-5" style={{ display: 'inline-flex' }}>
+            The Work
+          </Reveal>
+          <Reveal variant="blur" as="h1" className="font-display font-semibold text-ink tracking-tight leading-[1.03] mb-6"
+            style={{ fontSize: 'clamp(2.4rem, 6vw, 4.4rem)' }}>
+            Scattered ideas,<br />
+            <span className="text-ember-grad italic">assembled into products.</span>
+          </Reveal>
+          <Reveal variant="up" delay={0.25} as="p" className="text-lg text-muted max-w-xl mx-auto font-light">
+            Five client platforms in production, plus AI systems and engineering deep-cuts.
+            Scroll — the featured work gathers itself. Click any piece to open its case study.
+          </Reveal>
         </div>
       </section>
 
-      {selectedProject && (
-        <ProjectDetail
-          project={selectedProject}
-          onClose={() => setSelectedProject(null)}
-        />
-      )}
+      {/* signature scatter gallery */}
+      <ScatterGallery projects={featuredProjects} onSelect={setSelected} />
+
+      {/* archive grid */}
+      <section className="py-24 bg-surface border-t border-line relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-12">
+            <div>
+              <Reveal variant="clip-l" as="p" className="eyebrow mb-4">Full Archive</Reveal>
+              <Reveal variant="up" as="h2" className="font-display font-semibold text-ink tracking-tight"
+                style={{ fontSize: 'clamp(1.8rem, 4vw, 2.8rem)' }}>
+                Every build, catalogued.
+              </Reveal>
+            </div>
+
+            {/* filters */}
+            <Reveal variant="left" delay={0.15} className="flex flex-wrap gap-2">
+              {FILTERS.map(f => (
+                <button key={f.key} onClick={() => setFilter(f.key)}
+                  className={`px-5 py-2.5 rounded-full font-sans font-medium text-sm border transition-all duration-300
+                    ${filter === f.key
+                      ? 'text-white border-transparent'
+                      : 'text-muted border-line hover:border-ember hover:text-ink bg-card'}`}
+                  style={filter === f.key ? { background: 'linear-gradient(120deg, var(--ember), var(--ember-2))', boxShadow: '0 6px 20px var(--glow)' } : undefined}>
+                  {f.label}
+                </button>
+              ))}
+            </Reveal>
+          </div>
+
+          <div key={filter} className="grid gap-7 md:grid-cols-2 xl:grid-cols-3">
+            {visible.map((p, i) => (
+              <ProjectCard key={p.id} project={p} index={i} onClick={() => setSelected(p)} />
+            ))}
+          </div>
+
+          {visible.length === 0 && (
+            <p className="text-center text-muted py-20 font-mono text-sm">Nothing in this category yet.</p>
+          )}
+        </div>
+      </section>
+
+      {selected && <ProjectDetail project={selected} onClose={() => setSelected(null)} />}
     </>
   )
 }

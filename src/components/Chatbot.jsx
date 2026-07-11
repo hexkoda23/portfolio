@@ -229,7 +229,7 @@ export default function Chatbot() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="bg-white text-slate-900 border border-slate-200 hover:bg-slate-100 rounded-full p-4 shadow-lg transition-all duration-300 transform hover:scale-110"
+          className="bg-card text-ink border border-line hover:border-ember rounded-full p-4 shadow-lg transition-all duration-300 transform hover:scale-110"
         >
           <span className="text-2xl leading-none">🤖</span>
         </button>
@@ -237,13 +237,13 @@ export default function Chatbot() {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="bg-white rounded-lg shadow-2xl w-80 sm:w-96 flex flex-col h-[500px] border border-slate-200 transition-all duration-300">
+        <div className="bg-card rounded-3xl shadow-2xl w-80 sm:w-96 flex flex-col h-[500px] border border-line transition-all duration-300">
           {/* Header */}
-          <div className="bg-white p-4 rounded-t-lg flex justify-between items-center text-slate-900 border-b border-slate-200">
+          <div className="bg-card p-4 rounded-t-3xl flex justify-between items-center text-ink border-b border-line">
             <h3 className="font-bold text-lg">Tife's Bot</h3>
             <button 
               onClick={() => setIsOpen(false)}
-              className="hover:text-slate-600 focus:outline-none"
+              className="text-muted hover:text-ember focus:outline-none"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -252,7 +252,7 @@ export default function Chatbot() {
           </div>
 
           {/* Messages Area */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-white">
+          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-card">
             {messages.map((msg, index) => (
               <div
                 key={index}
@@ -261,8 +261,8 @@ export default function Chatbot() {
                 <div
                   className={`max-w-[80%] p-3 rounded-lg ${
                     msg.role === 'user'
-                      ? 'bg-slate-100 text-slate-900 border border-slate-200 rounded-br-none'
-                      : 'bg-white text-slate-900 border border-slate-200 rounded-bl-none'
+                      ? 'bg-ember-soft text-ink border border-line rounded-br-none'
+                      : 'bg-surface text-ink border border-line rounded-bl-none'
                   }`}
                 >
                   {msg.text}
@@ -271,7 +271,7 @@ export default function Chatbot() {
             ))}
             {isLoading && (
               <div className="flex justify-start">
-                <div className="bg-white text-slate-900 border border-slate-200 p-3 rounded-lg rounded-bl-none animate-pulse">
+                <div className="bg-surface text-muted border border-line p-3 rounded-lg rounded-bl-none animate-pulse">
                   Thinking...
                 </div>
               </div>
@@ -280,7 +280,7 @@ export default function Chatbot() {
           </div>
 
           {/* Input Area */}
-          <div className="p-4 border-t border-slate-200 bg-white rounded-b-lg">
+          <div className="p-4 border-t border-line bg-card rounded-b-3xl">
             <div className="flex space-x-2">
               <input
                 type="text"
@@ -288,12 +288,12 @@ export default function Chatbot() {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="Ask something..."
-                className="flex-1 p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-400 bg-white text-slate-900"
+                className="flex-1 p-2.5 border border-line rounded-xl focus:outline-none focus:border-ember bg-surface text-ink placeholder:text-muted"
               />
               <button
                 onClick={handleSend}
                 disabled={isLoading}
-                className={`bg-white text-slate-900 border border-slate-200 p-2 rounded-md hover:bg-slate-100 transition-colors ${
+                className={`bg-surface text-ink border border-line p-2.5 rounded-xl hover:border-ember hover:text-ember transition-colors ${
                   isLoading ? 'opacity-50 cursor-not-allowed' : ''
                 }`}
                 aria-label="Send"

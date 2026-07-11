@@ -1,68 +1,97 @@
+import React, { useState } from 'react'
+import { Send, Mail, MapPin, Briefcase } from 'lucide-react'
+import Reveal from '../components/anim/Reveal'
+
+const inputCls =
+  'w-full p-4 rounded-2xl bg-card border border-line font-sans text-sm text-ink placeholder:text-muted focus:outline-none focus:border-ember focus:ring-2 transition-all duration-300'
+
 export default function Contact() {
+  const [sent, setSent] = useState(false)
+
+  const onSubmit = e => {
+    e.preventDefault()
+    const data = new FormData(e.target)
+    const subject = encodeURIComponent(`Portfolio inquiry — ${data.get('type') || 'Project'}`)
+    const body = encodeURIComponent(
+      `Name: ${data.get('name')}\nEmail: ${data.get('email')}\nCompany: ${data.get('company')}\n\n${data.get('message')}`
+    )
+    window.location.href = `mailto:kehindeadeleke92@gmail.com?subject=${subject}&body=${body}`
+    setSent(true)
+  }
+
   return (
     <div>
-      {/* Dark hero — SabiLens CTA section */}
-      <section className="bg-[#0f172a] py-24 relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl aspect-square bg-orange-500/20 rounded-full blur-[100px] pointer-events-none" />
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10 text-center">
-          <p className="inline-flex items-center gap-2 font-mono font-semibold text-[0.7rem] uppercase tracking-[0.16em] text-orange-500 mb-4 before:block before:w-5 before:h-0.5 before:bg-orange-500 before:rounded-full justify-center mx-auto">
-            Contact
-          </p>
-          <h1 className="font-syne font-bold text-white mb-5 leading-tight"
-            style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
-            AI Consulting, partnerships,<br />and development inquiries.
-          </h1>
-          <p className="font-sans text-lg text-white/60 max-w-lg mx-auto">
-            Share your project requirements. I typically reply within 48 hours.
-          </p>
+      {/* Hero */}
+      <section className="pt-40 pb-20 relative overflow-hidden grain">
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'var(--hero-grad)' }} />
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10 text-center">
+          <Reveal variant="down" as="p" className="eyebrow justify-center mb-5" style={{ display: 'inline-flex' }}>Contact</Reveal>
+          <Reveal variant="blur" as="h1" className="font-display font-semibold text-ink tracking-tight leading-[1.04] mb-6"
+            style={{ fontSize: 'clamp(2.3rem, 5.5vw, 4rem)' }}>
+            Tell me what you're<br /><span className="text-ember-grad italic">trying to build.</span>
+          </Reveal>
+          <Reveal variant="up" delay={0.2} as="p" className="text-lg text-muted max-w-lg mx-auto font-light">
+            Roles, contracts, consulting, or ambitious ideas — I reply within 48 hours.
+          </Reveal>
         </div>
       </section>
 
-      <section className="py-16 bg-white dark:bg-[#0d1117]">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <div className="grid gap-8 lg:grid-cols-[0.9fr,1.1fr]">
+      <section className="pb-28">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
 
-            {/* Info card */}
-            <div className="bg-white dark:bg-[#1e2435] border border-slate-100 dark:border-white/[0.08] rounded-2xl p-7 shadow-soft">
-              <div className="flex items-center gap-2 mb-6">
-                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                <span className="font-mono text-xs text-green-600 dark:text-green-400 uppercase tracking-widest font-semibold">Currently Available</span>
-              </div>
-              <h3 className="font-syne font-bold text-xl text-slate-900 dark:text-white mb-3">Availability</h3>
-              <p className="font-sans text-sm text-slate-500 dark:text-slate-400 mb-6 leading-relaxed">
-                Open for freelance AI development, technical consulting, and long-term partnerships.
-              </p>
-              <div className="space-y-4">
-                {[
-                  { label: 'Email', value: 'kehindeadeleke92@gmail.com', href: 'mailto:kehindeadeleke92@gmail.com' },
-                  { label: 'Location', value: 'Lagos, Nigeria · Remote', href: null },
-                  { label: 'Services', value: 'AI Design · NLP · Full Stack', href: null },
-                ].map(item => (
-                  <div key={item.label}>
-                    <p className="font-mono text-[0.6rem] text-orange-500 uppercase tracking-widest font-bold mb-1">{item.label}</p>
-                    {item.href
-                      ? <a href={item.href} className="font-sans text-sm text-slate-500 dark:text-slate-400 hover:text-orange-500 transition-colors">{item.value}</a>
-                      : <p className="font-sans text-sm text-slate-500 dark:text-slate-400">{item.value}</p>
-                    }
+            {/* Info rail */}
+            <div className="space-y-6">
+              {[
+                { icon: Mail, label: 'Email', value: 'kehindeadeleke92@gmail.com', href: 'mailto:kehindeadeleke92@gmail.com' },
+                { icon: MapPin, label: 'Location', value: 'Lagos, Nigeria · Remote worldwide' },
+                { icon: Briefcase, label: 'Open to', value: 'Full-time roles · Contract · AI consulting' },
+              ].map((item, i) => (
+                <Reveal key={item.label} variant="right" delay={i * 0.12}>
+                  <div className="card-lux rounded-[1.6rem] p-6 flex items-start gap-5">
+                    <div className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0" style={{ background: 'var(--ember-soft)' }}>
+                      <item.icon className="w-5 h-5 text-ember" />
+                    </div>
+                    <div>
+                      <p className="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-muted mb-1.5">{item.label}</p>
+                      {item.href
+                        ? <a href={item.href} className="font-sans font-medium text-ink hover:text-ember transition-colors break-all">{item.value}</a>
+                        : <p className="font-sans font-medium text-ink">{item.value}</p>}
+                    </div>
                   </div>
-                ))}
-              </div>
+                </Reveal>
+              ))}
+
+              <Reveal variant="right" delay={0.4}>
+                <div className="rounded-[1.6rem] p-6 border border-line" style={{ background: 'var(--pine-soft)' }}>
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="w-2 h-2 rounded-full bg-green-500 dot-live" />
+                    <span className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-ink-soft">Currently available</span>
+                  </div>
+                  <p className="text-sm text-muted leading-relaxed">
+                    Actively interviewing for software engineering roles and taking on
+                    select client platforms.
+                  </p>
+                </div>
+              </Reveal>
             </div>
 
-            {/* Form — SabiLens input style */}
-            <form className="bg-white dark:bg-[#1e2435] border border-slate-100 dark:border-white/[0.08] rounded-2xl shadow-soft p-7 grid gap-4">
-              <div className="grid gap-4 md:grid-cols-2">
-                <input className="w-full p-4 border border-slate-200 dark:border-white/10 rounded-2xl bg-slate-50 dark:bg-[#0d1117] font-sans text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500 dark:focus:border-orange-500 transition-all" placeholder="Your name" />
-                <input type="email" className="w-full p-4 border border-slate-200 dark:border-white/10 rounded-2xl bg-slate-50 dark:bg-[#0d1117] font-sans text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500 dark:focus:border-orange-500 transition-all" placeholder="Email" />
-              </div>
-              <input className="w-full p-4 border border-slate-200 dark:border-white/10 rounded-2xl bg-slate-50 dark:bg-[#0d1117] font-sans text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500 dark:focus:border-orange-500 transition-all" placeholder="Company / Organization" />
-              <input className="w-full p-4 border border-slate-200 dark:border-white/10 rounded-2xl bg-slate-50 dark:bg-[#0d1117] font-sans text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500 dark:focus:border-orange-500 transition-all" placeholder="Project Type (e.g. RAG Chatbot, NLP Analysis)" />
-              <textarea rows={6} className="w-full p-4 border border-slate-200 dark:border-white/10 rounded-2xl bg-slate-50 dark:bg-[#0d1117] font-sans text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500 dark:focus:border-orange-500 transition-all resize-none" placeholder="Describe your project goals, timeline, and requirements…" />
-              <button type="submit"
-                className="w-full py-4 font-syne font-semibold text-base rounded-2xl bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-glow hover:scale-[0.98] active:scale-95 transition-all">
-                Send Request →
-              </button>
-            </form>
+            {/* Form */}
+            <Reveal variant="left" delay={0.15}>
+              <form onSubmit={onSubmit} className="card-lux rounded-[2rem] p-8 grid gap-5" style={{ '--tw-ring-color': 'var(--ember-soft)' }}>
+                <div className="grid gap-5 md:grid-cols-2">
+                  <input name="name" required className={inputCls} placeholder="Your name" />
+                  <input name="email" type="email" required className={inputCls} placeholder="Email address" />
+                </div>
+                <input name="company" className={inputCls} placeholder="Company / Organization" />
+                <input name="type" className={inputCls} placeholder="What is it? (Role, platform build, AI system…)" />
+                <textarea name="message" rows={6} required className={`${inputCls} resize-none`} placeholder="Tell me about the goals, timeline, and what success looks like…" />
+                <button type="submit" className="btn-ember w-full py-4 text-base group">
+                  {sent ? 'Opening your mail client…' : 'Send Message'}
+                  <Send className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5" />
+                </button>
+              </form>
+            </Reveal>
           </div>
         </div>
       </section>
