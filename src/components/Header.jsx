@@ -29,7 +29,11 @@ export default function Header() {
     const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'
     root.setAttribute('data-theme', next)
     root.classList.toggle('dark', next === 'dark')
-    localStorage.setItem('theme', next)
+    // Session-only override: if the choice matches the system preference,
+    // clear it so the site keeps following the device setting.
+    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    if ((next === 'dark') === systemDark) sessionStorage.removeItem('theme-override')
+    else sessionStorage.setItem('theme-override', next)
     setDark(next === 'dark')
   }
 

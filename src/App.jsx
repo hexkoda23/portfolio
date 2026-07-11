@@ -19,15 +19,22 @@ function ScrollToTop() {
 }
 
 export default function App() {
-  // apply saved / system theme once on mount
+  // Theme follows the visitor's system preference (live). A manual toggle
+  // stores a session-only override that wins until the tab is closed.
   useEffect(() => {
-    const saved = localStorage.getItem('theme')
-    const dark = saved
-      ? saved === 'dark'
-      : window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-    const root = document.documentElement
-    root.setAttribute('data-theme', dark ? 'dark' : 'light')
-    root.classList.toggle('dark', dark)
+    const mq = window.matchMedia('(prefers-color-scheme: dark)')
+
+    const apply = () => {
+      const override = sessionStorage.getItem('theme-override')
+      const dark = override ? override === 'dark' : mq.matches
+      const root = document.documentElement
+      root.setAttribute('data-theme', dark ? 'dark' : 'light')
+      root.classList.toggle('dark', dark)
+    }
+
+    apply()
+    mq.addEventListener('change', apply)
+    return () => mq.removeEventListener('change', apply)
   }, [])
 
   return (
