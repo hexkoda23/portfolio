@@ -38,7 +38,7 @@ export default function About() {
               </Reveal>
               <Reveal variant="up" delay={0.2} as="p" className="text-lg text-muted leading-relaxed max-w-xl font-light mb-9">
                 I'm Adeleke Kehinde, a software engineer working across full-stack product engineering,
-                enterprise systems and applied AI. Since June 2026 I've been a Software Engineer at{' '}
+                enterprise systems and applied AI. Since July 2026 I've been a Software Engineer at{' '}
                 <span className="text-ink font-medium">Hitech Construction Company Limited</span>, building the
                 ERP, AI layer, payroll/HRIS and survey systems the business runs on. Alongside that I lead
                 engineering on oyela.ai and have shipped client platforms for enterprise procurement, the

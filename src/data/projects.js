@@ -93,14 +93,14 @@ const projects = [
     status: 'Hitech · In-house',
     kind: 'hitech',
     category: 'Enterprise Software Engineering',
-    year: 'Jun 2026 — Present',
+    year: 'Jul 2026 — Present',
     role: 'Software Engineer, ERP team',
     description:
       'A role-scoped ERP for a road and civil-infrastructure contractor: workforce, biometric attendance, leave, HSE/OHS, fleet telematics, drone survey maps, quantity survey and approvals — one database, one login, nineteen roles.',
     tags: ['Django', 'PostgreSQL', 'Celery', 'Redis', 'CesiumJS', 'Power BI'],
     metrics: [
       ['19', 'Operational roles'],
-      ['20+', 'ERP modules'],
+      ['30+', 'ERP apps'],
       ['10', 'Scheduled jobs'],
       ['500+', 'Team commits'],
     ],
@@ -157,20 +157,20 @@ const projects = [
     year: '2026',
     role: 'Software Engineer',
     description:
-      'An AI layer inside the ERP: ask in plain English, get answers drawn from records the asker is allowed to see, with citations and deep links back into the ERP. Claude does the reasoning, and a deterministic extractive fallback keeps answering when the API is unavailable.',
+      'A permission-safe multi-agent layer over the ERP: HSE, QS, BOQ, HR, Fleet, Drone, Cost Control and Survey agents coordinated by an orchestrator, answering through per-department chatbots. Scope is enforced in code, and agents never write without human approval.',
     tags: ['Claude', 'RAG', 'Agents', 'Django', 'NLQ'],
     metrics: [
-      ['4', 'AI Django apps'],
-      ['2', 'LLM backends'],
-      ['Role', 'Scoped retrieval'],
-      ['Always', 'Backend disclosed'],
+      ['8 + 1', 'Dept agents + orchestrator'],
+      ['2', 'Path RAG'],
+      ['700+', 'Automated tests'],
+      ['0', 'Unapproved writes'],
     ],
     overview:
       'Four Django apps make up the layer. ai_core handles natural-language queries with scope enforcement, a semantic vocabulary, proposals and deep links. ai_agents adds a planner, an agent registry, streaming, follow-ups, disclosures and an evidence cache. ai_rag covers retrieval over HR documents and tabular data. ai_identity uses LLM matching to tie people and estate records together.',
     whyImpressive:
       'The design is built for trust. The hosted backend (Claude) reasons and summarises; the local backend is extractive and never composes a claim that is not literally in a retrieved record. The interface always tells the user which backend answered, and department access is enforced before retrieval, not after.',
     coreConcepts: ['Retrieval-Augmented Generation', 'Agent Planning & Routing', 'Row-Level Scope Enforcement', 'Extractive Fallback', 'Evaluation Suites for NLQ'],
-    techStack: ['Python / Django', 'Claude (Anthropic API)', 'RAG over documents + tables', 'Server-sent streaming', 'Extensive test suites'],
+    techStack: ['Django', 'Celery', 'PostgreSQL + pgvector', 'Claude API', 'OpenAI API', 'Llama', 'RAG', 'Multi-agent orchestration'],
     features: [
       'Plain-English questions across HR, HSE, fleet, survey, projects and more',
       'Department agents chosen by a planner with intent and referent tracking',
@@ -182,7 +182,7 @@ const projects = [
     problemStatement:
       'Managers had to learn every module to answer simple questions. A chatbot that quietly fails, or leaks another department\'s data, is worse than none.',
     approach:
-      'I work on this layer with the ERP team. It is split into separate apps with tests for routing, department-only access, disclosures, referents, fallback privacy and review fixes, so its behaviour can still be checked as the ERP grows.',
+      'I designed and built this layer within my first three months at Hitech. Every read resolves against a department registry before any SQL runs and executes as the requesting user through the ERP’s own permission functions, so a prompt-injected request for payroll from the HSE agent fails at the tool boundary. Agents only raise proposed changes, which apply after the ERP’s approval workflow signs them off, with every action in an append-only audit log. Retrieval is dual-path: documents are embedded into pgvector, while spreadsheets become typed rows answered with real SQL, so counts are counted, not guessed. Pay, bank and private fields are masked until an administrator releases them. 700+ automated tests cover the layer.',
     deliverables: ['ai_core, ai_agents, ai_rag, ai_identity apps', 'NLQ evaluation tooling', 'Demo data for safe walkthroughs'],
     limitations: 'Internal system. Shown with designed cover art rather than screenshots.',
     images: ['/hitech/hitech-ai.svg'],

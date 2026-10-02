@@ -5,7 +5,7 @@ const experience = [
   {
     title: 'Software Engineer',
     org: 'Hitech Construction Company Limited',
-    year: 'Jun 2026 — Present',
+    year: 'Jul 2026 — Present',
     current: true,
     detail:
       'Building internal systems for a road and civil-infrastructure contractor with a workforce in the thousands. I work on the company ERP (HSE/OHS workflows, project and survey reporting, activity trail), its Claude-powered AI layer, the PayTrack payroll and HRIS workspace, a Survey asset-management module, a Project Documentation Hub, and the ZKTeco biometric-attendance integration. Everything ships through reviewed PRs with role-based UAT.',

@@ -10,7 +10,7 @@ University: Caleb University.
 Degree: B.Sc Computer Science.
 CGPA: 4.4/5.0.
 Secondary School: FSTC Ijebu Imushin (JSS1 to SS3).
-Current Role: Software Engineer at Hitech Construction Company Limited (since June 2026).
+Current Role: Software Engineer at Hitech Construction Company Limited (since July 2026).
 At Hitech: works on the company ERP (HSE/OHS workflows, project and survey reporting, activity trail), the ERP AI layer (Claude-powered natural-language questions, RAG and department agents, scoped by role), Hitech PayTrack payroll and HRIS, the Survey Inventory & Asset Management module, the Project Documentation Hub, and the ZKTeco biometric attendance integration.
 Hitech stack: Django, PostgreSQL, Celery, Redis, Claude API, CesiumJS, on-prem deployment.
 Flagship client product: Oyela (oyela.ai), a family-systems assessment platform with six assessment pathways, 23+ page Claude-written reports, Stripe payments, coach and organisation portals, and the Human Performance Genome corporate pilot.

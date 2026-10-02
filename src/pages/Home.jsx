@@ -75,7 +75,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between mb-14">
             <div>
-              <Reveal variant="clip-l" as="p" className="eyebrow mb-4">Now · Since June 2026</Reveal>
+              <Reveal variant="clip-l" as="p" className="eyebrow mb-4">Now · Since July 2026</Reveal>
               <Reveal variant="up" as="h2" className="font-display font-semibold text-ink tracking-tight leading-[1.05]"
                 style={{ fontSize: 'clamp(2rem, 4.5vw, 3.4rem)' }}>
                 Software Engineer at<br />
