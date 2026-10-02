@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { X, ArrowUpRight, Check } from 'lucide-react'
+import BrowserFrame from './BrowserFrame'
+import { frameLabel } from '../data/projects'
 
 /** Full-screen editorial case-study overlay with image lightbox. */
 export default function ProjectDetail({ project, onClose }) {
@@ -59,7 +61,7 @@ export default function ProjectDetail({ project, onClose }) {
           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
           <div className="absolute bottom-8 left-6 right-6 sm:left-10 sm:right-10">
             <p className={`font-mono text-[0.65rem] uppercase tracking-[0.24em] text-white/80 mb-3 transition-all duration-700 delay-200 ${entered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-              {project.category} {project.status === 'Client Work' && '· Client Engagement'}
+              {project.category} · {project.status}
             </p>
             <h1 className={`font-display font-semibold text-white leading-[1.05] tracking-tight transition-all duration-700 delay-300 ${entered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
               style={{ fontSize: 'clamp(1.8rem, 4.5vw, 3.2rem)' }}>
@@ -67,6 +69,30 @@ export default function ProjectDetail({ project, onClose }) {
             </h1>
           </div>
         </div>
+
+        {/* Metrics + meta strip */}
+        {(project.metrics?.length > 0 || project.role) && (
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 border-b border-line bg-surface">
+            {project.metrics?.map(([v, l]) => (
+              <div key={l} className="px-6 py-6 border-r border-line last:border-r-0">
+                <p className="font-display font-semibold text-3xl text-ember-grad leading-none mb-2">{v}</p>
+                <p className="font-mono text-[0.58rem] uppercase tracking-[0.16em] text-muted">{l}</p>
+              </div>
+            ))}
+            {project.role && (
+              <div className="px-6 py-6 border-r border-line">
+                <p className="font-mono text-[0.58rem] uppercase tracking-[0.16em] text-gold mb-2">Role</p>
+                <p className="text-sm text-ink font-medium leading-snug">{project.role}</p>
+              </div>
+            )}
+            {project.year && (
+              <div className="px-6 py-6">
+                <p className="font-mono text-[0.58rem] uppercase tracking-[0.16em] text-gold mb-2">Timeline</p>
+                <p className="text-sm text-ink font-medium leading-snug">{project.year}</p>
+              </div>
+            )}
+          </div>
+        )}
 
         {/* Body */}
         <div className="grid lg:grid-cols-[1fr_320px] gap-10 p-6 sm:p-10">
@@ -112,14 +138,13 @@ export default function ProjectDetail({ project, onClose }) {
 
             {project.images?.length > 1 && (
               <Sect label="Gallery">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   {project.images.slice(1).map((img, i) => (
                     <button key={i}
-                      className={`img-zoom rounded-2xl border border-line overflow-hidden cursor-zoom-in ${i % 5 === 0 ? 'sm:col-span-2' : ''}`}
+                      className={`cursor-zoom-in text-left transition-transform duration-500 hover:-translate-y-1 ${i % 5 === 0 ? 'sm:col-span-2' : ''}`}
                       onClick={() => setLightbox(img)}>
-                      <img src={img} alt={`${project.title} — screen ${i + 2}`} loading="lazy"
-                        className="w-full object-cover object-top"
-                        style={{ maxHeight: i % 5 === 0 ? 420 : 260, minHeight: 180, width: '100%' }} />
+                      <BrowserFrame src={img} alt={`${project.title} — screen ${i + 2}`} label={frameLabel(project)}
+                        art={project.art} className="img-zoom" />
                     </button>
                   ))}
                 </div>
@@ -171,7 +196,7 @@ export default function ProjectDetail({ project, onClose }) {
               <div className="flex flex-col gap-3">
                 {project.demo && (
                   <a href={project.demo} target="_blank" rel="noopener noreferrer" className="btn-ember py-3.5 text-sm">
-                    Live Demo <ArrowUpRight className="w-4 h-4" />
+                    Visit Live Site <ArrowUpRight className="w-4 h-4" />
                   </a>
                 )}
                 {project.github && (

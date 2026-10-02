@@ -283,6 +283,51 @@
   transform: translateY(-2px);
 }
 
+/* browser-frame mockups */
+.frame-shell {
+  border-radius: 1.1rem;
+  background: var(--card);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-card);
+}
+
+.frame-bar {
+  background: color-mix(in srgb, var(--surface) 88%, var(--line));
+  border-bottom: 1px solid var(--line);
+}
+
+.frame-url {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  color: var(--muted);
+}
+
+/* filmstrip: endless horizontal drift */
+@keyframes filmDrift {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.anim-film { animation: filmDrift 70s linear infinite; }
+.anim-film-rev { animation: filmDrift 80s linear infinite reverse; }
+.anim-film:hover, .anim-film-rev:hover { animation-play-state: paused; }
+
+/* fade horizontal overflow at both edges */
+.edge-fade {
+  mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+}
+
+/* stacked device collage for spotlight sections */
+.stack-card {
+  transform: translate(var(--sx, 0), var(--sy, 0)) rotate(var(--sr, 0deg));
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.6s ease;
+}
+
+.stack-wrap:hover .stack-card {
+  transform: translate(var(--hx, var(--sx, 0)), var(--hy, var(--sy, 0))) rotate(var(--hr, var(--sr, 0deg)));
+}
+
 /* glass header */
 .glass-bar {
   background: color-mix(in srgb, var(--bg) 82%, transparent);

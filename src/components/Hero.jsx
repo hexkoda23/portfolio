@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom'
 import { ArrowRight, ArrowDown } from 'lucide-react'
 import Tilt from './anim/Tilt'
 import Reveal from './anim/Reveal'
+import projects, { clientProjects } from '../data/projects'
 
 const marqueeItems = [
   'React', 'TypeScript', 'Next.js', 'FastAPI', 'NestJS', '.NET', 'PostgreSQL', 'MongoDB',
-  'Claude AI', 'RAG Systems', 'Tailwind', 'Docker', 'Azure DevOps', 'Prisma', 'Redis', 'Python',
+  'Django', 'Claude AI', 'RAG Systems', 'Celery', 'Tailwind', 'Docker', 'Azure DevOps', 'Prisma', 'Redis', 'Python', 'Stripe',
 ]
 
 /** Headline words rise one-by-one through overflow masks. */
@@ -40,7 +41,7 @@ export default function Hero() {
             <Reveal variant="down" duration={0.7}>
               <span className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-line bg-card/70 backdrop-blur font-mono text-[0.66rem] uppercase tracking-[0.2em] text-ink-soft mb-8">
                 <span className="w-2 h-2 rounded-full bg-green-500 dot-live" />
-                Software Engineer · Available for hire
+                Software Engineer @ Hitech Construction
               </span>
             </Reveal>
 
@@ -48,7 +49,7 @@ export default function Hero() {
               style={{ fontSize: 'clamp(2.6rem, 6vw, 4.6rem)' }}>
               <Cascade text="I design and ship" startDelay={0.1} />
               <br />
-              <Cascade text="production software —" startDelay={0.4} />
+              <Cascade text="production software" startDelay={0.4} />
               <br />
               <span className="word-mask">
                 <span style={{ '--wd': '0.75s' }} className="text-ember-grad italic">from AI to enterprise.</span>
@@ -57,9 +58,11 @@ export default function Hero() {
 
             <Reveal variant="blur" delay={0.5}>
               <p className="text-lg text-muted leading-relaxed max-w-xl mx-auto lg:mx-0 mb-10 font-light">
-                Full-stack &amp; AI engineer with shipped client platforms across assessment tech,
-                enterprise procurement, creative-economy CRM, and edtech — React, Python, .NET, and
-                LLM systems, taken all the way to production.
+                Software engineer at <span className="text-ink font-medium">Hitech Construction</span>, building
+                the company's ERP, AI layer and HR systems. I also lead engineering on{' '}
+                <a href="https://oyela.ai" target="_blank" rel="noreferrer" className="text-ember font-medium underline decoration-ember/30 underline-offset-4 hover:decoration-ember">oyela.ai</a>{' '}
+                and have shipped client platforms in assessment tech, enterprise procurement, creative-economy
+                CRM, edtech and fashion.
               </p>
             </Reveal>
 
@@ -75,8 +78,8 @@ export default function Hero() {
 
             <Reveal variant="up" delay={0.8} className="flex flex-wrap items-center gap-x-10 gap-y-4 justify-center lg:justify-start">
               {[
-                ['5+', 'Client platforms shipped'],
-                ['14', 'Projects in portfolio'],
+                [`${clientProjects.length}+`, 'Client platforms shipped'],
+                [String(projects.length), 'Projects in portfolio'],
                 ['3+', 'Years building'],
               ].map(([v, l]) => (
                 <div key={l} className="text-center lg:text-left">
@@ -110,11 +113,11 @@ export default function Hero() {
               {/* floating chips */}
               <div className="absolute -right-16 top-14 anim-float card-lux rounded-2xl px-4 py-3 w-44" style={{ '--fl-rot': '2deg' }}>
                 <p className="font-mono text-[0.58rem] uppercase tracking-[0.16em] text-ember mb-1">Currently</p>
-                <p className="font-sans font-medium text-ink text-sm leading-tight">Shipping client platforms end-to-end</p>
+                <p className="font-sans font-medium text-ink text-sm leading-tight">Software Engineer at Hitech Construction</p>
               </div>
               <div className="absolute -left-20 bottom-20 anim-float card-lux rounded-2xl px-4 py-3 w-48" style={{ animationDelay: '1.6s', '--fl-rot': '-2deg' }}>
-                <p className="font-mono text-[0.58rem] uppercase tracking-[0.16em] text-ember mb-1">Stack of choice</p>
-                <p className="font-sans font-medium text-ink text-sm leading-tight">React · Python · .NET · LLMs</p>
+                <p className="font-mono text-[0.58rem] uppercase tracking-[0.16em] text-ember mb-1">Live now</p>
+                <p className="font-sans font-medium text-ink text-sm leading-tight">oyela.ai · 23 · Hitech ERP</p>
               </div>
             </Tilt>
           </Reveal>

@@ -3,10 +3,11 @@ import ProjectCard from '../components/ProjectCard'
 import ProjectDetail from '../components/ProjectDetail'
 import ScatterGallery from '../components/ScatterGallery'
 import Reveal from '../components/anim/Reveal'
-import projects, { featuredProjects } from '../data/projects'
+import projects, { featuredProjects, clientProjects, hitechProjects } from '../data/projects'
 
 const FILTERS = [
   { key: 'all', label: 'All Work' },
+  { key: 'hitech', label: 'Hitech Systems' },
   { key: 'client', label: 'Client Platforms' },
   { key: 'ai', label: 'AI & ML' },
   { key: 'engineering', label: 'Engineering' },
@@ -37,8 +38,8 @@ export default function Portfolio() {
             <span className="text-ember-grad italic">assembled into products.</span>
           </Reveal>
           <Reveal variant="up" delay={0.25} as="p" className="text-lg text-muted max-w-xl mx-auto font-light">
-            Five client platforms in production, plus AI systems and engineering deep-cuts.
-            Scroll — the featured work gathers itself. Click any piece to open its case study.
+            {hitechProjects.length} enterprise systems at Hitech, {clientProjects.length} client platforms in production,
+            plus AI systems and engineering deep-cuts. Scroll and the featured work gathers itself. Click any piece to open its case study.
           </Reveal>
         </div>
       </section>
@@ -68,6 +69,9 @@ export default function Portfolio() {
                       : 'text-muted border-line hover:border-ember hover:text-ink bg-card'}`}
                   style={filter === f.key ? { background: 'linear-gradient(120deg, var(--ember), var(--ember-2))', boxShadow: '0 6px 20px var(--glow)' } : undefined}>
                   {f.label}
+                  <span className="ml-2 font-mono text-[0.62rem] opacity-60">
+                    {f.key === 'all' ? projects.length : projects.filter(p => p.kind === f.key).length}
+                  </span>
                 </button>
               ))}
             </Reveal>

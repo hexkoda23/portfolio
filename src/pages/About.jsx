@@ -2,42 +2,16 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Reveal from '../components/anim/Reveal'
 import Tilt from '../components/anim/Tilt'
-
-const roles = [
-  {
-    title: 'Software Engineer · Client Platforms (Contract)',
-    detail: 'Designed and shipped multiple production platforms end-to-end, including: Oyela (AI assessment & coaching reports), IHS Procure vendor portal (enterprise procurement for IHS Towers), TASCK OS (creative-economy CRM & portals), Talent Nation (AI engineering fellowship platform), and Atom (THCO\'s general AI assistant). Owned everything from architecture and AI pipelines to payments, Docker deployment, and client demo loops.',
-    year: '2025 — Present',
-  },
-  {
-    title: 'Data Annotation Specialist · Awarri',
-    detail: 'Key contributor to a high-precision computer vision project for healthcare diagnostics. Performed semantic segmentation and object detection on complex hospital laboratory datasets, producing pixel-perfect training data for models detecting medical equipment and anomalies in clinical environments.',
-    year: 'Dec 2024 — Jan 2025',
-  },
-  {
-    title: 'AI Developer · Nigerian Communications Commission (NCC)',
-    detail: 'Spearheaded integration of AI technologies into national regulatory frameworks. Designed and deployed machine learning models automating regulatory compliance tasks, deepening expertise in NLP and advanced analytics while collaborating with cross-functional teams on digital transformation.',
-    year: 'Aug 2024 — Jan 2025',
-  },
-  {
-    title: 'AI Developer · Freelance',
-    detail: 'Building intelligent applications using LLMs, RAG, and modern web technologies — custom AI solutions addressing specific business needs, from multilingual chatbots to retail intelligence.',
-    year: 'Nov 2023 — Present',
-  },
-  {
-    title: 'Database Manager (SIWES) · Sonet Technology Limited',
-    detail: 'Managed Oracle databases, data integrity, and day-to-day operations. Assisted with data migration, backups, and performance monitoring, collaborating with teams to ensure reliable data access.',
-    year: 'May 2023 — Nov 2023',
-  },
-]
+import experience from '../data/experience'
 
 const capabilities = [
   ['Frontend', 'React 19, Next.js 15, TypeScript, Tailwind, Vite, design systems'],
-  ['Backend', 'FastAPI, NestJS, ASP.NET Core, REST API design, Prisma'],
-  ['AI / ML', 'LLM pipelines (Claude, OpenAI), RAG, embeddings, agents, report generation'],
-  ['Data', 'PostgreSQL, MongoDB, Redis, vector stores'],
-  ['Delivery', 'Docker, Azure DevOps, protected-branch workflows, Vitest/xUnit'],
-  ['Product', 'Client demo loops, feature-flagged launches, payment integration'],
+  ['Backend', 'Django, FastAPI, NestJS, ASP.NET Core, Celery, REST API design, Prisma'],
+  ['AI / ML', 'Claude pipelines, RAG, department agents, extractive fallbacks, report generation'],
+  ['Enterprise', 'ERP modules, payroll & HRIS, role-based access, audit trails, biometric & GPS integrations'],
+  ['Data', 'PostgreSQL, MongoDB, Redis, vector stores, Excel round-tripping'],
+  ['Delivery', 'Docker, Azure DevOps, reviewed PRs, on-prem deploys, runbooks, Vitest/xUnit'],
+  ['Product', 'Stripe payments, PDF typesetting, client demo loops, feature-flagged launches'],
 ]
 
 const values = [
@@ -63,11 +37,12 @@ export default function About() {
                 <span className="text-ember-grad italic">every build like a flagship.</span>
               </Reveal>
               <Reveal variant="up" delay={0.2} as="p" className="text-lg text-muted leading-relaxed max-w-xl font-light mb-9">
-                I'm Adeleke Kehinde — a software engineer bridging full-stack product engineering and
-                applied AI. I've shipped a growing portfolio of client platforms to production —
-                assessment engines with AI-authored clinical reports, an enterprise procurement portal
-                for one of Africa's largest telecom infrastructure companies, a creative-economy
-                operating system, an edtech fellowship platform, a premium AI assistant, and more.
+                I'm Adeleke Kehinde, a software engineer working across full-stack product engineering,
+                enterprise systems and applied AI. Since June 2026 I've been a Software Engineer at{' '}
+                <span className="text-ink font-medium">Hitech Construction Company Limited</span>, building the
+                ERP, AI layer, payroll/HRIS and survey systems the business runs on. Alongside that I lead
+                engineering on oyela.ai and have shipped client platforms for enterprise procurement, the
+                creative economy, edtech, premium AI and fashion.
               </Reveal>
               <Reveal variant="up" delay={0.3} className="flex flex-wrap gap-4">
                 <Link to="/portfolio" className="btn-ember px-8 py-3.5 text-sm">See the Work</Link>
@@ -116,14 +91,23 @@ export default function About() {
               <div className="relative">
                 <Reveal variant="clip" className="absolute left-[7px] top-2 bottom-2 w-px bg-line-strong" duration={2} />
                 <div className="space-y-10">
-                  {roles.map((role, i) => (
-                    <Reveal key={role.title} variant={i % 2 === 0 ? 'right' : 'blur'} delay={0.08}
+                  {experience.map((role, i) => (
+                    <Reveal key={role.title + role.org} variant={i % 2 === 0 ? 'right' : 'blur'} delay={0.08}
                       className="relative pl-10">
                       <span className="absolute left-0 top-2 w-[15px] h-[15px] rounded-full border-2 border-ember bg-bg"
                         style={{ boxShadow: '0 0 0 4px var(--ember-soft)' }} />
                       <p className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-ember mb-2">{role.year}</p>
-                      <h3 className="font-display font-semibold text-lg text-ink mb-2.5">{role.title}</h3>
+                      <h3 className="font-display font-semibold text-lg text-ink mb-1">{role.title}</h3>
+                      <p className="font-sans text-sm text-ink-soft font-medium mb-2.5 flex items-center gap-2">
+                        {role.org}
+                        {role.current && <span className="font-mono text-[0.55rem] uppercase tracking-[0.16em] px-2 py-0.5 rounded-full text-ember border border-ember/40">Current</span>}
+                      </p>
                       <p className="text-sm text-muted leading-relaxed">{role.detail}</p>
+                      <div className="flex flex-wrap gap-1.5 mt-3">
+                        {role.highlights.map(h => (
+                          <span key={h} className="font-mono text-[0.58rem] px-2.5 py-1 rounded-full bg-surface border border-line text-muted">{h}</span>
+                        ))}
+                      </div>
                     </Reveal>
                   ))}
                 </div>
@@ -151,10 +135,10 @@ export default function About() {
                   style={{ background: 'linear-gradient(140deg, var(--ember-soft), var(--pine-soft))' }}>
                   <div className="flex items-center gap-2 mb-4">
                     <span className="w-2 h-2 rounded-full bg-green-500 dot-live" />
-                    <span className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-ink-soft font-medium">Open to opportunities</span>
+                    <span className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-ink-soft font-medium">Software Engineer @ Hitech</span>
                   </div>
                   <p className="font-display font-semibold text-ink text-lg mb-1">Lagos, Nigeria</p>
-                  <p className="text-muted text-sm mb-1.5">Remote-ready · Worldwide</p>
+                  <p className="text-muted text-sm mb-1.5">Open to select collaborations · Worldwide</p>
                   <p className="text-muted text-sm mb-7">kehindeadeleke92@gmail.com</p>
                   <Link to="/contact" className="btn-ember w-full py-3.5 text-sm">Request Availability →</Link>
                 </div>

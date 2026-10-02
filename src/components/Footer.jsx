@@ -4,10 +4,11 @@ import { Github, Linkedin, Mail, ArrowUpRight } from 'lucide-react'
 import Reveal from './anim/Reveal'
 
 const work = [
-  ['Oyela Platform', '/portfolio'],
-  ['IHS Vendor Portal', '/portfolio'],
+  ['Hitech Construction ERP', '/portfolio'],
+  ['Oyela · oyela.ai', 'https://oyela.ai'],
+  ['TWENTY3™', 'https://23-web.vercel.app/'],
+  ['IHS Procure Vendor Portal', '/portfolio'],
   ['TASCK OS', '/portfolio'],
-  ['Talent Nation', '/portfolio'],
 ]
 
 export default function Footer() {
@@ -41,7 +42,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-muted text-sm leading-relaxed mb-7 max-w-xs">
-              Full-stack &amp; AI engineer shipping real client platforms — from assessment engines to enterprise procurement. Lagos based, working globally.
+              Software Engineer at Hitech Construction. Full-stack &amp; AI engineer behind oyela.ai and a run of production client platforms. Lagos based, working globally.
             </p>
             <div className="flex items-center gap-3">
               {[
@@ -76,7 +77,9 @@ export default function Footer() {
             <ul className="space-y-3.5">
               {work.map(([label, href]) => (
                 <li key={label}>
-                  <Link to={href} className="text-muted hover:text-ember transition-all text-sm inline-block hover:translate-x-1 duration-300">{label}</Link>
+                  {href.startsWith('http')
+                    ? <a href={href} target="_blank" rel="noreferrer" className="text-muted hover:text-ember transition-all text-sm inline-block hover:translate-x-1 duration-300">{label} ↗</a>
+                    : <Link to={href} className="text-muted hover:text-ember transition-all text-sm inline-block hover:translate-x-1 duration-300">{label}</Link>}
                 </li>
               ))}
               <li>

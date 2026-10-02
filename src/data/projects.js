@@ -8,62 +8,313 @@ const projects = [
     id: 'oyela',
     featured: true,
     title: 'Oyela — Family Systems Engineering Platform',
-    subtitle: 'AI-Powered Assessment & Coaching Platform',
-    status: 'Client Work',
+    subtitle: 'AI Assessment, Reporting & Coaching Platform',
+    status: 'Live · oyela.ai',
     kind: 'client',
     category: 'Full-Stack Product Engineering',
+    domain: 'oyela.ai',
+    year: '2025 — Present',
+    role: 'Lead engineer, end-to-end',
     description:
-      'A culturally-aware relationship assessment platform that turns guided diagnostics into narrative AI coaching reports — covering marital, premarital, parenting, teen, and executive wellness pathways, with payments, coach marketplace, and PDF report generation.',
-    tags: ['React', 'FastAPI', 'MongoDB', 'Claude AI', 'WeasyPrint', 'Payments'],
-    overview:
-      'Oyela ("Illumination for Every Family") is a production client platform for Family Systems Engineering diagnostics. Users choose an assessment pathway — Marital, Singles, Next Chapter Marriage, Parenting, Teen, or Executive Wellness — answer guided modules in 7–10 minutes, and receive coach-ready narrative reports scored across 8 FSE systems. The platform handles the entire journey: multi-language marketing site, checkout with regional currency detection (NGN/USD), partner-linked couple assessments, a coach directory, and an admin operations console.',
-    whyImpressive:
-      'This is a real, revenue-generating client product — not a demo. It combines assessment engine design, AI-authored long-form report generation matched word-for-word to clinical templates, PDF typesetting with WeasyPrint, payment orchestration through Mainstack, and couple-linking flows where two partners\' results merge into one combined report. Every report package has its own deterministic Claude-powered builder to guarantee 15+ page professional output.',
-    coreConcepts: [
-      'Assessment Engine Design',
-      'AI Narrative Report Generation',
-      'PDF Typesetting Pipelines',
-      'Payment Integration',
-      'Multi-Currency Pricing',
-      'Couple-Linked Data Flows',
-      'Coach Marketplace'
+      'oyela.ai — a culturally-aware family-systems assessment platform. People take psychometric assessments, pay to unlock, and receive 23+ page Claude-written diagnostic reports; coaches, practitioners and organisations each get their own portal.',
+    tags: ['React', 'FastAPI', 'MongoDB', 'Claude AI', 'WeasyPrint', 'Stripe'],
+    metrics: [
+      ['6', 'Assessment pathways'],
+      ['8', 'FSE scoring systems'],
+      ['23+', 'Pages per AI report'],
+      ['440+', 'Commits shipped'],
     ],
-    techStack: ['React 19 (CRA + Craco)', 'Tailwind + Radix UI', 'FastAPI (Python)', 'MongoDB', 'Claude API', 'WeasyPrint', 'Mainstack Payments', 'Docker'],
+    overview:
+      'Oyela ("Illumination for a Better Human Experience") is the production platform for the Family Systems Engineering™ framework, built for Praise Fowowe International. Users pick a pathway — Marital, Next Chapter Marriage, Premarital, Parenting, Child/Teen, or Executive Wellness — answer guided modules, and receive long-form diagnostic reports on screen, as PDF, and by email. Around that core sit a free Oyela Pulse scan, a coach directory and marketplace, practitioner client links and family bundles, partner-linked couple assessments, a free Human Performance Genome™ corporate pilot for HR teams, and an admin operations console.',
+    whyImpressive:
+      'This is a real, revenue-generating product with real money and real clinical stakes. Every report package has its own builder that drives Claude to author sections matched word-for-word to client-approved samples, then typesets them with WeasyPrint — and the pipeline refuses to pass a degraded narrative off as a finished one. Payments moved from Mainstack to Stripe with webhook + on-return verification, exact amount/currency matching, atomic unlock claims and idempotent emails, so a forged webhook can never unlock a report.',
+    coreConcepts: [
+      'Psychometric Scoring Engines',
+      'AI Long-Form Report Generation',
+      'PDF Typesetting Pipelines',
+      'Payment Verification & Idempotency',
+      'Couple-Linked Data Flows',
+      'Multi-Portal Roles (user, coach, org, admin)',
+      'Cloudflare-Safe Long-Running Jobs'
+    ],
+    techStack: ['React (CRA + Craco)', 'Tailwind + shadcn/Radix', 'FastAPI (Python)', 'MongoDB (motor)', 'Claude API', 'WeasyPrint', 'Stripe Checkout', 'Resend email', 'Google OAuth'],
     features: [
-      'Six assessment pathways scored across 8 FSE scoring systems',
-      'AI-authored narrative reports (15+ pages) matched to clinical sample templates',
-      'Combined couple reports that merge two partners\' assessment data',
-      'Regional pricing with automatic NGN/USD currency detection',
-      'Mainstack payment integration with confirmation tracking',
-      'Coach directory, invites, and join-as-coach onboarding',
-      'Partner invite links for couple assessments',
-      'Admin console for orders, reports, and content operations',
-      'Regenerate-on-download report pipeline with silent backfill of past reports'
+      'Six assessment pathways scored across 8 Family Systems Engineering systems',
+      'Per-package Claude report builders producing 23+ page narrative reports',
+      'Combined couple report that waits for both partners, then merges their results',
+      'Free Oyela Pulse scan — twelve statements across four systems, no account',
+      'Human Performance Genome™ corporate pilot: org staff links + private HR results dashboard',
+      'Stripe checkout with webhook + return verification and fail-closed amount matching',
+      'Coach directory, join-as-coach onboarding and intro videos',
+      'Practitioner credit links and family bundles for client assessments',
+      'Regional NGN/USD pricing with country detection and multi-language UI',
+      'Admin console: orders, stuck reports, report-engine diagnostics, testing-access codes'
     ],
     problemStatement:
-      'Families and couples seeking structured relationship insight had no culturally-aware digital tool: existing assessments were western-centric, produced shallow generic outputs, and required manual coach interpretation. The client needed assessments that produce clinical-grade narrative reports automatically, priced correctly for Nigerian and international audiences.',
+      'Families and couples seeking structured relationship insight had no culturally-aware digital tool. Existing assessments were western-centric, produced shallow generic output, and needed a coach to interpret them by hand. The client needed clinical-grade narrative reports produced automatically, priced correctly for Nigerian and international audiences, and trusted enough that coaches and HR teams would hand them to clients.',
     approach:
-      'I built the platform end-to-end: a React front-end with a warm editorial design system, a FastAPI + MongoDB backend for assessments, scoring, orders, and coach data, and a per-package AI report pipeline where each of the seven report types has its own builder that drives Claude to author sections matching approved clinical samples, then typesets them to PDF with WeasyPrint. Payments route through Mainstack with regional currency logic, and couple flows link two assignment records into one combined report.',
+      'I built Oyela end-to-end: a warm editorial React front-end, a FastAPI + MongoDB backend for the catalogue, scoring, orders, coaches and organisations, and a report engine where each package has a dedicated builder. Because production sits behind Cloudflare\'s ~100s proxy timeout, report generation and download run as background jobs with a progress popup rather than one long request. Deploys follow a mandatory three-step verify routine, and every finance path is covered by simulated end-to-end tests before it touches real money.',
     deliverables: [
-      'Production web platform (marketing site + assessment engine + checkout)',
-      'Seven AI report builders matched word-for-word to client-approved samples',
-      'Combined marital/couple report pipeline',
-      'Coach directory and onboarding flows',
-      'Admin operations console',
-      'Payment integration with regional pricing'
+      'Production platform at oyela.ai (marketing, assessments, checkout, reports)',
+      'Seven AI report builders matched to client-approved samples',
+      'Combined couple report pipeline',
+      'Stripe payment rail with verification, idempotency and admin recovery tools',
+      'Coach, practitioner and organisation portals',
+      'Human Performance Genome™ assessment and corporate pilot'
     ],
     limitations:
-      'Payments currently route through one general Mainstack link while six branded fixed-price pages await activation. Next phases include automated coach-client matching and deeper analytics on assessment outcomes.',
+      'Next on the roadmap: the word-for-word Premarital report once the client supplies its sample, automated coach–client matching, and outcome analytics across completed assessments.',
     images: [
-      '/oyela/oyela-1.png',
-      '/oyela/oyela-2.png',
-      '/oyela/oyela-6.png',
-      '/oyela/oyela-3.png',
-      '/oyela/oyela-4.png',
-      '/oyela/oyela-5.png',
-      '/oyela/oyela-7.png',
-      '/oyela/oyela-8.png'
+      '/oyela/oyela-1.jpg',
+      '/oyela/oyela-2.jpg',
+      '/oyela/oyela-3.jpg',
+      '/oyela/oyela-4.jpg',
+      '/oyela/oyela-5.jpg',
+      '/oyela/oyela-6.jpg',
+      '/oyela/oyela-7.jpg',
+      '/oyela/oyela-8.jpg',
+      '/oyela/oyela-9.jpg',
+      '/oyela/oyela-10.jpg',
+      '/oyela/oyela-11.jpg',
+      '/oyela/oyela-12.jpg'
     ],
+    github: null,
+    demo: 'https://oyela.ai'
+  },
+
+  // ── Hitech Construction (in-house, internal systems: designed covers, no screenshots) ──
+
+  {
+    id: 'hitech-erp',
+    featured: true,
+    art: true,
+    title: 'Hitech Construction ERP',
+    subtitle: 'Enterprise Operations Platform',
+    status: 'Hitech · In-house',
+    kind: 'hitech',
+    category: 'Enterprise Software Engineering',
+    year: 'Jun 2026 — Present',
+    role: 'Software Engineer, ERP team',
+    description:
+      'A role-scoped ERP for a road and civil-infrastructure contractor: workforce, biometric attendance, leave, HSE/OHS, fleet telematics, drone survey maps, quantity survey and approvals — one database, one login, nineteen roles.',
+    tags: ['Django', 'PostgreSQL', 'Celery', 'Redis', 'CesiumJS', 'Power BI'],
+    metrics: [
+      ['19', 'Operational roles'],
+      ['20+', 'ERP modules'],
+      ['10', 'Scheduled jobs'],
+      ['500+', 'Team commits'],
+    ],
+    overview:
+      'Hitech Construction runs road and civil projects across many sites, with a workforce in the thousands, a large equipment fleet and drone survey operations. Before the ERP, attendance lived on biometric devices with no link to payroll, site reports were emailed spreadsheets, HSE incidents were paper forms and drone outputs sat on engineers\' laptops. The ERP pulls all of it into one auditable, role-scoped system.',
+    whyImpressive:
+      'It is a large, multi-developer production system with real operational weight: biometric attendance synced on a schedule, GPS positions pulled from telematics, 3D drone tilesets viewable in a browser, commercial data imported from the estimating system, and append-only audit on every approval and status change. Work moves through reviewed pull requests across a team, with UAT walkthroughs per role.',
+    coreConcepts: [
+      'Role-Based Access from One Module Map',
+      'Scheduled Integrations (Celery Beat)',
+      'HSE Leading/Lagging Indicators',
+      'Geospatial & 3D Survey Data',
+      'Approval Workflows & Audit Trails',
+      'On-Prem Deployment'
+    ],
+    techStack: ['Django', 'PostgreSQL', 'Celery + Redis', 'Django REST Framework', 'CesiumJS', 'Esri basemaps', 'Wialon telematics', 'ZKBio Time', 'Power BI API'],
+    features: [
+      'Nineteen roles, each scoped from a single module-access map shared by menus and views',
+      'Biometric attendance synced automatically from ZKTeco terminals',
+      'HSE/OHS module with incident records, corrective actions and coordinator/manager dashboards',
+      'Fleet positions from Wialon GPS linked to projects and sites',
+      'Drone map with orthomosaics and 3D tilesets in the browser',
+      'Quantity survey: BOQ, budget and valuation imports',
+      'Overdue reports and unresolved approvals surface on their own',
+      'Read-only Power BI API for board and ESG reporting'
+    ],
+    problemStatement:
+      'Attendance disputes, invisible late site reports, paper HSE records, isolated fuel and equipment logs, and survey data nobody outside the survey team could open. Everyone either saw nothing or saw everything.',
+    approach:
+      'I work on the ERP as part of Hitech\'s engineering team. My recent work includes consolidating the HSE/OHS workflow so coordinators and managers get one dashboard instead of two, the project → area → site structure, survey daily and weekly reporting with its two survey roles, a per-person activity trail, and review fixes across HSE and accounts, all landed through reviewed PRs.',
+    deliverables: [
+      'Consolidated HSE/OHS workflow and role dashboards',
+      'Project area hierarchy and estate commands',
+      'Survey daily/weekly reporting',
+      'Per-person activity trail',
+      'ZKTeco / ZKBio Time attendance integration study and REST API reference'
+    ],
+    limitations:
+      'Internal system. Shown with designed cover art instead of screenshots to protect company and employee data.',
+    images: ['/hitech/hitech-erp.svg'],
+    github: null,
+    demo: null
+  },
+
+  {
+    id: 'hitech-ai',
+    featured: false,
+    art: true,
+    title: 'ERP AI Layer — Department Agents & RAG',
+    subtitle: 'Natural-Language Questions over Company Records',
+    status: 'Hitech · In-house',
+    kind: 'hitech',
+    category: 'Applied AI Engineering',
+    year: '2026',
+    role: 'Software Engineer',
+    description:
+      'An AI layer inside the ERP: ask in plain English, get answers drawn from records the asker is allowed to see, with citations and deep links back into the ERP. Claude does the reasoning, and a deterministic extractive fallback keeps answering when the API is unavailable.',
+    tags: ['Claude', 'RAG', 'Agents', 'Django', 'NLQ'],
+    metrics: [
+      ['4', 'AI Django apps'],
+      ['2', 'LLM backends'],
+      ['Role', 'Scoped retrieval'],
+      ['Always', 'Backend disclosed'],
+    ],
+    overview:
+      'Four Django apps make up the layer. ai_core handles natural-language queries with scope enforcement, a semantic vocabulary, proposals and deep links. ai_agents adds a planner, an agent registry, streaming, follow-ups, disclosures and an evidence cache. ai_rag covers retrieval over HR documents and tabular data. ai_identity uses LLM matching to tie people and estate records together.',
+    whyImpressive:
+      'The design is built for trust. The hosted backend (Claude) reasons and summarises; the local backend is extractive and never composes a claim that is not literally in a retrieved record. The interface always tells the user which backend answered, and department access is enforced before retrieval, not after.',
+    coreConcepts: ['Retrieval-Augmented Generation', 'Agent Planning & Routing', 'Row-Level Scope Enforcement', 'Extractive Fallback', 'Evaluation Suites for NLQ'],
+    techStack: ['Python / Django', 'Claude (Anthropic API)', 'RAG over documents + tables', 'Server-sent streaming', 'Extensive test suites'],
+    features: [
+      'Plain-English questions across HR, HSE, fleet, survey, projects and more',
+      'Department agents chosen by a planner with intent and referent tracking',
+      'Answers cite records and deep-link back into the ERP',
+      'Role and department scoping applied before retrieval',
+      'Deterministic extractive fallback when the hosted model is unavailable',
+      'Backend in use is always disclosed to the user'
+    ],
+    problemStatement:
+      'Managers had to learn every module to answer simple questions. A chatbot that quietly fails, or leaks another department\'s data, is worse than none.',
+    approach:
+      'I work on this layer with the ERP team. It is split into separate apps with tests for routing, department-only access, disclosures, referents, fallback privacy and review fixes, so its behaviour can still be checked as the ERP grows.',
+    deliverables: ['ai_core, ai_agents, ai_rag, ai_identity apps', 'NLQ evaluation tooling', 'Demo data for safe walkthroughs'],
+    limitations: 'Internal system. Shown with designed cover art rather than screenshots.',
+    images: ['/hitech/hitech-ai.svg'],
+    github: null,
+    demo: null
+  },
+
+  {
+    id: 'hitech-paytrack',
+    featured: false,
+    art: true,
+    title: 'Hitech PayTrack — Payroll & HRIS',
+    subtitle: 'Payroll Workspace, Weekly Reports & Approvals',
+    status: 'Hitech · Pilot',
+    kind: 'hitech',
+    category: 'Enterprise Software Engineering',
+    year: 'Jul 2026 — Present',
+    role: 'Software Engineer',
+    description:
+      'Replaces the monthly payroll Excel workflow: HR imports a ~5,200-row workbook, edits it in a multi-user spreadsheet grid with full audit, routes risky changes through review, and exports a file identical in shape to the original. HRIS weekly reporting and role dashboards sit alongside.',
+    tags: ['Django', 'PostgreSQL', 'Celery', 'openpyxl', 'HRIS'],
+    metrics: [
+      ['~5.2k', 'Rows per workbook'],
+      ['26', 'Contract columns'],
+      ['1:1', 'Excel round-trip'],
+      ['100%', 'Changes audited'],
+    ],
+    overview:
+      'PayTrack treats Excel as the contract: the 26-column header row agreed with HR defines import, export and CSV paths alike, and export → re-import must produce identical values. Rows missing from a re-import are flagged, never deleted. Money is always Decimal. Down-adjustments go to a review queue, largest first, with no batch resolve.',
+    whyImpressive:
+      'It shows the discipline payroll demands: append-only audit, multi-user presence in a custom spreadsheet grid, background imports and exports on Celery, and the "humans decide" rule written into the code. On the HRIS side I delivered weekly-report workflows, PM review modification tracking, approval locking and project/location routing for HR.',
+    coreConcepts: ['Spreadsheet Round-Tripping', 'Audit-First Data Design', 'Review & Approval Queues', 'Background Jobs', 'Role Dashboards'],
+    techStack: ['Django', 'PostgreSQL', 'Celery + Redis', 'openpyxl', 'Vanilla JS grid'],
+    features: [
+      'Import preview and commit for the monthly workbook',
+      'Spreadsheet-style grid with keyboard navigation, paste and live presence',
+      'Calculation and validation with HR-confirmed formula constants',
+      'Review queue for down-adjustments and anomalies',
+      'Byte-for-byte shaped export back to Excel',
+      'HRIS weekly reports with PM review tracking and approval locking',
+      'HR routing by project and location; role-based dashboards'
+    ],
+    problemStatement:
+      'Payroll lived in one huge spreadsheet edited by hand, with no audit, no review and no protection against silent mistakes.',
+    approach:
+      'A layered Django app with the import/export services built around one EXPECTED_COLUMNS list, plus pilot runbooks, backup/restore guides and a test plan for HR pilot users.',
+    deliverables: ['Payroll workspace (pilot)', 'HRIS weekly reports & dashboards', 'Deployment, backup and pilot runbooks'],
+    limitations: 'Internal system in controlled pilot. Shown with designed cover art rather than screenshots.',
+    images: ['/hitech/hitech-paytrack.svg'],
+    github: null,
+    demo: null
+  },
+
+  {
+    id: 'hitech-survey',
+    featured: false,
+    art: true,
+    title: 'Survey Inventory & Asset Management',
+    subtitle: 'ERP Module for the Survey Department',
+    status: 'Hitech · Built',
+    kind: 'hitech',
+    category: 'Enterprise Software Engineering',
+    year: 'Aug 2026',
+    role: 'Software Engineer',
+    description:
+      'Moves the Survey Department off two sprawling workbooks: GNSS kits, total stations, levels, drones, radios, software licences and consumables, tracked by site, custodian and condition, with alerts for expiries and low stock.',
+    tags: ['Django', 'Data Modelling', 'Inventory', 'ERP Module'],
+    metrics: [
+      ['16', 'Worksheets replaced'],
+      ['30', 'Sites normalised'],
+      ['1', 'Name per site'],
+      ['Auto', 'Expiry alerts'],
+    ],
+    overview:
+      'The real files had one site written six different ways, equipment condition buried in free text, custodian and site packed into one cell, licence keys in plain columns, and subscriptions that had expired years earlier still listed as live. The module turns that into clean, reportable data that links back to the ERP.',
+    whyImpressive:
+      'It is careful domain work. Normalising messy real-world data, separating custodian from site, typing equipment condition, moving secrets out of spreadsheets, and surfacing expiries and critically low stock before anyone has to notice them.',
+    coreConcepts: ['Data Normalisation', 'Asset Lifecycle', 'Custody Tracking', 'Proactive Alerts'],
+    techStack: ['Django', 'SQLite → PostgreSQL', 'ERP integration'],
+    features: [
+      'Equipment registry with typed condition (working, fault, in repair)',
+      'Surveyor placement across sites and ranks',
+      'Licence register with expiry alerts',
+      'Consumables stock book with low-stock warnings',
+      'Movement history: who took what, and when'
+    ],
+    problemStatement: 'Shared spreadsheets made it impossible to answer simple questions like "what is on Section 1B?"',
+    approach: 'I wrote the PRD from the real workbooks first, then built the module and cleaned the deployment (no hardcoded values, no demo credentials).',
+    deliverables: ['Survey inventory module', 'PRD v3.2'],
+    limitations: 'Internal system. Shown with designed cover art rather than screenshots.',
+    images: ['/hitech/hitech-survey.svg'],
+    github: null,
+    demo: null
+  },
+
+  {
+    id: 'hitech-dochub',
+    featured: false,
+    art: true,
+    title: 'Project Documentation Hub',
+    subtitle: 'Controlled Documents & Auto-Generated PRDs',
+    status: 'Hitech · In-house',
+    kind: 'hitech',
+    category: 'Knowledge Systems',
+    year: 'Aug 2026',
+    role: 'Software Engineer',
+    description:
+      'An organisational knowledge system. Construction projects get controlled documents, PRDs and decision/risk/issue/change registers with owners, versions and approvals. Software projects can upload their source and get PRD sections 01–08 written for them.',
+    tags: ['Django', 'Document Control', 'Code Analysis', 'Audit'],
+    metrics: [
+      ['2', 'Separate workspaces'],
+      ['4', 'Registers'],
+      ['8', 'Auto-written PRD sections'],
+      ['Every', 'Doc owned & versioned'],
+    ],
+    overview:
+      'The Hub is not a file share. Every project follows the same structure, every document has an owner, a version and a review period, decisions are traceable, and people can find what they need. A software workspace analyses an uploaded ZIP or folder to document what the app is, its stack, its modules, its data models, how to run it, its configuration (names only, never values) and its dependencies.',
+    whyImpressive: 'It combines document-control rigour with practical automation: real source code turned into readable documentation.',
+    coreConcepts: ['Document Control', 'Registers & Traceability', 'Static Code Analysis', 'Role-Based Accounts'],
+    techStack: ['Django', 'SQLite / PostgreSQL', 'Email onboarding'],
+    features: [
+      'Construction and software workspaces that never mix',
+      'Controlled document taxonomy with phases and review periods',
+      'Decision, risk, issue and change registers',
+      'Upload a codebase → PRD sections 01–08 generated',
+      'Admin-managed accounts with forced first-login password change'
+    ],
+    problemStatement: 'Project knowledge was scattered, unversioned and owned by no one.',
+    approach: 'Taxonomy installed by migration, capabilities per account, and an analyser that reads code rather than guessing.',
+    deliverables: ['Documentation Hub application'],
+    limitations: 'Internal system. Shown with designed cover art rather than screenshots.',
+    images: ['/hitech/hitech-dochub.svg'],
     github: null,
     demo: null
   },
@@ -389,35 +640,47 @@ const projects = [
 
   {
     id: '23-fashion',
-    featured: false,
-    title: '23 — Fashion Platform & Brand Experience',
-    subtitle: 'E-commerce, Lookbook & Outfit Generator',
-    status: 'Published',
+    featured: true,
+    title: 'TWENTY3™ — Luxury Fashion Platform',
+    subtitle: 'E-commerce, Lookbook, AI Studio & Outfit Generator',
+    status: 'Live',
     kind: 'product',
     category: 'Digital Product & Frontend',
+    domain: '23-web.vercel.app',
+    year: '2025 — 2026',
+    role: 'Designer & engineer',
     description:
-      'A luxury brand experience for TWENTY3™ blending shopping, editorial storytelling, and an outfit generator — a platform built to inspire, not just sell.',
-    tags: ['E-commerce', 'Fashion UX', 'React', 'Tailwind', 'Outfit Generator'],
+      'A luxury brand platform for TWENTY3™: "Wear your world." Cinematic storytelling, a full shop with product pages and garment measurements, a lookbook, an outfit generator, a 23 AI Studio for styling, accounts, subscriber emails and a looping soundtrack.',
+    tags: ['React', 'Vite', 'Tailwind', 'E-commerce', 'AI Styling', 'Vercel'],
+    metrics: [
+      ['12+', 'Routes & experiences'],
+      ['80+', 'Commits shipped'],
+      ['1', 'Barcode per garment'],
+      ['AI', 'Styling studio'],
+    ],
     overview:
-      '23 is more than a clothing website — a living brand platform with a cinematic lookbook, curated shop drops, and an outfit generator that turns browsing into creation. The design language pairs Archivo Black wordmarks with DM Serif Display headlines for a luxury editorial feel.',
+      'TWENTY3™ is "luxury personalised for you". It is a living brand platform where every garment carries its own barcode identity and story. Visitors move from a cinematic hero into new arrivals and unreleased concepts, browse a shop of signature pieces, open product pages with per-type garment measurement diagrams and a size guide, flip through an editorial lookbook, build fits in the outfit generator, and get styling advice in the 23 AI Studio.',
     whyImpressive:
-      'It fuses brand storytelling with product utility: design-system thinking, performance-first frontend engineering, and an interaction model that deepens engagement with the brand.',
-    coreConcepts: ['Conversion & Community UX', 'Component-Driven Design System', 'Stateful Interactions', 'Outfit Suggestion Logic'],
-    techStack: ['React', 'Vite', 'Tailwind CSS', 'React Router'],
+      'It treats brand and product as one problem. The scroll choreography, the Archivo Black / serif pairing and the barcode storytelling give it a luxury editorial feel, and underneath sit real commerce mechanics: a persistent cart, accounts with password visibility and reset, weekly subscriber emails, garment measurements and an assistant that knows the catalogue.',
+    coreConcepts: ['Brand-Led Product Design', 'Scroll Choreography', 'Commerce UX', 'AI Styling Assistant', 'Component Design System'],
+    techStack: ['React', 'Vite', 'Tailwind CSS', 'React Router', 'Serverless API routes', 'Vercel'],
     features: [
-      'Cinematic hero narrative and editorial lookbook',
-      'Shop grid for drops and capsules',
-      'Outfit generator with wardrobe panels and guided styling',
-      'Persistent cart and quick-view interactions',
-      'Resilient try-on flow that never hard-fails'
+      'Cinematic hero, new arrivals and unreleased-concepts storytelling',
+      'Shop grid with signature pieces and product detail pages',
+      'Garment measurement diagrams per garment type, plus a size guide',
+      'Editorial lookbook with scattered polaroid layout',
+      'Outfit generator with a wardrobe panel and a daily planner',
+      '23 AI Studio: stylist, try-on, challenges, trends and drop concepts',
+      'Accounts with sign-up, password reset and weekly subscriber emails',
+      'Catalogue-aware shopping assistant and a looping soundtrack with play/pause'
     ],
     problemStatement:
-      'The brand needed a digital home that communicates ethos and gives people tools to style and belong — a path from admiration to participation.',
+      'The brand needed a digital home that communicates its ethos and gives people tools to style and belong, so admiration turns into participation and purchase.',
     approach:
-      'A modular, component-driven UI keeps the aesthetic consistent across Lookbook, Shop, and Generator, with information architecture guiding discovery to purchase.',
-    deliverables: ['Responsive site with lookbook, shop, and generator', 'Reusable design-system components', 'Deployment with performance budget'],
+      'A modular, component-driven UI keeps the aesthetic consistent across shop, lookbook, generator and studio, while the information architecture leads from story to product to checkout. The barcode identity system ties each physical piece to its digital story.',
+    deliverables: ['Live brand + commerce site', 'Outfit generator & AI Studio', 'Measurement and size-guide system', 'Account and subscriber email flows'],
     limitations:
-      'Demo inventory; next steps are live inventory, payments, and personalization models.',
+      'Next: live inventory sync, payments at scale and personalisation models trained on styling history.',
     images: [
       '/23/23-1.jpg', '/23/23-2.jpg', '/23/23-3.jpg', '/23/23-4.jpg', '/23/23-5.jpg', '/23/23-6.jpg',
       '/23/23-7.jpg', '/23/23-8.jpg', '/23/23-9.jpg', '/23/23-10.jpg', '/23/23-11.jpg', '/23/23-12.jpg'
@@ -620,4 +883,11 @@ const projects = [
 ]
 
 export const featuredProjects = projects.filter(p => p.featured)
+export const hitechProjects = projects.filter(p => p.kind === 'hitech')
+export const clientProjects = projects.filter(p => p.kind === 'client')
+export const getProject = id => projects.find(p => p.id === id)
+/** Short address-bar label for a project's browser-frame mockup. */
+export const frameLabel = p => p.domain || p.title.split(' — ')[0]
+/** Smaller copy of a screenshot, for filmstrips. */
+export const thumb = src => src.replace(/\/([^/]+\.jpg)$/, '/thumbs/$1')
 export default projects

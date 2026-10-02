@@ -12,8 +12,8 @@ export default function CV() {
           <h1 className="font-display font-semibold text-3xl text-ink tracking-tight">The paper trail.</h1>
         </div>
         <div className="flex gap-3">
-          <a href="/cv/tife-cv.pdf" download className="btn-ember px-6 py-3 text-sm">Download PDF</a>
-          <a href="/cv/tife-cv.pdf" target="_blank" rel="noreferrer" className="btn-ghost px-6 py-3 text-sm">Open in new tab</a>
+          <a href="/cv/Adeleke_Kehinde_CV.pdf" download className="btn-ember px-6 py-3 text-sm">Download PDF</a>
+          <a href="/cv/Adeleke_Kehinde_CV.pdf" target="_blank" rel="noreferrer" className="btn-ghost px-6 py-3 text-sm">Open in new tab</a>
         </div>
       </Reveal>
 
@@ -21,7 +21,7 @@ export default function CV() {
         <div className="rounded-[1.6rem] overflow-hidden border border-line bg-card" style={{ boxShadow: 'var(--shadow-card)' }}>
           {!fallback ? (
             <object
-              data="/cv/tife-cv.pdf"
+              data="/cv/Adeleke_Kehinde_CV.pdf"
               type="application/pdf"
               className="w-full h-[80vh]"
               onError={() => setFallback(true)}
@@ -29,7 +29,7 @@ export default function CV() {
               <div className="p-6">
                 <p className="text-muted">
                   Unable to load the PDF inline. You can{' '}
-                  <a href="/cv/tife-cv.pdf" className="text-ember underline">open it in a new tab</a>{' '}
+                  <a href="/cv/Adeleke_Kehinde_CV.pdf" className="text-ember underline">open it in a new tab</a>{' '}
                   or download it above.
                 </p>
               </div>
@@ -47,7 +47,7 @@ export default function CV() {
                 }}
               />
               <p id="cv-missing" className="hidden text-muted">
-                CV file not found. Add <code className="font-mono">public/cv/tife-cv.pdf</code> or{' '}
+                CV file not found. Add <code className="font-mono">public/cv/Adeleke_Kehinde_CV.pdf</code> or{' '}
                 <code className="font-mono">public/cv/tife-cv.jpg</code>.
               </p>
             </div>
