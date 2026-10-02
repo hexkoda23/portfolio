@@ -457,7 +457,7 @@ export default function Home() {
                       <h3 className="font-display font-semibold text-lg text-ink">{r.title} <span className="text-muted font-normal">· {r.org}</span></h3>
                       <span className="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-ember">{r.year}</span>
                     </div>
-                    {i < 2 && <p className="text-sm text-muted leading-relaxed mt-2">{r.detail}</p>}
+                    {r.current && <p className="text-sm text-muted leading-relaxed mt-2">{r.detail}</p>}
                   </div>
                 </Reveal>
               ))}
